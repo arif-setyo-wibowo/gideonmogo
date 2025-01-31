@@ -85,47 +85,77 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($kategori as $index => $item)
                         <tr>
-                            <td>1</td>
-                            <td>P</td>
-
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $item->kategori }}</td>
                             <td>
-                                <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}"
-                                style="cursor: pointer;"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalCenter"
-                                alt="Produk Image"
-                                width="125">
+                                @if($item->foto)
+                                <img src="{{ asset('storage/' . $item->foto) }}"
+                                    style="cursor: pointer;"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalCenter-{{ $item->id }}"
+                                    alt="Kategori Image"
+                                    width="125">
+                                @else
+                                Tidak ada gambar
+                                @endif
                             </td>
                             <td>
-                                <a href="{{ route('kategori.edit','1')}}" class="btn btn-info btn-sm">
+                                <a href="{{ route('kategori.edit', $item->id) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                     Edit
                                 </a>
-                                <form action="" method="POST" id="delete-form" style="display: inline;">
+                                <form action="{{ route('kategori.destroy', $item->id) }}" method="POST" style="display: inline;">
                                     @csrf
-                                    <button type="button" class="btn btn-danger btn-sm" id="confirm-text">
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm delete-confirm">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
                             </td>
                         </tr>
 
+                        <!-- Modal for each image -->
+                        @if($item->foto)
+                        <div class="modal fade" id="modalCenter-{{ $item->id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Gambar Kategori: {{ $item->kategori }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col mb-4 mt-2">
+                                                <div class="form-floating form-floating-outline">
+                                                    <img src="{{ asset('storage/' . $item->foto) }}" alt="Kategori Image" width="100%">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="tab-pane fade " id="navs-top-profile" role="tabpanel">
-                <form action="{{ route('kategori.store')}}" method="POST" >
+                <form action="{{ route('kategori.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="text" class="form-control" id="basic-default-fullname" name="nama_kategori" placeholder="Kategori" required/>
+                        <input type="text" class="form-control" id="basic-default-fullname" name="kategori" placeholder="Kategori" required/>
                         <label for="basic-default-fullname">Kategori</label>
                     </div>
 
                     <div class="mb-4">
                         <label for="basic-default-fullname">Banner kategori</label>
-                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Judul Latihan" />
-
+                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Banner Kategori" />
                     </div>
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </form>
@@ -172,31 +202,28 @@
 @endsection
 @section('js')
 <script>
-    document.getElementById('confirm-text').addEventListener('click', function(event) {
-        event.preventDefault();
-        Swal.fire({
-            title: 'Apakah Yakin ingin menghapus data?',
-            text: "Data yang dihapus akan hilang!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal',
-            customClass: {
-            confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
-            cancelButton: 'btn btn-outline-secondary waves-effect'
-            },
-            buttonsStyling: false
-        }).then(function (result) {
-            if (result.value) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil Hapus!',
-                    text: 'Data telah dihapus.',
-                    customClass: {
-                    confirmButton: 'btn btn-success waves-effect'
-                    }
-                });
-            }
+    // Delete confirmation for all delete buttons
+    document.querySelectorAll('.delete-confirm').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            
+            Swal.fire({
+                title: 'Apakah Yakin ingin menghapus data?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
+                    cancelButton: 'btn btn-outline-secondary waves-effect'
+                },
+                buttonsStyling: false
+            }).then(function (result) {
+                if (result.value) {
+                    form.submit();
+                }
+            });
         });
     });
 </script>

@@ -1,5 +1,12 @@
 @extends('template.admin_layout')
 
+@section('css')
+<!-- Quill CSS -->
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}" />
+@endsection
+
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="py-3 mb-4"><span class="text-muted fw-light">GideonMogo /</span> Produk</h4>
@@ -88,70 +95,129 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($produks as $index => $produk)
                         <tr>
-                            <td>1</td>
-                            <td>P</td>
-                            <td>Elektronik</td>
-                            <td>50</td>
-                            <td>Rp 500.000</td>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $produk->nama_produk }}</td>
+                            <td>{{ $produk->kategori->kategori }}</td>
+                            <td>{{ $produk->stok }}</td>
+                            <td>${{ number_format($produk->harga, 0, ',', '.') }}</td>
                             <td>
-                                <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}"
-                                style="cursor: pointer;"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalCenter"
-                                alt="Produk Image"
-                                width="125">
+                                @if($produk->foto)
+                                <img src="{{ asset('storage/' . $produk->foto) }}"
+                                    style="cursor: pointer;"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalCenter{{ $produk->id }}"
+                                    alt="Produk Image"
+                                    width="125">
+                                @else
+                                Tidak ada gambar
+                                @endif
                             </td>
                             <td>
-                                <a href="{{ route('produk.edit','1') }}" class="btn btn-info btn-sm" >
+                                <a href="{{ route('produk.edit', $produk->id) }}" class="btn btn-info btn-sm" >
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
-                                <form action="{{ route('produk.destroy', '1') }}" method="POST" id="delete-form" style="display: inline;">
+                                <form action="{{ route('produk.destroy', $produk->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm" id="confirm-text">
+                                    <button type="button" class="btn btn-danger btn-sm delete-btn">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
                             </td>
                         </tr>
+
+                        <!-- Modal for each product -->
+                        @if($produk->foto)
+                        <div class="modal fade" id="modalCenter{{ $produk->id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title">{{ $produk->nama_produk }}</h4>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                <div class="row">
+                                    <div class="col mb-4 mt-2">
+                                    <div class="form-floating form-floating-outline">
+                                        <img src="{{ asset('storage/' . $produk->foto) }}"
+                                            alt="Produk Image"
+                                            width="100%">
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="tab-pane fade " id="navs-top-profile" role="tabpanel">
-                <form action="{{ route('produk.store')}}" method="POST" >
+            <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
+                <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="text" class="form-control" id="basic-default-fullname" name="nama_produk" placeholder="produk" required/>
-                        <label for="basic-default-fullname">Nama Produk</label>
+                        <input type="text" class="form-control" id="nama_produk" name="nama_produk" placeholder="Nama Produk" required/>
+                        <label for="nama_produk">Nama Produk</label>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
                         <label>Kategori</label>
                         <select class="selectpicker w-100" data-style="btn-default" name="id_kategori"
                             data-live-search="true" required>
                             <option selected disabled value="">Pilih Kategori</option>
-                            <option value="">test</option>
+                            @foreach($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="basic-default-fullname" name="nama_produk" placeholder="produk" required/>
-                        <label for="basic-default-fullname">Stok</label>
+                        <input type="number" class="form-control" id="stok" name="stok" placeholder="Stok" required/>
+                        <label for="stok">Stok</label>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="basic-default-fullname" name="nama_produk" placeholder="produk" required/>
-                        <label for="basic-default-fullname">Harga</label>
+                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required/>
+                        <label for="harga">Harga</label>
                     </div>
                     <div class="mb-4">
-                        <label for="basic-default-fullname">Foto Produk</label>
-                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Judul Latihan" />
-
+                        <label for="foto">Foto Produk</label>
+                        <input type="file" class="form-control" id="foto" name="foto" />
                     </div>
-                    <div class="form-floating form-floating-outline mb-4">
-                        <input type="hidden" id="snow-editor-content" name="isi">
-
-
-                        <div id="snow-editor">
+                    <div class="mb-4">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <div id="snow-toolbar">
+                            <span class="ql-formats">
+                                <select class="ql-font"></select>
+                                <select class="ql-size"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-bold"></button>
+                                <button class="ql-italic"></button>
+                                <button class="ql-underline"></button>
+                                <button class="ql-strike"></button>
+                            </span>
+                            <span class="ql-formats">
+                                <select class="ql-color"></select>
+                                <select class="ql-background"></select>
+                            </span>
+                            <span class="ql-formats">
+                                <button class="ql-list" value="ordered"></button>
+                                <button class="ql-list" value="bullet"></button>
+                            </span>
                         </div>
+                        <div id="snow-editor" style="min-height: 150px;"></div>
+                        <input type="hidden" name="deskripsi" id="deskripsi-input">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Tambah</button>
@@ -160,69 +226,64 @@
           </div>
         </div>
       </div>
-
-
 </div>
-    <!-- Modal -->
-    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h4 class="modal-title" id="modalCenterTitle">Gambar</h4>
-            <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <div class="row">
-                <div class="col mb-4 mt-2">
-                <div class="form-floating form-floating-outline">
-                    <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}"
-                        alt="Produk Image"
-                        width="100%">
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                Close
-            </button>
-            </div>
-        </div>
-        </div>
-    </div>
 @endsection
+
 @section('js')
+<!-- Quill JS -->
+<script src="{{ asset('assets/vendor/libs/quill/katex.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/quill/quill.js') }}"></script>
+
 <script>
-    document.getElementById('confirm-text').addEventListener('click', function(event) {
-        event.preventDefault();
-        Swal.fire({
-            title: 'Apakah Yakin ingin menghapus data?',
-            text: "Data yang dihapus akan hilang!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal',
-            customClass: {
-            confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
-            cancelButton: 'btn btn-outline-secondary waves-effect'
-            },
-            buttonsStyling: false
-        }).then(function (result) {
-            if (result.value) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil Hapus!',
-                    text: 'Data telah dihapus.',
-                    customClass: {
-                    confirmButton: 'btn btn-success waves-effect'
-                    }
-                });
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ 'header': 1 }, { 'header': 2 }],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['clean']
+    ];
+
+    var quill = new Quill('#snow-editor', {
+        modules: {
+            toolbar: '#snow-toolbar'
+        },
+        theme: 'snow'
+    });
+
+    // Update hidden input before form submission
+    document.querySelector('form').addEventListener('submit', function() {
+        document.getElementById('deskripsi-input').value = quill.root.innerHTML;
+    });
+
+    // Initialize delete confirmation
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            
+            Swal.fire({
+                title: 'Apakah Yakin ingin menghapus data?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
         });
     });
+});
 </script>
 @endsection

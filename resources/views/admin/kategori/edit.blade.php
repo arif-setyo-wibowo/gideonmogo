@@ -19,30 +19,32 @@
         <div class="card-body">
           <div class="tab-content p-0">
             <div class="tab-pane fade active show" id="navs-top-profile" role="tabpanel">
-                <form action="{{ route('kategori.update','1')}}" method="POST" >
+                <form action="{{ route('kategori.update', $kategori->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="hidden" name="id" value="" hidden>
-                        <input type="text" class="form-control" id="basic-default-fullname" name="kategori" placeholder="Kategori " value="" required/>
+                        <input type="text" class="form-control" id="basic-default-fullname" name="kategori" placeholder="Kategori" value="{{ $kategori->kategori }}" required/>
                         <label for="basic-default-fullname">Kategori</label>
                     </div>
 
                     <div class="mb-4">
                         <label for="basic-default-fullname">Banner kategori</label>
-                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Judul Latihan" />
-
+                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Banner Kategori" />
+                        
+                        @if($kategori->foto)
+                        <div class="mt-3">
+                            <label>Foto Saat Ini:</label>
+                            <img src="{{ asset('storage/' . $kategori->foto) }}" alt="Kategori Image" width="200" class="img-thumbnail">
+                        </div>
+                        @endif
                     </div>
                     <button type="submit" class="btn btn-primary">Ubah</button>
-                    <a href="{{ route('kategori.index')}}"><button type="button" class="btn btn-danger">Batal</button></a>
+                    <a href="{{ route('kategori.index') }}" class="btn btn-danger">Batal</a>
                 </form>
             </div>
           </div>
         </div>
       </div>
-
-
 </div>
   <!-- / Content -->
 @endsection
-

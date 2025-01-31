@@ -109,12 +109,6 @@
                     </a>
                 </li>
 
-                <li class="menu-item {{ request()->routeIs('produk.index') ? 'active' : '' }}">
-                    <a href="{{ route('produk.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-clipboard-outline"></i>
-                        <div>Data Produk Vendor</div>
-                    </a>
-                </li>
                 <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
                     <a href="{{ route('pembelian.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons mdi mdi-calendar-edit"></i>
