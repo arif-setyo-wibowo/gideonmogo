@@ -11,6 +11,15 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 
+
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\PembelianController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProdukController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\AdminController;
+
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home.index');
 });
@@ -56,5 +65,21 @@ Route::controller(ContactController::class)->group(function () {
 });
 
 Route::prefix('back/')->group(function () {
-    
+
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/', 'index')->name('dashboard.index');
+    });
+
+    Route::resource('kategori', KategoriController::class);
+
+    Route::resource('produk', ProdukController::class);
+
+    Route::resource('pembelian', PembelianController::class);
+
+    Route::resource('user-admin', UserController::class);
+
+    Route::resource('admin', AdminController::class);
+
+    Route::resource('faq', FaqController::class);
+
 });
