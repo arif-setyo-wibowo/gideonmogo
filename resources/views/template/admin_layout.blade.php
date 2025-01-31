@@ -86,10 +86,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-
-
             <!-- Apps & Pages -->
-
                 <li class="menu-item  {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                     <a href="{{ route('dashboard.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
@@ -289,6 +286,7 @@
 
     <!-- Main JS -->
     <script src="{{ asset('assets_admin/')}}/js/main.js"></script>
+    <script src="{{ asset('assets_admin/')}}/js/ui-modals.js"></script>
 
     <!-- Page JS -->
 

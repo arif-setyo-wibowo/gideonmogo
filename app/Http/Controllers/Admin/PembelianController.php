@@ -13,7 +13,11 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'Pembelian'
+        ];
+
+        return view('admin.pembelian.index',$data);
     }
 
     /**

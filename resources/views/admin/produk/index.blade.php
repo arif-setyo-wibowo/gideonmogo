@@ -91,14 +91,19 @@
                         <tr>
                             <td>1</td>
                             <td>P</td>
-                            <td>Elektronik</td> <!-- Contoh kategori -->
-                            <td>50</td> <!-- Contoh stok -->
-                            <td>Rp 500.000</td> <!-- Contoh harga -->
+                            <td>Elektronik</td>
+                            <td>50</td>
+                            <td>Rp 500.000</td>
                             <td>
-                                <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}" alt="Produk Image" width="125">
+                                <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}"
+                                style="cursor: pointer;"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalCenter"
+                                alt="Produk Image"
+                                width="125">
                             </td>
                             <td>
-                                <a href="{{ route('produk.edit','1') }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('produk.edit','1') }}" class="btn btn-info btn-sm" >
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
                                 <form action="{{ route('produk.destroy', '1') }}" method="POST" id="delete-form" style="display: inline;">
@@ -158,7 +163,37 @@
 
 
 </div>
-  <!-- / Content -->
+<!-- Modal -->
+<div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modalCenterTitle">Gambar</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col mb-4 mt-2">
+              <div class="form-floating form-floating-outline">
+                <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}"
+                    alt="Produk Image"
+                     width="100%">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 @section('js')
 <script>
