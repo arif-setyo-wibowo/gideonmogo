@@ -76,43 +76,6 @@
     </section>
 
     <!--End hero slider-->
-    <section class="popular-categories section-padding">
-        <div class="container wow animate__animated animate__fadeIn">
-            <div class="carausel-10-columns-cover position-relative">
-                <div class="carausel-10-columns" id="carausel-10-columns">
-                    <div class="card-2 bg-9 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-                        <figure class="img-hover-scale overflow-hidden">
-                            <a href="shop-grid-right.html"><img src="{{ asset('assets/')}}/imgs/shop/cat-13.png" alt="" /></a>
-                        </figure>
-                        <h6><a href="shop-grid-right.html">Cake & Milk</a></h6>
-                        <span>26 items</span>
-                    </div>
-                    <div class="card-2 bg-10 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                        <figure class="img-hover-scale overflow-hidden">
-                            <a href="shop-grid-right.html"><img src="{{ asset('assets/')}}/imgs/shop/cat-12.png" alt="" /></a>
-                        </figure>
-                        <h6><a href="shop-grid-right.html">Oganic Kiwi</a></h6>
-                        <span>28 items</span>
-                    </div>
-                    <div class="card-2 bg-11 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
-                        <figure class="img-hover-scale overflow-hidden">
-                            <a href="shop-grid-right.html"><img src="{{ asset('assets/')}}/imgs/shop/cat-11.png" alt="" /></a>
-                        </figure>
-                        <h6><a href="shop-grid-right.html">Peach</a></h6>
-                        <span>14 items</span>
-                    </div>
-                    <div class="card-2 bg-12 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-                        <figure class="img-hover-scale overflow-hidden">
-                            <a href="shop-grid-right.html"><img src="{{ asset('assets/')}}/imgs/shop/cat-9.png" alt="" /></a>
-                        </figure>
-                        <h6><a href="shop-grid-right.html">Red Apple</a></h6>
-                        <span>54 items</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--End category slider-->
     <section class="banners mb-25">
         <div class="container">
             <div class="row">

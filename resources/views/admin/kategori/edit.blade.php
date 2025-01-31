@@ -27,6 +27,12 @@
                         <input type="text" class="form-control" id="basic-default-fullname" name="kategori" placeholder="Kategori " value="" required/>
                         <label for="basic-default-fullname">Kategori</label>
                     </div>
+
+                    <div class="mb-4">
+                        <label for="basic-default-fullname">Banner kategori</label>
+                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Judul Latihan" />
+
+                    </div>
                     <button type="submit" class="btn btn-primary">Ubah</button>
                     <a href="{{ route('kategori.index')}}"><button type="button" class="btn btn-danger">Batal</button></a>
                 </form>

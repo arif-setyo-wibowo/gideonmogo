@@ -17,7 +17,6 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\PembelianController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProdukController;
-use App\Http\Controllers\Admin\ProdukVendorController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\AdminController;
 
@@ -74,8 +73,6 @@ Route::prefix('back/')->group(function () {
     Route::resource('kategori', KategoriController::class);
 
     Route::resource('produk', ProdukController::class);
-
-    Route::resource('produk-vendor', ProdukVendorController::class);
 
     Route::resource('pembelian', PembelianController::class);
 

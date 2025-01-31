@@ -80,6 +80,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kategori</th>
+                            <th>Banner</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -87,6 +88,15 @@
                         <tr>
                             <td>1</td>
                             <td>P</td>
+
+                            <td>
+                                <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}"
+                                style="cursor: pointer;"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalCenter"
+                                alt="Produk Image"
+                                width="125">
+                            </td>
                             <td>
                                 <a href="{{ route('kategori.edit','1')}}" class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
@@ -111,6 +121,12 @@
                         <input type="text" class="form-control" id="basic-default-fullname" name="nama_kategori" placeholder="Kategori" required/>
                         <label for="basic-default-fullname">Kategori</label>
                     </div>
+
+                    <div class="mb-4">
+                        <label for="basic-default-fullname">Banner kategori</label>
+                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Judul Latihan" />
+
+                    </div>
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </form>
             </div>
@@ -121,6 +137,38 @@
 
 </div>
   <!-- / Content -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title" id="modalCenterTitle">Gambar</h4>
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <div class="row">
+            <div class="col mb-4 mt-2">
+            <div class="form-floating form-floating-outline">
+                <img src="{{ asset('assets/imgs/banner/banner-menu.png') }}"
+                    alt="Produk Image"
+                    width="100%">
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+        </button>
+        </div>
+    </div>
+    </div>
+</div>
 @endsection
 @section('js')
 <script>

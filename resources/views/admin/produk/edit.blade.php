@@ -49,8 +49,6 @@
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="hidden" id="snow-editor-content" name="isi">
-
-
                         <div id="snow-editor">
                         </div>
                     </div>
