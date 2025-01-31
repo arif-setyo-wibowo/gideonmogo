@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategori;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,12 +14,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $totalKategori = Kategori::count();
+        $totalProduk = Produk::count();
+
         $data = [
-            'title' => 'Dashboard'
+            'title' => 'Dashboard',
+            'totalKategori' => $totalKategori,
+            'totalProduk' => $totalProduk
         ];
 
-        return view('admin.dashboard.index',$data);
-        
+        return view('admin.dashboard.index', $data);
     }
 
     /**
