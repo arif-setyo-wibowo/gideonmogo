@@ -77,7 +77,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="" class="app-brand-link">
+            <a href="{{ route('dashboard.index')}}" class="app-brand-link">
               <span class="app-brand-text demo menu-text fw-bold ms-2">GideonMogo</span>
             </a>
           </div>
@@ -95,7 +95,7 @@
                 </li>
                 <li class="menu-header fw-medium mt-4">
                     <span class="menu-header-text">Action Data</span>
-                  </li>
+                </li>
                  <li class="menu-item  {{ request()->routeIs('kategori.index') ? 'active' : '' }}">
                     <a href="{{ route('kategori.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons mdi mdi-shape"></i>
@@ -106,6 +106,13 @@
                     <a href="{{ route('produk.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons mdi mdi-clipboard-outline"></i>
                         <div>Data Produk</div>
+                    </a>
+                </li>
+
+                <li class="menu-item {{ request()->routeIs('produk.index') ? 'active' : '' }}">
+                    <a href="{{ route('produk.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-clipboard-outline"></i>
+                        <div>Data Produk Vendor</div>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
@@ -125,6 +132,15 @@
                     <a href="{{ route('admin.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons mdi mdi-calendar-account"></i>
                         <div>Data Admin</div>
+                    </a>
+                </li>
+                <li class="menu-header fw-medium mt-4">
+                    <span class="menu-header-text">Data Laporan</span>
+                </li>
+                <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
+                    <a href="{{ route('pembelian.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-calendar-edit"></i>
+                        <div>Laporan Pembelian</div>
                     </a>
                 </li>
                 <li class="menu-header fw-medium mt-4">

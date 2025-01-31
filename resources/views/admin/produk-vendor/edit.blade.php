@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="py-3 mb-4"><span class="text-muted fw-light">GideonMogo /</span> Produk Update</h4>
+    <h4 class="py-3 mb-4"><span class="text-muted fw-light">GideonMogo /</span> Produk Vendo Update</h4>
 
     <div class="card mb-4">
         <div class="card-header p-0">
@@ -25,14 +25,6 @@
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="text" class="form-control" id="basic-default-fullname" name="nama_produk" placeholder="produk" required/>
                         <label for="basic-default-fullname">Nama Produk</label>
-                    </div>
-                    <div class="form-floating form-floating-outline mb-4">
-                        <label>Kategori</label>
-                        <select class="selectpicker w-100" data-style="btn-default" name="id_kategori"
-                            data-live-search="true" required>
-                            <option selected disabled value="">Pilih Kategori</option>
-                            <option value="">test</option>
-                        </select>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="number" class="form-control" id="basic-default-fullname" name="nama_produk" placeholder="produk" required/>

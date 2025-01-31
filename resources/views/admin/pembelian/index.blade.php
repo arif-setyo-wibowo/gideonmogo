@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="py-3 mb-4"><span class="text-muted fw-light">GideonMogo /</span> Produk</h4>
+    <h4 class="py-3 mb-4"><span class="text-muted fw-light">GideonMogo /</span> Pembelian</h4>
 
     <div class="card mb-4">
         <div class="card-header p-0">
@@ -254,6 +254,7 @@
 
     // Tambahkan aksi untuk tombol Setuju
     document.getElementById("setujuBtn").addEventListener("click", function() {
+        // KIRIM EMAIL KE PELANGGAN
         modal.hide();
     });
 
