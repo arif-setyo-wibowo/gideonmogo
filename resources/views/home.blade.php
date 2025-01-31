@@ -79,11 +79,11 @@
     <section class="banners mb-25">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0">
-                        <img src="{{ asset('assets/')}}/imgs/banner/banner-1.png" alt="" />
+                <div class="col col-lg-3 col-md-6">
+                    <div class="banner-img wow animate__animated animate__fadeInUp"  data-wow-delay="0">
+                        <img src="{{ asset('assets/')}}/imgs/banner/banner-1.png" width="378" height="223" alt="" />
                         <div class="banner-text">
-                            <h4>
+                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
                                 Everyday Fresh & <br />Clean with Our<br />
                                 Products
                             </h4>
@@ -91,11 +91,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                        <img src="{{ asset('assets/')}}/imgs/banner/banner-2.png" alt="" />
+                        <img src="{{ asset('assets/')}}/imgs/banner/banner-2.png" width="378" height="223" alt="" />
                         <div class="banner-text">
-                            <h4>
+                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
                                 Make your Breakfast<br />
                                 Healthy and Easy
                             </h4>
@@ -103,11 +103,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 d-md-none d-lg-flex">
+                <div class="col-lg-3 d-md-none d-lg-flex">
                     <div class="banner-img mb-sm-0 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-                        <img src="{{ asset('assets/')}}/imgs/banner/banner-3.png" alt="" />
+                        <img src="{{ asset('assets/')}}/imgs/About3.webp" width="378" height="223" alt="" />
                         <div class="banner-text">
-                            <h4>The best Organic <br />Products Online</h4>
+                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">The best Organic <br />Products Online</h4>
+                            <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-md-none d-lg-flex">
+                    <div class="banner-img mb-sm-0 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
+                        <img src="{{ asset('assets/')}}/imgs/banner/banner-3.png" width="378" height="223"  alt="" />
+                        <div class="banner-text">
+                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">The best Organic <br />Products Online</h4>
                             <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                         </div>
                     </div>

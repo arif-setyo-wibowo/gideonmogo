@@ -57,10 +57,13 @@
                     <form method="post">
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <input type="text" required="" name="fname" placeholder="Nama pengguna dalam game *">
+                                <input type="text" required="" name="fname" placeholder="In Game username *">
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="text" required="" name="lname" placeholder="Nama Facebook *">
+                                <input type="text" required="" name="lname" placeholder="Facebook Name *">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" required="" name="lname" placeholder="Link *">
                             </div>
                         </div>
                     </form>
@@ -163,8 +166,8 @@
                             <div class="checkbox">
                                 <div class="custome-checkbox">
                                     <input class="form-check-input" type="checkbox" name="checkbox" id="createaccount" data-target="#collapsePassword">
-                                    <label class="form-check-label fs-5 fw-bold" data-bs-toggle="collapse" href="#collapsePassword" aria-controls="collapsePassword" for="createaccount">BCA</label>
-                                    <img class="mr-15" src="assets/imgs/theme/icons/payment-paypal.svg" alt="">
+                                    <label class="form-check-label fs-5 fw-bold" data-bs-toggle="collapse" href="#collapsePassword" aria-controls="collapsePassword" for="createaccount">Pay Pal</label>
+                                    <img class="mr-15" src="assets/imgs/theme/icons/payment-paypal.svg" width="90" height="25" alt="">
                                 </div>
                             </div>
                         </div>
@@ -173,7 +176,7 @@
                                 <label for="uploadBukti" class="form-label fs-4 fw-bold">Upload Bukti Pembayaran</label>
                             </div>
                             <label for="nomer" class="form-label fs-4 fw-bold text-success">
-                                Nomer Rekening : 0181708483 A.n Arif Setyo Wibowo
+                                Paypal : josephex13@gmail.com
                             </label>
                             <div class="custom-file">
                                 <input type="file" name="bukti" class="custom-file-input" id="uploadBukti" required>
@@ -185,8 +188,8 @@
                             <div class="checkbox">
                                 <div class="custome-checkbox">
                                     <input class="form-check-input" type="checkbox" name="checkbox" id="createaccount1" data-target="#collapsePassword1">
-                                    <label class="form-check-label fs-5 fw-bold" data-bs-toggle="collapse" href="#collapsePassword1" aria-controls="collapsePassword1" for="createaccount1">MANDIRI</label>
-                                    <img class="mr-15" src="assets/imgs/theme/icons/payment-visa.svg" alt="">
+                                    <label class="form-check-label fs-5 fw-bold" data-bs-toggle="collapse" href="#collapsePassword1" aria-controls="collapsePassword1" for="createaccount1">CashApp</label>
+                                    <img class="mr-15" src="assets/imgs/theme/cashapp.png" width="90" height="25" alt="">
                                 </div>
                             </div>
                         </div>
@@ -195,7 +198,29 @@
                                 <label for="uploadBukti" class="form-label fs-4 fw-bold">Upload Bukti Pembayaran</label>
                             </div>
                             <label for="nomer" class="form-label fs-4 fw-bold text-success">
-                                Nomer Rekening : 0181708483 A.n Arif Setyo Wibowo
+                                CashApp : $mogogs or &nbsp; <a href="https://cash.app/$mogogs">Link CashApp</a>
+                            </label>
+                            <div class="custom-file">
+                                <input type="file" name="bukti" class="custom-file-input" id="uploadBukti" required>
+                                <label class="custom-file-label" for="uploadBukti">Pilih file...</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <div class="custome-checkbox">
+                                    <input class="form-check-input" type="checkbox" name="checkbox" id="createaccount2" data-target="#collapsePassword2">
+                                    <label class="form-check-label fs-5 fw-bold" data-bs-toggle="collapse" href="#collapsePassword2" aria-controls="collapsePassword2" for="createaccount2">Venmo</label>
+                                    <img class="mr-15" src="assets/imgs/theme/venmo-logo.webp" width="90" height="25" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="collapsePassword2" class="form-group create-account collapse in">
+                            <div>
+                                <label for="uploadBukti" class="form-label fs-4 fw-bold">Upload Bukti Pembayaran</label>
+                            </div>
+                            <label for="nomer" class="form-label fs-4 fw-bold text-success">
+                                Venmo : <a href="https://venmo.com/u/mogogs">Link Venmo</a>
                             </label>
                             <div class="custom-file">
                                 <input type="file" name="bukti" class="custom-file-input" id="uploadBukti" required>
@@ -205,7 +230,7 @@
                     </div>
                     <a href="#" class="btn btn-fill-out btn-block mt-30 d-flex align-items-center justify-content-center">
                         <img class="me-2" src="{{ asset('assets/imgs/theme/icons/wa.png') }}" alt="WhatsApp Icon" style="width: 20px; height: 20px;">
-                        Checkout Ke WhatsApp
+                            Checkout Ke WhatsApp
                         <i class="fi-rs-sign-out ms-2"></i>
                     </a>
 
