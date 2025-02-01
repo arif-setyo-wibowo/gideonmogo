@@ -1,11 +1,19 @@
 @extends('template.home_layout')
 @section('content')
 <main class="main">
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="{{ route('home.index')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <span></span> Shop
+            </div>
+        </div>
+    </div>
     <div class="page-header mt-30 mb-50">
         <div class="container">
             <div class="archive-header-3 mt-30 mb-80 ">
-                <div class="archive-header-3-inner" style="border-radius: 25px;">
-                    <video autoplay loop muted playsinline class="video-background">
+                <div class="archive-header-3-inner" style="border-radius: 20px;">
+                    <video autoplay loop muted playsinline class="video-background" style="border-radius: 20px;">
                         <source src="{{ asset('assets/video/homeBanner_enus.mp4') }}" type="video/mp4">
                     </video>
 

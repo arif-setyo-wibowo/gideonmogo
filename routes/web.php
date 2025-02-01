@@ -10,6 +10,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PolicyController;
 
 
 use App\Http\Controllers\Admin\DashboardController;
@@ -62,6 +63,18 @@ Route::controller(AboutController::class)->group(function () {
 
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact', 'index')->name('contact.index');
+});
+
+Route::controller(PolicyController::class)->group(function () {
+    Route::get('/privacy-policy', 'index')->name('privacy.index');
+});
+
+Route::controller(PolicyController::class)->group(function () {
+    Route::get('/terms-policy', 'terms')->name('terms.index');
+});
+
+Route::controller(PolicyController::class)->group(function () {
+    Route::get('/refund-policy', 'refund')->name('refund.index');
 });
 
 Route::prefix('back/')->group(function () {

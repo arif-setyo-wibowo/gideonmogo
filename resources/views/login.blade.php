@@ -2,6 +2,14 @@
 
 @section('content')
 <main class="main pages d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="{{ route('home.index')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a><span></span> Login
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">

@@ -42,11 +42,11 @@
                 <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
                     <!-- Slide dengan Video -->
                     <div class="single-hero-slider single-animation-wrap">
-                        <video autoplay loop muted playsinline class="video-background">
+                        <video autoplay loop muted playsinline class="video-background" style="border-radius: 10px;">
                             <source src="{{ asset('assets/video/homeBanner_enus.mp4') }}" type="video/mp4">
                         </video>
 
-                        <div class="overlay"></div>
+                        <div class="overlay" style="border-radius: 10px;"></div>
                         <div class="slider-content">
                             <h1 class="display-2 mb-40 overlay-text ">
                                 Monopoly GO!<br />
@@ -246,11 +246,16 @@
             <!--End tab-content-->
         </div>
     </section>
-    <section class="container mb-50 d-none d-md-block">
+    <section class="container mb-50 d-none d-md-block text-center" >
         <section class="text-center mb-50">
-            <h2 class="title style-3 mb-40">Kenapa Memilih Kami?</h2>
+            <h2 class="title style-3 mb-40">Why Choose Us?</h2>
+            <p class="text-muted">
+                At GideonMogo, we are committed to providing top-notch quality, cutting-edge innovation, and exceptional service to ensure your satisfaction.
+                Here's why we're the best choice for you:
+            </p>
         </section>
-        <div class="row about-count position-relative">
+
+        <div class="row about-count position-relative justify-content-center">
             <!-- Video Background -->
             <video autoplay loop muted playsinline class="video-background">
                 <source src="{{ asset('assets/video/homeBanner_enus.mp4') }}" type="video/mp4">
@@ -258,28 +263,29 @@
 
             <div class="overlay"></div> <!-- Overlay untuk efek gelap -->
 
-            <div class="col-lg-1-5 col-md-6 text-center mb-lg-0 mb-md-5">
-                <h1 class="heading-1"><span class="count">12</span>+</h1>
-                <h4>Glorious years</h4>
+            <div class="col-lg-1-5 col-md-6 text-center">
+                <h1 class="heading-1"><i class="fi-rs-thumbs-up"></i></h1>
+                <h4>Quality Service</h4>
+                <p class="text-muted">Our commitment to excellence has earned us the trust of clients worldwide.</p>
             </div>
             <div class="col-lg-1-5 col-md-6 text-center">
-                <h1 class="heading-1"><span class="count">36</span>+</h1>
-                <h4>Happy clients</h4>
+                <h1 class="heading-1"><i class="fi-rs-shield-check"></i></h1>
+                <h4>100% Safe</h4>
+                <p class="text-muted">We prioritize your security and ensure every transaction is protected.</p>
             </div>
             <div class="col-lg-1-5 col-md-6 text-center">
-                <h1 class="heading-1"><span class="count">58</span>+</h1>
-                <h4>Projects complete</h4>
-            </div>
-            <div class="col-lg-1-5 col-md-6 text-center">
-                <h1 class="heading-1"><span class="count">24</span>+</h1>
-                <h4>Team advisor</h4>
+                <h1 class="heading-1"><i class="fi-rs-dollar"></i></h1>
+                <h4>Best Price</h4>
+                <p class="text-muted">We offer competitive pricing without compromising on quality.</p>
             </div>
             <div class="col-lg-1-5 text-center d-none d-lg-block">
-                <h1 class="heading-1"><span class="count">26</span>+</h1>
-                <h4>Products Sale</h4>
+                <h1 class="heading-1"><i class="fi-rs-refresh"></i></h1>
+                <h4>Fast Refunds</h4>
+                <p class="text-muted ">We provide hassle-free refunds for a seamless customer experience.</p>
             </div>
         </div>
     </section>
+
 
     <!--End 4 columns-->
 </main>

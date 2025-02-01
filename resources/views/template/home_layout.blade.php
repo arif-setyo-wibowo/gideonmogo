@@ -378,9 +378,7 @@
                 <div class="mobile-social-icon mb-50">
                     <h6 class="mb-15">Follow Us</h6>
                     <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-facebook-white.svg" alt="" /></a>
-                    <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-twitter-white.svg" alt="" /></a>
                     <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-instagram-white.svg" alt="" /></a>
-                    <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-pinterest-white.svg" alt="" /></a>
                     <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-youtube-white.svg" alt="" /></a>
                 </div>
                 <div class="site-copyright">Copyright 2024 © Nest. All rights reserved. Powered by AliThemes.</div>
@@ -390,75 +388,75 @@
     <!--End header-->
     @yield('content')
     <footer class="main">
-        <section class="container  mb-50">
-            <section class="text-center  mb-50">
-                <h2 class="title style-3 mt-100 mb-40">Pertanyaan yang Sering Diajukan</h2>
+        <section class="container mb-50">
+            <section class="text-center mb-50">
+                <h2 class="title style-3 mt-100 mb-40">Frequently Asked Questions</h2>
             </section>
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <div class="accordion" id="faqAccordion">
-                        <!-- Pertanyaan 1 -->
+                        <!-- Question 1 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading1">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
-                                    Apa itu Nest eCommerce?
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                                    What is Nest eCommerce?
                                 </button>
                             </h2>
-                            <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                            <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body bg-light p-3 text-dark rounded">
-                                    Nest eCommerce adalah template modern untuk membangun toko online dengan desain responsif dan fitur lengkap.
+                                    Nest eCommerce is a modern template for building online stores with responsive design and complete features.
                                 </div>
                             </div>
                         </div>
-                        <!-- Pertanyaan 2 -->
+                        <!-- Question 2 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading2">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
-                                    Apakah Nest eCommerce mendukung pembayaran online?
+                                    Does Nest eCommerce support online payments?
                                 </button>
                             </h2>
                             <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-success text-white p-3 rounded">
-                                    Ya, template ini dapat diintegrasikan dengan berbagai gateway pembayaran seperti PayPal, Stripe, dan lainnya.
+                                <div class="accordion-body bg-light p-3 text-dark p-3 rounded">
+                                    Yes, this template can be integrated with various payment gateways such as PayPal, Stripe, and more.
                                 </div>
                             </div>
                         </div>
-                        <!-- Pertanyaan 3 -->
+                        <!-- Question 3 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading3">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
-                                    Bagaimana cara menyesuaikan tampilan template ini?
+                                    How can I customize this template's appearance?
                                 </button>
                             </h2>
                             <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-primary text-white p-3 rounded">
-                                    Kamu bisa mengedit file HTML, CSS, dan JavaScript dari template ini atau menggunakan framework seperti Laravel untuk backend.
+                                <div class="accordion-body bg-light p-3 text-dark p-3 rounded">
+                                    You can edit the HTML, CSS, and JavaScript files of this template or use a backend framework like Laravel.
                                 </div>
                             </div>
                         </div>
-                        <!-- Pertanyaan 4 -->
+                        <!-- Question 4 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading4">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
-                                    Apakah template ini SEO friendly?
+                                    Is this template SEO friendly?
                                 </button>
                             </h2>
                             <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-warning text-dark p-3 rounded">
-                                    Ya, Nest eCommerce sudah dioptimalkan untuk SEO dengan struktur HTML yang baik dan kompatibilitas dengan Google Search Console.
+                                <div class="accordion-body bg-light  text-dark p-3 rounded">
+                                    Yes, Nest eCommerce is optimized for SEO with a clean HTML structure and compatibility with Google Search Console.
                                 </div>
                             </div>
                         </div>
-                        <!-- Pertanyaan 5 -->
+                        <!-- Question 5 -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading5">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
-                                    Apakah Nest eCommerce mendukung berbagai bahasa?
+                                    Does Nest eCommerce support multiple languages?
                                 </button>
                             </h2>
                             <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-danger text-white p-3 rounded">
-                                    Ya, template ini mendukung multi-language dengan mudah menggunakan file terjemahan atau plugin tambahan.
+                                <div class="accordion-body bg-light p-3 text-dark p-3 rounded">
+                                    Yes, this template supports multiple languages easily using translation files or additional plugins.
                                 </div>
                             </div>
                         </div>
@@ -467,6 +465,7 @@
             </div>
         </section>
 
+
         <section class="section-padding footer-mid">
             <div class="container pt-15 pb-20">
                 <div class="row">
@@ -474,59 +473,55 @@
                         <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
                             <div class="logo mb-30">
                                 <a href="index.html" class="mb-15"><img src="{{ asset('assets/')}}/imgs/logo/logo-2.png" width="120" alt="logo" /></a>
-                                <p class="font-lg text-heading">Awesome grocery store website template</p>
+                                <p class="font-lg text-heading">Empower Your Journey with GideonMogo!</p>
                             </div>
                             <ul class="contact-infor">
-                                <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
+                                <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span>Jakarta, Indonesia</span></li>
+                                <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Call Us:</strong><span>(+62) - 540-025-124553</span></li>
                                 <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-email-2.svg" alt="" /><strong>Email:</strong><span>sale@Nest.com</span></li>
-                                <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-clock.svg" alt="" /><strong>Hours:</strong><span>10:00 - 18:00, Mon - Sat</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".1s>
-                        <h4 class=" widget-title">Company</h4>
+                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                        <h4 class="widget-title">Company</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Support Center</a></li>
-                            <li><a href="#">Careers</a></li>
+                            <li><a href="{{ route('about.index')}}">About Us</a></li>
+                            <li>FAQ</li>
+                            <li><a href="{{ route('contact.index')}}">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                        <h4 class="widget-title">Policy</h4>
+                        <ul class="footer-list mb-sm-5 mb-md-0">
+                            <li><a href="{{ route('privacy.index')}}">Privacy Policy</a></li>
+                            <li><a href="{{ route('terms.index')}}">Terms &amp; Conditions</a></li>
+                            <li><a href="{{ route('refund.index')}}">Refund Policy</a></li>
                         </ul>
                     </div>
                     <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
                         <h4 class="widget-title">Account</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help Ticket</a></li>
-                            <li><a href="#">Shipping Details</a></li>
-                            <li><a href="#">Compare products</a></li>
+                            <li><a href="{{ route('login.index')}}">Sign In</a></li>
+                            <li><a href="{{ route('shop-cart.index')}}">View Cart</a></li>
                         </ul>
                     </div>
                 </div>
         </section>
+
         <div class="container pb-30 wow animate__animated animate__fadeInUp" data-wow-delay="0">
             <div class="row align-items-center">
                 <div class="col-12 mb-30">
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
-                    <p class="font-sm mb-0">&copy; 2024, <strong class="text-brand">Nest</strong> - HTML Ecommerce Template <br />All rights reserved</p>
+                    <p class="font-sm mb-0">&copy; 2025, <strong class="text-brand">Itboy</strong> <br />All rights reserved</p>
                 </div>
 
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
-                        {{-- <img src="assets/imgs/theme/icons/phone-call.svg" alt="hotline" />
-                        <p>1900 - 6666<span>Working 8:00 - 22:00</span></p> --}}
                     </div>
                     <div class="hotline d-lg-inline-flex">
-                        {{-- <img src="assets/imgs/theme/icons/phone-call.svg" alt="hotline" />
-                        <p>1900 - 8888<span>24/7 Support Center</span></p> --}}
                     </div>
                 </div>
 
@@ -534,12 +529,9 @@
                     <div class="mobile-social-icon">
                         <h6>Follow Us</h6>
                         <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-facebook-white.svg" alt="" /></a>
-                        <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-twitter-white.svg" alt="" /></a>
                         <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-instagram-white.svg" alt="" /></a>
-                        <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-pinterest-white.svg" alt="" /></a>
                         <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-youtube-white.svg" alt="" /></a>
                     </div>
-                    <p class="font-sm">Up to 15% discount on your first subscribe</p>
                 </div>
             </div>
         </div>

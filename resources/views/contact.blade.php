@@ -6,8 +6,8 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Pages <span></span> Contact
+                <a href="{{ route('home.index')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <span></span> Contact
             </div>
         </div>
     </div>
@@ -17,36 +17,54 @@
                 <div class="col-xl-10 col-lg-12 m-auto">
                     <section class="mb-50">
                         <div class="row mb-60">
-                            <div class="col-md-4 mb-4 mb-md-0">
-                                <h4 class="mb-15 text-brand">Office</h4>
-                                205 North Michigan Avenue, Suite 810<br />
-                                Chicago, 60601, USA<br />
-                                <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
-                                <abbr title="Email">Email: </abbr>contact@Evara.com<br />
-                                <a class="btn btn-sm font-weight-bold text-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i class="fi-rs-marker mr-5"></i>View map</a>
+                            <div class="col-md-3  ">
+                                <div class="d-flex align-items-center">
+                                    <a href="https://www.facebook.com" class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
+                                        <img src="{{ asset('assets/')}}/imgs/theme/icons/icon-facebook-white.svg" width="35" alt="Facebook" />
+                                    </a>
+                                    <h4 class="mb-0 text-brand">Facebook</h4>
+                                </div>
                             </div>
-                            <div class="col-md-4 mb-4 mb-md-0">
-                                <h4 class="mb-15 text-brand">Studio</h4>
-                                205 North Michigan Avenue, Suite 810<br />
-                                Chicago, 60601, USA<br />
-                                <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
-                                <abbr title="Email">Email: </abbr>contact@Evara.com<br />
-                                <a class="btn btn-sm font-weight-bold text-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i class="fi-rs-marker mr-5"></i>View map</a>
+                            <div class="col-md-3 ">
+                                <div class="d-flex align-items-center">
+                                    <a href="https://www.instagram.com" class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
+                                        <img src="{{ asset('assets/')}}/imgs/theme/icons/icon-instagram-white.svg" width="35" alt="Instagram" />
+                                    </a>
+                                    <h4 class="mb-0 text-brand">Instagram</h4>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <h4 class="mb-15 text-brand">Shop</h4>
-                                205 North Michigan Avenue, Suite 810<br />
-                                Chicago, 60601, USA<br />
-                                <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
-                                <abbr title="Email">Email: </abbr>contact@Evara.com<br />
-                                <a class="btn btn-sm font-weight-bold text-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i class="fi-rs-marker mr-5"></i>View map</a>
+                            <div class="col-md-3">
+                                <div class="d-flex align-items-center">
+                                    <a href="https://www.youtube.com" class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
+                                        <img src="{{ asset('assets/')}}/imgs/theme/icons/icon-youtube-white.svg" width="35" alt="YouTube" />
+                                    </a>
+                                    <h4 class="mb-0 text-brand">YouTube</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="d-flex align-items-center">
+                                    <a href="https://www.youtube.com" class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
+                                        <img src="{{ asset('assets/')}}/imgs/theme/icons/wa.png" width="35" alt="Whatsapp" />
+                                    </a>
+                                    <h4 class="mb-0 text-brand">Whatsapp</h4>
+                                </div>
                             </div>
                         </div>
+
+
+                        <!-- Connect With Us Section -->
                         <div class="row">
-                            <div class="col-xl-8">
+                            <div class="col-12 text-center">
+                                <h2 class="title style-3 mb-40">Connect with Us</h2>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form Section -->
+                        <div class="row">
+                            <div class="col-12 text-center">
                                 <div class="contact-from-area padding-20-row-col">
                                     <h5 class="text-brand mb-10">Contact form</h5>
-                                    <h2 class="mb-10">Drop Us a Line</h2>
                                     <p class="text-muted mb-30 font-sm">Your email address will not be published. Required fields are marked *</p>
                                     <form class="contact-form-style mt-30" id="contact-form" action="#" method="post">
                                         <div class="row">
