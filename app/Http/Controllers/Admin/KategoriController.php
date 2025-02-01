@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class KategoriController extends Controller
 {
@@ -12,11 +16,13 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        $kategori = Kategori::all();
         $data = [
-            'title' => 'Kategori'
+            'title' => 'Kategori',
+            'kategori' => $kategori
         ];
 
-        return view('admin.kategori.index',$data);
+        return view('admin.kategori.index', $data);
     }
 
     /**
@@ -24,7 +30,10 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Tambah Kategori'
+        ];
+        return view('admin.kategori.create', $data);
     }
 
     /**
@@ -32,7 +41,42 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validatedData = $request->validate([
+                'kategori' => 'required|max:255|unique:kategori,kategori',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+
+            $kategori = new Kategori();
+            $kategori->kategori = $validatedData['kategori'];
+            $kategori->slug = Str::slug($validatedData['kategori']);
+
+            // Handle file upload
+            if ($request->hasFile('foto')) {
+                $file = $request->file('foto');
+                
+                // Generate unique filename
+                $filename = uniqid('kategori_') . '.' . $file->getClientOriginalExtension();
+                
+                // Store file in the public disk
+                $path = $file->storeAs('kategori', $filename, 'public');
+                
+                // Remove 'public/' prefix if present
+                $kategori->foto = str_replace('public/', '', $path);
+            }
+
+            $kategori->save();
+
+            return redirect()->route('kategori.index')->with('msg', 'Kategori berhasil ditambahkan');
+        } catch (\Exception $e) {
+            // Log the full error
+            Log::error('Kategori store error: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Gagal menyimpan kategori: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -40,19 +84,25 @@ class KategoriController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $data = [
+            'title' => 'Detail Kategori',
+            'kategori' => $kategori
+        ];
+        return view('admin.kategori.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id)
     {
+        $kategori = Kategori::findOrFail($id);
         $data = [
-            'title' => 'Kategori Update'
+            'title' => 'Edit Kategori',
+            'kategori' => $kategori
         ];
-
-        return view('admin.kategori.edit',$data);
+        return view('admin.kategori.edit', $data);
     }
 
     /**
@@ -60,7 +110,48 @@ class KategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $kategori = Kategori::findOrFail($id);
+
+            $validatedData = $request->validate([
+                'kategori' => 'required|max:255|unique:kategori,kategori,' . $id,
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+
+            $kategori->kategori = $validatedData['kategori'];
+            $kategori->slug = Str::slug($validatedData['kategori']);
+
+            // Handle file upload
+            if ($request->hasFile('foto')) {
+                // Delete old file if exists
+                if ($kategori->foto) {
+                    Storage::disk('public')->delete($kategori->foto);
+                }
+
+                $file = $request->file('foto');
+                
+                // Generate unique filename
+                $filename = uniqid('kategori_') . '.' . $file->getClientOriginalExtension();
+                
+                // Store file in the public disk
+                $path = $file->storeAs('kategori', $filename, 'public');
+                
+                // Remove 'public/' prefix if present
+                $kategori->foto = str_replace('public/', '', $path);
+            }
+
+            $kategori->save();
+
+            return redirect()->route('kategori.index')->with('msg', 'Kategori berhasil diperbarui');
+        } catch (\Exception $e) {
+            // Log the full error
+            Log::error('Kategori update error: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Gagal memperbarui kategori: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -68,6 +159,15 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+
+        // Delete associated image if exists
+        if ($kategori->foto) {
+            Storage::disk('public')->delete($kategori->foto);
+        }
+
+        $kategori->delete();
+
+        return redirect()->route('kategori.index')->with('msg', 'Kategori berhasil dihapus');
     }
 }
