@@ -131,8 +131,8 @@
                 <li class="menu-header fw-medium mt-4">
                     <span class="menu-header-text">Data Laporan</span>
                 </li>
-                <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
-                    <a href="{{ route('pembelian.index')}}" class="menu-link">
+                <li class="menu-item {{ request()->routeIs('laporan.pembelian') ? 'active' : '' }}">
+                    <a href="{{ route('laporan.pembelian')}}" class="menu-link">
                         <i class="menu-icon tf-icons mdi mdi-calendar-edit"></i>
                         <div>Laporan Pembelian</div>
                     </a>

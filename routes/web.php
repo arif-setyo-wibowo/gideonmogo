@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LaporanController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home.index');
@@ -94,5 +95,9 @@ Route::prefix('back/')->group(function () {
     Route::resource('admin', AdminController::class);
 
     Route::resource('faq', FaqController::class);
+
+    Route::controller(LaporanController::class)->group(function () {
+        Route::get('/laporan-pembelian', 'pembelian')->name('laporan.pembelian');
+    });
 
 });

@@ -36,14 +36,14 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="vendor-des mb-15">
-                                    <p class="font-sm text-white">Got a smooth, buttery spread in your fridge? Chances are good that it's Good Chef. This brand made Lionto's list of the most popular grocery brands across the country.</p>
+                                    <p class="font-sm text-white">GideonMogo: Unlock Your Game with Premium Items, Boost Your Power, and Dominate the Leaderboard!</p>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="vendor-info text-white mb-15">
                                     <ul class="font-sm">
-                                        <li><img class="mr-5" src="assets/imgs/theme/icons/icon-location.svg" alt=""><strong>Address: </strong> <span>5171 W Campbell Ave undefined, Utah 53127 United States</span></li>
-                                        <li><img class="mr-5" src="assets/imgs/theme/icons/icon-contact.svg" alt=""><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
+                                        <li><img class="mr-5" src="assets/imgs/theme/icons/icon-location.svg" alt=""><strong>Address: </strong> <span>Jakarta, Indonesia</span></li>
+                                        <li><img class="mr-5" src="assets/imgs/theme/icons/icon-contact.svg" alt=""><strong>Call Us:</strong><span>(+62) - 540-025-124553</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -53,22 +53,12 @@
                                     <ul class="social-network">
                                         <li class="hover-up">
                                             <a href="#">
-                                                <img src="assets/imgs/theme/icons/social-tw.svg" alt="">
-                                            </a>
-                                        </li>
-                                        <li class="hover-up">
-                                            <a href="#">
                                                 <img src="assets/imgs/theme/icons/social-fb.svg" alt="">
                                             </a>
                                         </li>
                                         <li class="hover-up">
                                             <a href="#">
                                                 <img src="assets/imgs/theme/icons/social-insta.svg" alt="">
-                                            </a>
-                                        </li>
-                                        <li class="hover-up">
-                                            <a href="#">
-                                                <img src="assets/imgs/theme/icons/social-pin.svg" alt="">
                                             </a>
                                         </li>
                                     </ul>
