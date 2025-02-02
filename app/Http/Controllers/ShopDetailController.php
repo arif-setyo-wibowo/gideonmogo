@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
+use App\Models\Kategori;
 
 class ShopDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($slug)
     {
-        return view('shop-detail');
+        $product = Produk::where('slug', $slug)->firstOrFail();
+        
+        // Find related products in the same category, excluding the current product
+        $relatedProducts = Produk::where('id_kategori', $product->id_kategori)
+            ->where('id', '!=', $product->id)
+            ->limit(4)
+            ->get();
+        
+        // Get all categories with their product count
+        $categories = Kategori::withCount('produks')->get();
+        
+        return view('shop-detail', compact('product', 'relatedProducts', 'categories'));
     }
 
     /**

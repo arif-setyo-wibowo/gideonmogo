@@ -31,7 +31,7 @@ Route::controller(ShopController::class)->group(function () {
 });
 
 Route::controller(ShopDetailController::class)->group(function () {
-    Route::get('/shop-detail', 'index')->name('shop-detail.index');
+    Route::get('/shop-detail/{slug}', 'index')->name('shop-detail.index');
 });
 
 Route::controller(ShopCartController::class)->group(function () {

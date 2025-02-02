@@ -52,7 +52,7 @@
                                 Monopoly GO!<br />
                                 Store
                             </h1>
-                            <button class="btn" type="submit"><i class="fi-rs-paper-plane"></i> &nbsp; Store</button>
+                            <a href="{{ route('shop.index') }}" class="btn" type="submit"><i class="fi-rs-paper-plane"></i> &nbsp; Store</a>
                         </div>
                     </div>
                     <!-- Slide dengan Gambar -->
@@ -76,85 +76,89 @@
     </section>
 
     <!--End hero slider-->
+    
+    <!-- Start Banner -->
     <section class="banners mb-25">
         <div class="container">
             <div class="row">
+                @foreach($categories as $category)
                 <div class="col col-lg-3 col-md-6">
-                    <div class="banner-img wow animate__animated animate__fadeInUp"  data-wow-delay="0">
-                        <img src="{{ asset('assets/')}}/imgs/banner/banner-1.png" width="378" height="223" alt="" />
+                    <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0.0s">
+                        <img src="{{ asset('storage/' . $category->foto) }}" 
+                             alt="{{ $category->kategori }}" 
+                             style="width: 400px; height: 250px; object-fit: cover; aspect-ratio: 1/1; filter: brightness(0.5);">
                         <div class="banner-text">
-                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-                                Everyday Fresh & <br />Clean with Our<br />
-                                Products
-                            </h4>
-                            <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                            <h4 class="text-white">{{ $category->kategori }}</h4>
+                            <a href="{{ route('shop.index', ['category' => $category->slug]) }}" 
+                               class="btn btn-sm btn-primary text-white" 
+                               style="background-color: rgba(0, 123, 255, 0.8); 
+                                      border-radius: 20px; 
+                                      padding: 5px 15px; 
+                                      text-shadow: 1px 1px 2px rgba(0,0,0,0.3); 
+                                      display: inline-block; 
+                                      margin-top: 10px;">
+                                Shop Now <i class="fi-rs-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                        <img src="{{ asset('assets/')}}/imgs/banner/banner-2.png" width="378" height="223" alt="" />
-                        <div class="banner-text">
-                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-                                Make your Breakfast<br />
-                                Healthy and Easy
-                            </h4>
-                            <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 d-md-none d-lg-flex">
-                    <div class="banner-img mb-sm-0 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-                        <img src="{{ asset('assets/')}}/imgs/About3.webp" width="378" height="223" alt="" />
-                        <div class="banner-text">
-                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">The best Organic <br />Products Online</h4>
-                            <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 d-md-none d-lg-flex">
-                    <div class="banner-img mb-sm-0 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-                        <img src="{{ asset('assets/')}}/imgs/banner/banner-3.png" width="378" height="223"  alt="" />
-                        <div class="banner-text">
-                            <h4 class="text-white"  style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">The best Organic <br />Products Online</h4>
-                            <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
     <!--End banners-->
+
+    <!-- Start Product -->
     <section class="product-tabs section-padding position-relative">
         <div class="container">
             <div class="section-title style-2 wow animate__animated animate__fadeIn">
                 <h3>Products</h3>
                 <ul class="nav nav-tabs links" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
+                        <button class="nav-link active" 
+                                id="all-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#all" 
+                                type="button" 
+                                role="tab" 
+                                aria-controls="all" 
+                                aria-selected="true">
+                            All
+                        </button>
                     </li>
+                    @foreach($categories as $category)
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Milks & Dairies</button>
+                        <button class="nav-link" 
+                                id="{{ $category->slug }}-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#{{ $category->slug }}" 
+                                type="button" 
+                                role="tab" 
+                                aria-controls="{{ $category->slug }}" 
+                                aria-selected="false">
+                            {{ $category->kategori }}
+                        </button>
                     </li>
+                    @endforeach
                 </ul>
             </div>
-            <!--End nav-tabs-->
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+            <div class="tab-content wow fadeIn" id="myTabContent">
+                <div class="tab-pane fade show active" 
+                     id="all" 
+                     role="tabpanel" 
+                     aria-labelledby="all-tab">
                     <div class="row product-grid-4">
+                        @forelse($products as $product)
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                             <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html">
-                                            <img class="default-img" src="{{ asset('assets/')}}/imgs/shop/product-1-1.jpg" alt="" />
-                                            <img class="hover-img" src="{{ asset('assets/')}}/imgs/shop/product-1-2.jpg" alt="" />
+                                        <a href="{{ route('shop-detail.index', ['slug' => $product->slug]) }}">
+                                            <img class="default-img" 
+                                                 src="{{ asset('storage/' . $product->foto) }}" 
+                                                 alt="{{ $product->nama_produk }}"
+                                                 style="width: 100%; height: 250px; object-fit: cover; aspect-ratio: 1/1;">
                                         </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
                                         <span class="hot">Hot</span>
@@ -162,91 +166,91 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">Snack</a>
+                                        <a href="{{ route('shop.index', ['category' => $product->kategori->slug]) }}">
+                                            {{ $product->kategori->kategori }}
+                                        </a>
                                     </div>
-                                    <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown, & Red Rice</a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
-                                    </div>
+                                    <h2>
+                                        <a href="{{ route('shop-detail.index', ['slug' => $product->slug]) }}">
+                                            {{ $product->nama_produk }}
+                                        </a>
+                                    </h2>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>$28.85</span>
-                                            <span class="old-price">$32.8</span>
+                                            <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--end product card-->
+                        @empty
+                        <div class="col-12 text-center">
+                            <p>No products found.</p>
+                        </div>
+                        @endforelse
                     </div>
-                    <!--End product-grid-4-->
                 </div>
-                <!--En tab one-->
-                <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
+                @foreach($categories as $category)
+                <div class="tab-pane fade" 
+                     id="{{ $category->slug }}" 
+                     role="tabpanel" 
+                     aria-labelledby="{{ $category->slug }}-tab">
                     <div class="row product-grid-4">
+                        @php
+                            $categoryProducts = $products->where('id_kategori', $category->id);
+                        @endphp
+                        @forelse($categoryProducts as $product)
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html">
-                                            <img class="default-img" src="{{ asset('assets/')}}/imgs/shop/product-10-1.jpg" alt="" />
-                                            <img class="hover-img" src="{{ asset('assets/')}}/imgs/shop/product-10-2.jpg" alt="" />
+                                        <a href="{{ route('shop-detail.index', ['slug' => $product->slug]) }}">
+                                            <img class="default-img" 
+                                                 src="{{ asset('storage/' . $product->foto) }}" 
+                                                 alt="{{ $product->nama_produk }}"
+                                                 style="width: 100%; height: 250px; object-fit: cover; aspect-ratio: 1/1;">
                                         </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="hot">Hot</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">Snack</a>
+                                        <a href="{{ route('shop.index', ['category' => $category->slug]) }}">
+                                            {{ $category->kategori }}
+                                        </a>
                                     </div>
-                                    <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown, & Red Rice</a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                    <div>
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
-                                    </div>
+                                    <h2>
+                                        <a href="{{ route('shop-detail.index', ['slug' => $product->slug]) }}">
+                                            {{ $product->nama_produk }}
+                                        </a>
+                                    </h2>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>$28.85</span>
-                                            <span class="old-price">$32.8</span>
+                                            <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--end product card-->
+                        @empty
+                        <div class="col-12 text-center">
+                            <p>No products found in this category.</p>
+                        </div>
+                        @endforelse
                     </div>
-                    <!--End product-grid-4-->
                 </div>
-                <!--En tab two-->
+                @endforeach
             </div>
-            <!--End tab-content-->
         </div>
     </section>
-    <section class="container mb-50 d-none d-md-block text-center" >
+    <!--End Product-->
+
+    <section class="container mb-50 mt-50 d-none d-md-block text-center" >
         <section class="text-center mb-50">
             <h2 class="title style-3 mb-40">Why Choose Us?</h2>
             <p class="text-muted">

@@ -51,12 +51,32 @@
             thousand: ",",
             prefix: "$"
         });
+
+        // Get min and max from data attributes
+        var minPrice = parseFloat(rangeSlider.getAttribute('data-min')) || 0;
+        var maxPrice = parseFloat(rangeSlider.getAttribute('data-max')) || 10000;
+        var actualMinPrice = parseFloat(rangeSlider.getAttribute('data-actual-min')) || minPrice;
+        var actualMaxPrice = parseFloat(rangeSlider.getAttribute('data-actual-max')) || maxPrice;
+
+        // Check URL for min_price and max_price
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlMinPrice = urlParams.get('min_price');
+        var urlMaxPrice = urlParams.get('max_price');
+
+        // Determine start values
+        var startMin = urlMinPrice ? parseFloat(urlMinPrice) : actualMinPrice;
+        var startMax = urlMaxPrice ? parseFloat(urlMaxPrice) : actualMaxPrice;
+
+        // Ensure start values are within the 0-10000 range
+        startMin = Math.max(minPrice, Math.min(startMin, maxPrice));
+        startMax = Math.max(startMin, Math.min(startMax, maxPrice));
+
         noUiSlider.create(rangeSlider, {
-            start: [500, 1000],
+            start: [startMin, startMax],
             step: 1,
             range: {
-                min: [0],
-                max: [2000]
+                min: [minPrice],
+                max: [maxPrice]
             },
             format: moneyFormat,
             connect: true
@@ -66,8 +86,15 @@
         rangeSlider.noUiSlider.on("update", function (values, handle) {
             document.getElementById("slider-range-value1").innerHTML = values[0];
             document.getElementById("slider-range-value2").innerHTML = values[1];
-            document.getElementsByName("min-value").value = moneyFormat.from(values[0]);
-            document.getElementsByName("max-value").value = moneyFormat.from(values[1]);
+            
+            // Update filter link with current values
+            var filterLink = document.querySelector('.btn-sm.btn-default');
+            if (filterLink) {
+                var currentUrl = new URL(filterLink.href);
+                currentUrl.searchParams.set('min_price', moneyFormat.from(values[0]));
+                currentUrl.searchParams.set('max_price', moneyFormat.from(values[1]));
+                filterLink.href = currentUrl.toString();
+            }
         });
     }
 
@@ -729,4 +756,3 @@
         showItems: 1
     });
 })(jQuery);
-
