@@ -11,152 +11,19 @@
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/')}}/imgs/logo/logo-2.png" />
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/')}}/css/plugins/animate.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/')}}/css/plugins/slider-range.css" />
     <link rel="stylesheet" href="{{ asset('assets/')}}/css/main.css?v=6.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body>
 
-    <!-- Quick view -->
-    <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
-                            <div class="detail-gallery">
-                                <span class="zoom-icon"><i class="fi-rs-search"></i></span>
-                                <!-- MAIN SLIDES -->
-                                <div class="product-image-slider">
-                                    <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/')}}/imgs/shop/product-16-2.jpg" alt="product image" />
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/')}}/imgs/shop/product-16-1.jpg" alt="product image" />
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/')}}/imgs/shop/product-16-3.jpg" alt="product image" />
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/')}}/imgs/shop/product-16-4.jpg" alt="product image" />
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/')}}/imgs/shop/product-16-5.jpg" alt="product image" />
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/')}}/imgs/shop/product-16-6.jpg" alt="product image" />
-                                    </figure>
-                                    <figure class="border-radius-10">
-                                        <img src="{{ asset('assets/')}}/imgs/shop/product-16-7.jpg" alt="product image" />
-                                    </figure>
-                                </div>
-                                <!-- THUMBNAILS -->
-                                <div class="slider-nav-thumbnails">
-                                    <div><img src="{{ asset('assets/')}}/imgs/shop/thumbnail-3.jpg" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/')}}/imgs/shop/thumbnail-4.jpg" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/')}}/imgs/shop/thumbnail-5.jpg" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/')}}/imgs/shop/thumbnail-6.jpg" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/')}}/imgs/shop/thumbnail-7.jpg" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/')}}/imgs/shop/thumbnail-8.jpg" alt="product image" /></div>
-                                    <div><img src="{{ asset('assets/')}}/imgs/shop/thumbnail-9.jpg" alt="product image" /></div>
-                                </div>
-                            </div>
-                            <!-- End Gallery -->
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="detail-info pr-30 pl-30">
-                                <span class="stock-status out-stock"> Sale Off </span>
-                                <h3 class="title-detail"><a href="shop-product-right.html" class="text-heading">Seeds of Change Organic Quinoa, Brown</a></h3>
-                                <div class="product-detail-rating">
-                                    <div class="product-rate-cover text-end">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (32 reviews)</span>
-                                    </div>
-                                </div>
-                                <div class="clearfix product-price-cover">
-                                    <div class="product-price primary-color float-left">
-                                        <span class="current-price text-brand">$38</span>
-                                        <span>
-                                            <span class="save-price font-md color3 ml-15">26% Off</span>
-                                            <span class="old-price font-md ml-15">$52</span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="detail-extralink mb-30">
-                                    <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <span class="qty-val">1</span>
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                    <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                    </div>
-                                </div>
-                                <div class="font-xs">
-                                    <ul>
-                                        <li class="mb-5">Vendor: <span class="text-brand">Nest</span></li>
-                                        <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2024</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Detail Info -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <header class="header-area header-style-1 header-height-2">
-        <div class="mobile-promotion">
-            <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
-        </div>
-        {{-- <div class="header-top header-top-ptb-1 d-none d-lg-block">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="header-info">
-                            <ul>
-                                <li><a href="{{ route('my-account.index')}}">My Account</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-4">
-                        <div class="text-center">
-                            <div id="news-flash" class="d-inline-block">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="header-info header-info-right">
-                            <ul>
-                                <li>
-                                    <a class="language-dropdown-active" href="#">English <i class="fi-rs-angle-small-down"></i></a>
-                                    <ul class="language-dropdown">
-                                        <li>
-                                            <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/flag-fr.png" alt="" />Français</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/flag-dt.png" alt="" />Deutsch</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/flag-ru.png" alt="" />Pусский</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">
@@ -165,9 +32,42 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form action="#">
-                                <input type="text" placeholder="Search for items..." />
+                            <form action="{{ route('shop.index') }}" method="GET" class="d-flex align-items-center search-form" id="desktop-search-form" onsubmit="return validateSearch(event)">
+                                <input type="text" name="search" placeholder="Search for items..." value="{{ request('search') }}" class="form-control search-input" style="background-image: none;" id="desktop-search-input">
+                                <button type="submit" class="btn btn-search">
+                                    <i class="fi-rs-search" style="font-size: 16px; margin-right: 8px;"></i> <span style="font-size: 16px;">Search</span>
+                                </button>
                             </form>
+                            <style>
+                                .search-form {
+                                    position: relative;
+                                    max-width: 400px;
+                                    width: 100%;
+                                }
+                                .search-input {
+                                    border-right: none;
+                                    padding-right: 120px;
+                                    background-image: none !important;
+                                }
+                                .btn-search {
+                                    position: absolute;
+                                    right: 0;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                    background-color: #3BB77E;
+                                    color: white;
+                                    border: none;
+                                    padding: 6px 15px;
+                                    border-radius: 0 4px 4px 0;
+                                    display: flex;
+                                    align-items: center;
+                                    transition: all 0.3s ease;
+                                }
+                                .btn-search:hover {
+                                    background-color: #2a9d64;
+                                    transform: translateY(-50%) scale(1.05);
+                                }
+                            </style>
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
@@ -181,7 +81,7 @@
                                                 <a class="{{ request()->routeIs('about.index') ? 'active' : '' }}" href="{{ route('about.index')}}">About</a>
                                             </li>
                                             <li>
-                                                <a class="{{ request()->routeIs('shop.index') ? 'active' : '' }}" href="{{ route('shop.index')}}">Shop </a>
+                                                <a class="{{ request()->routeIs('shop.index') || request()->routeIs('shop-detail.index') ? 'active' : '' }}" href="{{ route('shop.index')}}">Shop </a>
                                             </li>
                                             <li>
                                                 <a class="{{ request()->routeIs('contact.index') ? 'active' : '' }}" href="{{ route('contact.index')}}">Contact</a>
@@ -190,47 +90,82 @@
                                     </nav>
                                 </div>
                                 <div class="header-action-icon-2">
+                                    @php
+                                        $cartItemCount = \App\Models\Cart::when(Auth::check(), function($query) {
+                                            return $query->where('user_id', Auth::id());
+                                        })
+                                        ->when(!Auth::check(), function($query) {
+                                            return $query->where('session_id', Session::getId());
+                                        })
+                                        ->distinct('produk_id')
+                                        ->count('produk_id');
+                                    @endphp
                                     <a class="mini-cart-icon" href="{{ route('shop-cart.index') }}">
-                                        <img alt="Nest" src="{{ asset('assets/')}}/imgs/theme/icons/icon-cart.svg" />
-                                        <span class="pro-count blue">2</span>
+                                        <img alt="cart" src="{{ asset('assets/')}}/imgs/theme/icons/icon-cart.svg" />
+                                        <span class="pro-count blue">{{ $cartItemCount }}</span>
                                     </a>
                                     <a href="{{ route('shop-cart.index') }}"><span class="lable">Cart</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <ul>
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="shop-product-right.html"><img alt="Nest" src="{{ asset('assets/')}}/imgs/shop/thumbnail-3.jpg" /></a>
+                                        @php
+                                            $cartItems = \App\Models\Cart::with('produk')
+                                                ->when(Auth::check(), function($query) {
+                                                    return $query->where('user_id', Auth::id());
+                                                })
+                                                ->when(!Auth::check(), function($query) {
+                                                    return $query->where('session_id', Session::getId());
+                                                })
+                                                ->get();
+                                            
+                                            $cartTotal = $cartItems->sum(function($item) {
+                                                return $item->produk->harga * $item->quantity;
+                                            });
+                                        @endphp
+
+                                        @if($cartItems->count() > 0)
+                                            <ul>
+                                                @foreach($cartItems as $item)
+                                                    <li>
+                                                        <div class="shopping-cart-img">
+                                                            <a href="{{ route('shop-detail.index', $item->produk->id) }}">
+                                                                 <img alt="{{ $item->produk->nama_produk }}" 
+                                                                      src="{{ asset('storage/' . $item->produk->foto) }}" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="shopping-cart-title">
+                                                            <h4>
+                                                                <a href="{{ route('shop-detail.index', $item->produk->id) }}">
+                                                                    {{ Str::limit($item->produk->nama_produk, 18) }}
+                                                                </a>
+                                                            </h4>
+                                                            <h4>
+                                                                <span>{{ $item->quantity }} × </span>
+                                                                ${{ number_format($item->produk->harga, 0) }}
+                                                            </h4>
+                                                        </div>
+                                                        <div class="shopping-cart-delete">
+                                                            <a href="#" class="remove-cart-item-dropdown" 
+                                                               data-cart-id="{{ $item->id }}"
+                                                               onclick="event.preventDefault(); removeCartItemDropdown(this);">
+                                                                <i class="fi-rs-cross-small"></i>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                            <div class="shopping-cart-footer">
+                                                <div class="shopping-cart-total">
+                                                    <h4>Total <span>${{ number_format($cartTotal, 0) }}</span></h4>
                                                 </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
-                                                    <h4><span>1 × </span>$800.00</h4>
+                                                <div class="shopping-cart-button">
+                                                    <a href="{{ route('shop-cart.index') }}" class="outline">View cart</a>
+                                                    <a href="{{ route('shop-checkout.index') }}">Checkout</a>
                                                 </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="shop-product-right.html"><img alt="Nest" src="{{ asset('assets/')}}/imgs/shop/thumbnail-2.jpg" /></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
-                                                    <h4><span>1 × </span>$3200.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="shopping-cart-footer">
-                                            <div class="shopping-cart-total">
-                                                <h4>Total <span>$4000.00</span></h4>
                                             </div>
-                                            <div class="shopping-cart-button">
-                                                <a href="{{ route('shop-cart.index')}}" class="outline">View cart</a>
-                                                <a href="{{ route('shop-checkout.index')}}">Checkout</a>
+                                        @else
+                                            <div class="text-center p-3">
+                                                <p>Your cart is empty</p>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
@@ -276,52 +211,81 @@
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-                                    <img alt="Nest" src="assets/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">4</span>
-                                </a>
-                            </div>
-                            <div class="header-action-icon-2">
+                                @php
+                                    $cartItemCount = \App\Models\Cart::when(Auth::check(), function($query) {
+                                        return $query->where('user_id', Auth::id());
+                                    })
+                                    ->when(!Auth::check(), function($query) {
+                                        return $query->where('session_id', Session::getId());
+                                    })
+                                    ->distinct('produk_id')
+                                    ->count('produk_id');
+                                @endphp
                                 <a class="mini-cart-icon" href="#">
-                                    <img alt="Nest" src="assets/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">2</span>
+                                    <img alt="Nest" src="{{ asset('assets/')}}/imgs/theme/icons/icon-cart.svg">
+                                    <span class="pro-count white">{{ $cartItemCount }}</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                    <ul>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest" src="assets/imgs/shop/thumbnail-3.jpg"></a>
+                                    @php
+                                        $cartItems = \App\Models\Cart::with('produk')
+                                            ->when(Auth::check(), function($query) {
+                                                return $query->where('user_id', Auth::id());
+                                            })
+                                            ->when(!Auth::check(), function($query) {
+                                                return $query->where('session_id', Session::getId());
+                                            })
+                                            ->get();
+                                        
+                                        $cartTotal = $cartItems->sum(function($item) {
+                                            return $item->produk->harga * $item->quantity;
+                                        });
+                                    @endphp
+
+                                    @if($cartItems->count() > 0)
+                                        <ul>
+                                            @foreach($cartItems as $item)
+                                                <li>
+                                                    <div class="shopping-cart-img">
+                                                        <a href="{{ route('shop-detail.index', $item->produk->id) }}">
+                                                            <img alt="{{ $item->produk->nama_produk }}" 
+                                                                 src="{{ asset('storage/' . $item->produk->foto) }}" />
+                                                        </a>
+                                                    </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4>
+                                                            <a href="{{ route('shop-detail.index', $item->produk->id) }}">
+                                                                {{ Str::limit($item->produk->nama_produk, 18) }}
+                                                            </a>
+                                                        </h4>
+                                                        <h4>
+                                                            <span>{{ $item->quantity }} × </span>
+                                                            ${{ number_format($item->produk->harga, 0) }}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="shopping-cart-delete">
+                                                        <a href="#" class="remove-cart-item-dropdown" 
+                                                           data-cart-id="{{ $item->id }}"
+                                                           onclick="event.preventDefault(); removeCartItemDropdown(this);">
+                                                            <i class="fi-rs-cross-small"></i>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <div class="shopping-cart-footer">
+                                            <div class="shopping-cart-total">
+                                                <h4>Total <span>${{ number_format($cartTotal, 0) }}</span></h4>
                                             </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
-                                                <h3><span>1 × </span>$800.00</h3>
+                                            <div class="shopping-cart-button">
+                                                <a href="{{ route('shop-cart.index') }}" class="outline">View cart</a>
+                                                <a href="{{ route('shop-checkout.index') }}">Checkout</a>
                                             </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest" src="assets/imgs/shop/thumbnail-4.jpg"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Macbook Pro 2024</a></h4>
-                                                <h3><span>1 × </span>$3500.00</h3>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="shopping-cart-footer">
-                                        <div class="shopping-cart-total">
-                                            <h4>Total <span>$383.00</span></h4>
                                         </div>
-                                        <div class="shopping-cart-button">
-                                            <a href="{{ route('shop-cart.index')}}">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
+                                    @else
+                                        <div class="text-center p-3">
+                                            <p>Your cart is empty</p>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -345,10 +309,21 @@
             </div>
             <div class="mobile-header-content-area">
                 <div class="mobile-search search-style-3 mobile-header-border">
-                    <form action="#">
-                        <input type="text" placeholder="Search for items…" />
+                    <form action="{{ route('shop.index') }}" method="GET" id="mobile-search-form" onsubmit="return validateSearch(event)">
+                        <input type="text" name="search" placeholder="Search for items..." value="{{ request('search') }}">
                         <button type="submit"><i class="fi-rs-search"></i></button>
                     </form>
+                    <style>
+                        .mobile-search .search-style-3 button {
+                            background-color: transparent;
+                            border: none;
+                            color: #253D4E;
+                            transition: all 0.3s ease;
+                        }
+                        .mobile-search .search-style-3 button:hover {
+                            color: white;
+                        }
+                    </style>
                 </div>
                 <div class="mobile-menu-wrap mobile-header-border">
                     <!-- mobile menu start -->
@@ -381,7 +356,7 @@
                     <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-instagram-white.svg" alt="" /></a>
                     <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-youtube-white.svg" alt="" /></a>
                 </div>
-                <div class="site-copyright">Copyright 2024 © Nest. All rights reserved. Powered by AliThemes.</div>
+                <div class="site-copyright">Copyright 2024 Nest. All rights reserved. Powered by AliThemes.</div>
             </div>
         </div>
     </div>
@@ -557,6 +532,64 @@
     <script src="{{ asset('assets/')}}/js/plugins/jquery.theia.sticky.js"></script>
     <script src="{{ asset('assets/')}}/js/plugins/jquery.elevatezoom.js"></script>
     @yield('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    @yield('scripts')
+    @push('scripts')
+    <script>
+    function removeCartItemDropdown(element) {
+        const cartId = element.getAttribute('data-cart-id');
+        const cartItem = element.closest('li');
+
+        fetch(`/shop-cart/${cartId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                cartItem.remove();
+                updateCartDropdownTotal();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function updateCartDropdownTotal() {
+        const cartDropdown = document.querySelector('.cart-dropdown-wrap');
+        const cartItems = cartDropdown.querySelectorAll('li');
+        const totalElement = cartDropdown.querySelector('.shopping-cart-total span');
+
+        if (cartItems.length === 0) {
+            // If no items, replace with empty cart message
+            cartDropdown.innerHTML = `
+                <div class="text-center p-3">
+                    <p>Your cart is empty</p>
+                    <a href="{{ route('shop.index') }}" class="btn btn-sm btn-primary">Continue Shopping</a>
+                </div>
+            `;
+            return;
+        }
+
+        // Recalculate total
+        let total = 0;
+        cartItems.forEach(item => {
+            const priceText = item.querySelector('.shopping-cart-title h4:last-child').textContent;
+            const price = parseFloat(priceText.split('×')[1].replace('$', '').trim());
+            const quantity = parseInt(priceText.split('×')[0].trim());
+            total += price * quantity;
+        });
+
+        // Update total
+        totalElement.textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+    }
+    </script>
+    @endpush
     <!-- Template  JS -->
     <script src="{{ asset('assets/')}}/js/main.js?v=6.0"></script>
     <script src="{{ asset('assets/')}}/js/shop.js?v=6.0"></script>

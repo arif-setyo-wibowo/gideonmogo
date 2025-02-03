@@ -2,37 +2,40 @@
 @section('content')
 <style>
     /* Pastikan kontainer slider memiliki ukuran tetap */
-.home-slide-cover {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
+    .home-slide-cover {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 
-/* Pastikan video mengisi seluruh area slider */
-.video-background {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.overlay-text {
-    position: relative;
-    display: block;
-    padding: 20px;
-    color: white;
-    z-index: 2;
-}
+    /* Pastikan video mengisi seluruh area slider */
+    .video-background {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-.overlay-text::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Warna overlay */
-    z-index: -1;
-    border-radius: 10px; /* Opsional */
-}
+    .overlay-text {
+        position: relative;
+        display: block;
+        padding: 20px;
+        color: white;
+        z-index: 2;
+    }
+
+    .overlay-text::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        /* Warna overlay */
+        z-index: -1;
+        border-radius: 10px;
+        /* Opsional */
+    }
 
 </style>
 <main class="main">
@@ -52,46 +55,45 @@
                                 Monopoly GO!<br />
                                 Store
                             </h1>
-                            <a href="{{ route('shop.index') }}" class="btn" type="submit"><i class="fi-rs-paper-plane"></i> &nbsp; Store</a>
+                            <a href="{{ route('shop.index') }}" class="btn" type="submit"><i
+                                    class="fi-rs-paper-plane"></i> &nbsp; Store</a>
                         </div>
                     </div>
                     <!-- Slide dengan Gambar -->
                     {{-- <div class="single-hero-slider single-animation-wrap" style="background-image: url({{ asset('assets/imgs/slider/slider-2.png') }})">
-                        <div class="slider-content">
-                            <h1 class="display-2 mb-40">
-                                Fresh Vegetables<br />
-                                Big discount
-                            </h1>
-                            <p class="mb-65">Save up to 50% off on your first order</p>
-                            <form class="form-subcriber d-flex">
-                                <input type="email" placeholder="Your email address" />
-                                <button class="btn" type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                    </div> --}}
-                </div>
-                <div class="slider-arrow hero-slider-1-arrow"></div>
+                    <div class="slider-content">
+                        <h1 class="display-2 mb-40">
+                            Fresh Vegetables<br />
+                            Big discount
+                        </h1>
+                        <p class="mb-65">Save up to 50% off on your first order</p>
+                        <form class="form-subcriber d-flex">
+                            <input type="email" placeholder="Your email address" />
+                            <button class="btn" type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div> --}}
             </div>
+            <div class="slider-arrow hero-slider-1-arrow"></div>
+        </div>
         </div>
     </section>
 
     <!--End hero slider-->
-    
+
     <!-- Start Banner -->
     <section class="banners mb-25">
         <div class="container">
             <div class="row">
                 @foreach($categories as $category)
-                <div class="col col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-4 col-6 col-sm-6">
                     <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0.0s">
-                        <img src="{{ asset('storage/' . $category->foto) }}" 
-                             alt="{{ $category->kategori }}" 
-                             style="width: 400px; height: 250px; object-fit: cover; aspect-ratio: 1/1; filter: brightness(0.5);">
+                        <img src="{{ asset('storage/' . $category->foto) }}" alt="{{ $category->kategori }}"
+                            style="width: 400px; height: 250px; object-fit: cover; aspect-ratio: 1/1; filter: brightness(0.5);">
                         <div class="banner-text">
                             <h4 class="text-white">{{ $category->kategori }}</h4>
-                            <a href="{{ route('shop.index', ['category' => $category->slug]) }}" 
-                               class="btn btn-sm btn-primary text-white" 
-                               style="background-color: rgba(0, 123, 255, 0.8); 
+                            <a href="{{ route('shop.index', ['category' => $category->slug]) }}"
+                                class="btn btn-sm btn-primary text-white" style="background-color: rgba(0, 123, 255, 0.8); 
                                       border-radius: 20px; 
                                       padding: 5px 15px; 
                                       text-shadow: 1px 1px 2px rgba(0,0,0,0.3); 
@@ -115,27 +117,16 @@
                 <h3>Products</h3>
                 <ul class="nav nav-tabs links" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" 
-                                id="all-tab" 
-                                data-bs-toggle="tab" 
-                                data-bs-target="#all" 
-                                type="button" 
-                                role="tab" 
-                                aria-controls="all" 
-                                aria-selected="true">
+                        <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all"
+                            type="button" role="tab" aria-controls="all" aria-selected="true">
                             All
                         </button>
                     </li>
                     @foreach($categories as $category)
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" 
-                                id="{{ $category->slug }}-tab" 
-                                data-bs-toggle="tab" 
-                                data-bs-target="#{{ $category->slug }}" 
-                                type="button" 
-                                role="tab" 
-                                aria-controls="{{ $category->slug }}" 
-                                aria-selected="false">
+                        <button class="nav-link" id="{{ $category->slug }}-tab" data-bs-toggle="tab"
+                            data-bs-target="#{{ $category->slug }}" type="button" role="tab"
+                            aria-controls="{{ $category->slug }}" aria-selected="false">
                             {{ $category->kategori }}
                         </button>
                     </li>
@@ -143,21 +134,25 @@
                 </ul>
             </div>
             <div class="tab-content wow fadeIn" id="myTabContent">
-                <div class="tab-pane fade show active" 
-                     id="all" 
-                     role="tabpanel" 
-                     aria-labelledby="all-tab">
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    @foreach($categories as $category)
+                    <div class="section-title style-2 wow animate__animated animate__fadeIn">
+                        <h3>{{ $category->kategori }}</h3>
+                    </div>
                     <div class="row product-grid-4">
-                        @forelse($products as $product)
+                        @php
+                        $categoryProducts = $products->where('id_kategori', $category->id)->take(5);
+                        @endphp
+                        @forelse($categoryProducts as $product)
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                            <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+                            <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn"
+                                data-wow-delay=".1s">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="{{ route('shop-detail.index', ['slug' => $product->slug]) }}">
-                                            <img class="default-img" 
-                                                 src="{{ asset('storage/' . $product->foto) }}" 
-                                                 alt="{{ $product->nama_produk }}"
-                                                 style="width: 100%; height: 250px; object-fit: cover; aspect-ratio: 1/1;">
+                                            <img class="default-img" src="{{ asset('storage/' . $product->foto) }}"
+                                                alt="{{ $product->nama_produk }}"
+                                                style="width: 100%; height: 250px; object-fit: cover; aspect-ratio: 1/1;">
                                         </a>
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
@@ -166,8 +161,8 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="{{ route('shop.index', ['category' => $product->kategori->slug]) }}">
-                                            {{ $product->kategori->kategori }}
+                                        <a href="{{ route('shop.index', ['category' => $category->slug]) }}">
+                                            {{ $category->kategori }}
                                         </a>
                                     </div>
                                     <h2>
@@ -180,7 +175,9 @@
                                             <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add add-to-cart-link" href="javascript:void(0);"
+                                                data-produk_id="{{ $product->id }}" data-quantity="1"><i
+                                                    class="fi-rs-shopping-cart mr-5"></i>Add</a>
                                         </div>
                                     </div>
                                 </div>
@@ -188,19 +185,18 @@
                         </div>
                         @empty
                         <div class="col-12 text-center">
-                            <p>No products found.</p>
+                            <p>No products in this category.</p>
                         </div>
                         @endforelse
                     </div>
+                    @endforeach
                 </div>
                 @foreach($categories as $category)
-                <div class="tab-pane fade" 
-                     id="{{ $category->slug }}" 
-                     role="tabpanel" 
-                     aria-labelledby="{{ $category->slug }}-tab">
+                <div class="tab-pane fade" id="{{ $category->slug }}" role="tabpanel"
+                    aria-labelledby="{{ $category->slug }}-tab">
                     <div class="row product-grid-4">
                         @php
-                            $categoryProducts = $products->where('id_kategori', $category->id);
+                        $categoryProducts = $products->where('id_kategori', $category->id);
                         @endphp
                         @forelse($categoryProducts as $product)
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
@@ -208,10 +204,9 @@
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
                                         <a href="{{ route('shop-detail.index', ['slug' => $product->slug]) }}">
-                                            <img class="default-img" 
-                                                 src="{{ asset('storage/' . $product->foto) }}" 
-                                                 alt="{{ $product->nama_produk }}"
-                                                 style="width: 100%; height: 250px; object-fit: cover; aspect-ratio: 1/1;">
+                                            <img class="default-img" src="{{ asset('storage/' . $product->foto) }}"
+                                                alt="{{ $product->nama_produk }}"
+                                                style="width: 100%; height: 250px; object-fit: cover; aspect-ratio: 1/1;">
                                         </a>
                                     </div>
                                 </div>
@@ -231,7 +226,9 @@
                                             <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
                                         </div>
                                         <div class="add-cart">
-                                            <a class="add" href="#"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                            <a class="add add-to-cart-link" href="javascript:void(0);"
+                                                data-produk_id="{{ $product->id }}" data-quantity="1"><i
+                                                    class="fi-rs-shopping-cart mr-5"></i>Add</a>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +236,7 @@
                         </div>
                         @empty
                         <div class="col-12 text-center">
-                            <p>No products found in this category.</p>
+                            <p>No products in this category.</p>
                         </div>
                         @endforelse
                     </div>
@@ -250,11 +247,12 @@
     </section>
     <!--End Product-->
 
-    <section class="container mb-50 mt-50 d-none d-md-block text-center" >
+    <section class="container mb-50 mt-50 d-none d-md-block text-center">
         <section class="text-center mb-50">
             <h2 class="title style-3 mb-40">Why Choose Us?</h2>
             <p class="text-muted">
-                At GideonMogo, we are committed to providing top-notch quality, cutting-edge innovation, and exceptional service to ensure your satisfaction.
+                At GideonMogo, we are committed to providing top-notch quality, cutting-edge innovation, and exceptional
+                service to ensure your satisfaction.
                 Here's why we're the best choice for you:
             </p>
         </section>
@@ -293,4 +291,8 @@
 
     <!--End 4 columns-->
 </main>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/cart.js') }}"></script>
 @endsection

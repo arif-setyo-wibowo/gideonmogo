@@ -42,13 +42,9 @@
                                             </div>
                                         </div>
                                         <div class="detail-extralink mb-50">
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <input type="text" name="quantity" class="qty-val" value="1" min="1" max="{{ $product->stok }}">
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
                                             <div class="product-extra-link2">
-                                                <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                                <button type="submit" class="button button-add-to-cart add-to-cart-link" data-produk_id="{{ $product->id }}" 
+                                                data-quantity="1"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                             </div>
                                         </div>
                                         <div class="font-xs">
@@ -89,7 +85,7 @@
                                             <div class="product-cart-wrap hover-up">
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="{{ route('shop.detail', $relatedProduct->slug) }}" tabindex="0">
+                                                        <a href="{{ route('shop-detail.index', $relatedProduct->slug) }}" tabindex="0">
                                                             <img class="default-img" 
                                                                  src="{{ asset('storage/' . $relatedProduct->foto) }}" 
                                                                  style="width: 100%; height: 250px; object-fit: cover;"
@@ -98,7 +94,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
-                                                    <h2><a href="{{ route('shop.detail', $relatedProduct->slug) }}">{{ $relatedProduct->nama_produk }}</a></h2>
+                                                    <h2><a href="{{ route('shop-detail.index', $relatedProduct->slug) }}">{{ $relatedProduct->nama_produk }}</a></h2>
                                                     <div class="product-price">
                                                         <span>$ {{ number_format($relatedProduct->harga, 0, ',', '.') }}</span>
                                                     </div>
@@ -131,4 +127,8 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/cart.js') }}"></script>
 @endsection

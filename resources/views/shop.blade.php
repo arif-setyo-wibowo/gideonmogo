@@ -80,7 +80,18 @@
             <div class="col-lg-4-5">
                 <div class="shop-product-fillter">
                     <div class="totall-product">
+                        @if(request('search'))
+                        <p>
+                            @if($products->total() > 0)
+                            We found <strong class="text-brand">{{ $products->total() }}</strong> items matching
+                            "{{ request('search') }}"
+                            @else
+                            <strong class="text-danger">No results found for "{{ request('search') }}"</strong>
+                            @endif
+                        </p>
+                        @else
                         <p>We found <strong class="text-brand">{{ $products->total() }}</strong> items for you!</p>
+                        @endif
                     </div>
                     <div class="sort-by-product-area">
                         <div class="sort-by-cover mr-10">
@@ -175,8 +186,9 @@
                                         <span>$ {{ $product->harga }}</span>
                                     </div>
                                     <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add
-                                        </a>
+                                        <a class="add add-to-cart-link" href="javascript:void(0);"
+                                            data-produk_id="{{ $product->id }}" data-quantity="1"><i
+                                                class="fi-rs-shopping-cart mr-5"></i>Add</a>
                                     </div>
                                 </div>
                             </div>
@@ -202,8 +214,8 @@
                                     request()->except('category'), 
                                     ['category' => 'all']
                                 )
-                            ) }}" 
-                            class="category-filter {{ request('category') == 'all' || !request('category') ? 'active' : '' }}">
+                            ) }}"
+                                class="category-filter {{ request('category') == 'all' || !request('category') ? 'active' : '' }}">
                                 All Categories
                             </a>
                         </li>
@@ -214,8 +226,7 @@
                                     request()->except('category'), 
                                     ['category' => $category->slug]
                                 )
-                            ) }}" 
-                            class="category-filter {{ request('category') == $category->slug ? 'active' : '' }}">
+                            ) }}" class="category-filter {{ request('category') == $category->slug ? 'active' : '' }}">
                                 {{ $category->kategori }}
                                 <span class="count">{{ $category->produks_count }}</span>
                             </a>
@@ -228,19 +239,15 @@
                     <h5 class="section-title style-1 mb-30">Fill by price</h5>
                     <div class="price-filter">
                         <div class="price-filter-inner">
-                            <div id="slider-range" 
-                                 data-min="0" 
-                                 data-max="10000"
-                                 data-actual-min="0"
-                                 data-actual-max="10000"
-                                 class="mb-20"></div>
+                            <div id="slider-range" data-min="0" data-max="10000" data-actual-min="0"
+                                data-actual-max="10000" class="mb-20"></div>
                             <div class="d-flex justify-content-between">
-                                <div class="caption">From: 
+                                <div class="caption">From:
                                     <strong id="slider-range-value1" class="text-brand">
                                         ${{ number_format($minPrice, 0, ',', '.') }}
                                     </strong>
                                 </div>
-                                <div class="caption">To: 
+                                <div class="caption">To:
                                     <strong id="slider-range-value2" class="text-brand">
                                         ${{ number_format($maxPrice, 0, ',', '.') }}
                                     </strong>
@@ -262,4 +269,8 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/cart.js') }}"></script>
 @endsection

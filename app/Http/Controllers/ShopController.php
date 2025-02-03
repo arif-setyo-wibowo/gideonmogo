@@ -17,9 +17,9 @@ class ShopController extends Controller
         $query = Produk::with('kategori');
 
         // Determine items per page
-        $perPage = $request->input('show', 12);
+        $perPage = $request->input('show', 25);
         if ($perPage == 'all') {
-            $perPage = Produk::count(); // Show all products
+            $perPage = Produk::count();
         }
 
         // Filter by category
@@ -54,22 +54,31 @@ class ShopController extends Controller
         // Apply price filter
         $query->whereBetween('harga', [$filterMinPrice, $filterMaxPrice]);
 
+        // Search functionality
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('nama_produk', 'like', "%{$searchTerm}%");
+            });
+        }
+
         // Sorting
-        switch ($request->sort) {
+        $sortBy = $request->input('sort', 'latest');
+        switch ($sortBy) {
             case 'price_asc':
                 $query->orderBy('harga', 'asc');
                 break;
             case 'price_desc':
                 $query->orderBy('harga', 'desc');
                 break;
-            case 'newest':
-                $query->orderBy('created_at', 'desc');
+            case 'name_asc':
+                $query->orderBy('nama_produk', 'asc');
                 break;
-            case 'oldest':
-                $query->orderBy('created_at', 'asc');
+            case 'name_desc':
+                $query->orderBy('nama_produk', 'desc');
                 break;
             default:
-                $query->orderBy('created_at', 'desc');
+                $query->latest(); // Default sorting
         }
 
         // Paginate results

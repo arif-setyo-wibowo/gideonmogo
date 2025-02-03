@@ -11,7 +11,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PolicyController;
-
+use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
@@ -36,10 +36,20 @@ Route::controller(ShopDetailController::class)->group(function () {
 
 Route::controller(ShopCartController::class)->group(function () {
     Route::get('/shop-cart', 'index')->name('shop-cart.index');
+    Route::post('/cart/store', 'store')->name('cart.store');
+    Route::put('/shop-cart/{cartId}', 'update')->name('shop-cart.update');
+    Route::delete('/shop-cart/{cartId}', 'destroy')->name('shop-cart.remove');
+    Route::post('/shop-cart/clear', 'clear')->name('shop-cart.clear');
 });
+
+// Cart dropdown AJAX route
+Route::get('/cart/dropdown', [ShopCartController::class, 'getDropdownData'])
+    ->name('cart.dropdown');
 
 Route::controller(ShopCheckoutController::class)->group(function () {
     Route::get('/shop-checkout', 'index')->name('shop-checkout.index');
+    Route::post('/shop-checkout/process', 'process')->name('shop-checkout.process');
+    Route::get('/shop-checkout/success', 'success')->name('shop-checkout.success');
 });
 
 Route::controller(AccountController::class)->group(function () {
@@ -76,6 +86,13 @@ Route::controller(PolicyController::class)->group(function () {
 
 Route::controller(PolicyController::class)->group(function () {
     Route::get('/refund-policy', 'refund')->name('refund.index');
+});
+
+// Checkout Routes
+Route::prefix('checkout')->group(function () {
+    Route::get('/', [ShopCheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/process', [ShopCheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/success', [ShopCheckoutController::class, 'success'])->name('checkout.success');
 });
 
 Route::prefix('back/')->group(function () {
