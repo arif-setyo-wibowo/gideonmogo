@@ -14,7 +14,6 @@ class AccountController extends Controller
      */
     public function index()
     {
-        // Fetch the authenticated user's orders
         $orders = auth()->user()->pembelian()->with('details')->latest()->get();
 
         return view('my-account', compact('orders'));
@@ -83,7 +82,6 @@ class AccountController extends Controller
                 'email' => 'required|email|unique:users,email,' . $user->id,
             ]);
 
-            // Update user details
             $user->update([
                 'first_name' => $validatedData['first_name'],
                 'last_name' => $validatedData['last_name'] ?? null,
@@ -119,7 +117,6 @@ class AccountController extends Controller
                 'new_password.confirmed' => 'New password confirmation does not match.',
             ]);
 
-            // Check if current password is correct
             if (!Hash::check($validatedData['current_password'], $user->password)) {
                 if ($request->ajax()) {
                     return response()->json([
@@ -133,7 +130,6 @@ class AccountController extends Controller
                     ->with('alert_type', 'error');
             }
 
-            // Update password
             $user->update([
                 'password' => Hash::make($validatedData['new_password']),
             ]);
@@ -167,7 +163,6 @@ class AccountController extends Controller
      */
     public function orderDetails($nomer_order)
     {
-        // Fetch the specific order with its details
         $order = auth()->user()->pembelian()
             ->with(['details.produk'])
             ->where('nomer_order', $nomer_order)

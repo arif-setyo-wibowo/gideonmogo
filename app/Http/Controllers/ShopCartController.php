@@ -32,7 +32,6 @@ class ShopCartController extends Controller
             $result = Cart::addToCart($produkId, $quantity);
 
             if ($request->ajax() || $request->wantsJson()) {
-                // For AJAX requests, return JSON
                 return response()->json([
                     'success' => $result, 
                     'message' => $result 
@@ -66,7 +65,6 @@ class ShopCartController extends Controller
             $result = Cart::addToCart($productId, $quantity);
 
             if ($result) {
-                // Get updated cart count
                 $cartCount = Cart::getCartCount();
 
                 return response()->json([
@@ -95,11 +93,9 @@ class ShopCartController extends Controller
         ]);
 
         try {
-            // Find the cart item for the current user or session
             $cartItem = Cart::where(function($query) use ($cartId) {
                 $query->where('id', $cartId);
                 
-                // Add user or session condition
                 if (Auth::check()) {
                     $query->where('user_id', Auth::id());
                 } else {
@@ -107,10 +103,8 @@ class ShopCartController extends Controller
                 }
             })->firstOrFail();
 
-            // Get the associated product
             $produk = $cartItem->produk;
 
-            // Validate stock availability
             $newQuantity = $request->input('quantity');
             if ($newQuantity > $produk->stok) {
                 return response()->json([
@@ -119,7 +113,6 @@ class ShopCartController extends Controller
                 ], 400);
             }
 
-            // Update cart item quantity
             $cartItem->update([
                 'quantity' => $newQuantity
             ]);
@@ -139,11 +132,9 @@ class ShopCartController extends Controller
     public function destroy($cartId)
     {
         try {
-            // Find the cart item for the current user or session
             $cartItem = Cart::where(function($query) use ($cartId) {
                 $query->where('id', $cartId);
                 
-                // Add user or session condition
                 if (Auth::check()) {
                     $query->where('user_id', Auth::id());
                 } else {
@@ -151,7 +142,6 @@ class ShopCartController extends Controller
                 }
             })->firstOrFail();
             
-            // Delete the cart item
             $cartItem->delete();
 
             return response()->json([
@@ -169,9 +159,7 @@ class ShopCartController extends Controller
     public function clear()
     {
         try {
-            // Clear all cart items for the current user or session
             $query = Cart::where(function($query) {
-                // Add user or session condition
                 if (Auth::check()) {
                     $query->where('user_id', Auth::id());
                 } else {
@@ -179,7 +167,6 @@ class ShopCartController extends Controller
                 }
             });
 
-            // Delete the cart items
             $deletedCount = $query->delete();
 
             return response()->json([
@@ -197,7 +184,6 @@ class ShopCartController extends Controller
 
     public function getDropdownData(Request $request)
     {
-        // Get cart items with related product details
         $cartItems = Cart::with('produk')
             ->when(Auth::check(), function($query) {
                 return $query->where('user_id', Auth::id());
@@ -207,15 +193,12 @@ class ShopCartController extends Controller
             })
             ->get();
 
-        // Calculate cart total
         $cartTotal = $cartItems->sum(function($item) {
             return $item->produk->harga * $item->quantity;
         });
 
-        // Calculate unique product count
         $cartItemCount = $cartItems->unique('produk_id')->count();
 
-        // Return JSON response
         return response()->json([
             'cartItems' => $cartItems,
             'cartTotal' => $cartTotal,
@@ -225,15 +208,12 @@ class ShopCartController extends Controller
 
     public function checkout()
     {
-        // Get cart items
         $cartItems = Cart::getCartItems();
 
-        // If cart is empty, redirect to home
         if ($cartItems->isEmpty()) {
             return redirect()->route('home')->with('error', 'Keranjang Anda kosong. Silakan tambahkan produk terlebih dahulu.');
         }
 
-        // Calculate total
         $total = Cart::calculateTotal();
 
         return view('shop-checkout', compact('cartItems', 'total'));

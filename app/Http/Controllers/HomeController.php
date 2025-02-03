@@ -15,7 +15,6 @@ class HomeController extends Controller
     {
         $categories = Kategori::all();
         
-        // Fetch products with their categories
         $products = Produk::with('kategori')->get();
 
         return view('home', compact('categories', 'products'));

@@ -15,10 +15,8 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        // Get the user's cart items
         $cartItems = Cart::where('user_id', Auth::id())->with('produk')->get();
 
-        // If cart is empty, redirect to cart page
         if ($cartItems->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
@@ -29,7 +27,6 @@ class CheckoutController extends Controller
     public function processCheckout(Request $request)
     {
         try {
-            // Validate the request
             $validatedData = $request->validate([
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
@@ -63,7 +60,6 @@ class CheckoutController extends Controller
                 'bukti_pembayaran_cashapp.max' => 'CashApp payment proof must not exceed 5MB'
             ]);
 
-            // Handle file upload based on payment method
             $buktiPath = null;
             $paymentMethod = $request->input('payment_method');
             
@@ -81,18 +77,15 @@ class CheckoutController extends Controller
                     throw new \Exception('Invalid payment method');
             }
 
-            // Store the file
             $fileName = time() . '_' . $file->getClientOriginalName();
             $buktiPath = $file->storeAs('payment_proofs', $fileName, 'public');
 
-            // Get the user's cart items with product details
             $cartItems = Cart::where('user_id', Auth::id())
                 ->with(['produk' => function($query) {
                     $query->select('id', 'nama_produk', 'harga', 'id_kategori');
                 }])
                 ->get();
 
-            // Check if cart is empty
             if ($cartItems->isEmpty()) {
                 return response()->json([
                     'status' => 'error',
@@ -101,12 +94,10 @@ class CheckoutController extends Controller
                 ], 400);
             }
 
-            // Calculate total price
             $totalPrice = $cartItems->sum(function($item) {
                 return $item->quantity * $item->produk->harga;
             });
 
-            // Generate unique 8-digit order number
             do {
                 $nomerOrder = mt_rand(10000000, 99999999);
             } while (Pembelian::where('nomer_order', $nomerOrder)->exists());
@@ -118,32 +109,27 @@ class CheckoutController extends Controller
                 'metode_pembayaran' => $paymentMethod,
                 'status' => 'pending',
                 
-                // Billing Details
                 'first_name' => $validatedData['first_name'],
                 'last_name' => $validatedData['last_name'],
                 'email' => $validatedData['email'],
                 'phone' => $validatedData['phone'],
                 'note' => $request->input('note'),
                 
-                // Additional Details
                 'username' => $request->input('username', ''),
                 'facebook' => $request->input('facebook', ''),
                 'link' => $request->input('link', '')
             ];
 
-            // Add user_id if user is logged in
             if (Auth::check()) {
                 $pembelianData['user_id'] = Auth::id();
             }
 
-            // Add payment proof path
             if ($buktiPath) {
                 $pembelianData['bukti_pembayaran'] = $buktiPath;
             }
 
             $pembelian = Pembelian::create($pembelianData);
 
-            // Create PembelianDetail records and get product details
             $productDetails = [];
             foreach ($cartItems as $cartItem) {
                 PembelianDetail::create([
@@ -156,10 +142,8 @@ class CheckoutController extends Controller
                 $productDetails[] = "{$cartItem->quantity}x {$cartItem->produk->nama_produk}";
             }
 
-            // Clear the cart
             Cart::where('user_id', Auth::id())->delete();
 
-            // Format WhatsApp message
             $message = "*Order from GideonMogo*\n\n";
             $message .= "Order Number: " . $nomerOrder . "\n";
             $message .= "Date: " . now()->format('d F Y') . "\n";
@@ -175,23 +159,19 @@ class CheckoutController extends Controller
             $message .= "\nPayment Method: " . $paymentMethod . "\n";
             $message .= "Total: $" . number_format($totalPrice, 2);
 
-            // Encode message for URL
             $encodedMessage = urlencode($message);
             
-            // WhatsApp redirect URL (replace with your phone number)
             $whatsappUrl = "https://wa.me/6287863353906?text=" . $encodedMessage;
 
             return redirect($whatsappUrl);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Return validation errors
             return response()->json([
                 'status' => 'error',
                 'message' => 'Validation failed',
                 'errors' => $e->errors()
             ], 422);
         } catch (\Exception $e) {
-            // Return unexpected error
             return response()->json([
                 'status' => 'error',
                 'message' => 'An unexpected error occurred',

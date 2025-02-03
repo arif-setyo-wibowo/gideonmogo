@@ -13,48 +13,38 @@ class ShopController extends Controller
      */
     public function index(Request $request)
     {
-        // Start with base query
         $query = Produk::with('kategori');
 
-        // Determine items per page
         $perPage = $request->input('show', 25);
         if ($perPage == 'all') {
             $perPage = Produk::count();
         }
 
-        // Filter by category
         if ($request->has('category') && $request->category != 'all') {
             $query->whereHas('kategori', function($q) use ($request) {
                 $q->where('slug', $request->category);
             });
         }
 
-        // Get actual min and max prices
         $actualMinPrice = Produk::min('harga') ?? 0;
         $actualMaxPrice = Produk::max('harga') ?? 10000;
 
-        // Set default min and max prices
         $minPrice = 0;
         $maxPrice = 10000;
 
-        // If there are actual products with prices within the range, adjust slider
         if ($actualMinPrice > 0 || $actualMaxPrice < 10000) {
             $minPrice = max(0, $actualMinPrice);
             $maxPrice = min(10000, $actualMaxPrice);
         }
 
-        // Price filtering
         $filterMinPrice = $request->input('min_price', $minPrice);
         $filterMaxPrice = $request->input('max_price', $maxPrice);
 
-        // Ensure filter prices are within 0-10000 range
         $filterMinPrice = max(0, min($filterMinPrice, 10000));
         $filterMaxPrice = max(0, min($filterMaxPrice, 10000));
 
-        // Apply price filter
         $query->whereBetween('harga', [$filterMinPrice, $filterMaxPrice]);
 
-        // Search functionality
         if ($request->has('search') && !empty($request->search)) {
             $searchTerm = $request->search;
             $query->where(function($q) use ($searchTerm) {
@@ -62,7 +52,6 @@ class ShopController extends Controller
             });
         }
 
-        // Sorting
         $sortBy = $request->input('sort', 'latest');
         switch ($sortBy) {
             case 'price_asc':
@@ -78,16 +67,13 @@ class ShopController extends Controller
                 $query->orderBy('nama_produk', 'desc');
                 break;
             default:
-                $query->latest(); // Default sorting
+                $query->latest();
         }
 
-        // Paginate results
         $products = $query->paginate($perPage);
         
-        // Fetch all categories with their product count
         $categories = Kategori::withCount('produks')->get();
         
-        // Ensure pagination always shows
         $products->withPath($request->path());
         
         return view('shop', compact(

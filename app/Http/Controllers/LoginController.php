@@ -37,15 +37,12 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            // Authentication passed...
             $request->session()->regenerate();
-            
-            // Redirect to intended page or home
+
             return redirect()->intended(route('home.index'))
                 ->with('success', 'Login berhasil!');
         }
 
-        // Authentication failed
         return redirect()->back()
             ->withErrors(['email' => 'Email atau password salah'])
             ->withInput($request->only('email'));
@@ -71,7 +68,6 @@ class LoginController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Create display name
         $displayName = $validatedData['first_name'] . 
             ($validatedData['last_name'] ? ' ' . $validatedData['last_name'] : '');
 

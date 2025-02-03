@@ -14,12 +14,9 @@ class ShopCheckoutController extends Controller
     {
         $cartItems = Cart::getCartItems();
 
-        // If cart is empty, redirect to home
         if ($cartItems->isEmpty()) {
             return redirect()->route('home.index')->with('error', 'Keranjang Anda kosong. Silakan tambahkan produk terlebih dahulu.');
         }
-
-        // Calculate total
         $total = Cart::calculateTotal();
 
         return view('shop-checkout', compact('cartItems', 'total'));

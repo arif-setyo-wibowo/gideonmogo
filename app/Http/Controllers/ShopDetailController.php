@@ -15,13 +15,11 @@ class ShopDetailController extends Controller
     {
         $product = Produk::where('slug', $slug)->firstOrFail();
         
-        // Find related products in the same category, excluding the current product
         $relatedProducts = Produk::where('id_kategori', $product->id_kategori)
             ->where('id', '!=', $product->id)
             ->limit(4)
             ->get();
         
-        // Get all categories with their product count
         $categories = Kategori::withCount('produks')->get();
         
         return view('shop-detail', compact('product', 'relatedProducts', 'categories'));
