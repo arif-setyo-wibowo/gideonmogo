@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
@@ -63,11 +64,10 @@ Route::get('/refund-policy', [PolicyController::class, 'refund'])->name('refund.
 // Checkout Routes
 Route::prefix('checkout')->group(function () {
     Route::get('/', [ShopCheckoutController::class, 'index'])->name('checkout.index');
-    Route::post('/process', [ShopCheckoutController::class, 'process'])->name('checkout.process');
-    Route::get('/success', [ShopCheckoutController::class, 'success'])->name('checkout.success');
+    Route::post('/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/my-account', [AccountController::class, 'index'])->name('my-account.index');
     Route::post('/my-account/update-details', [AccountController::class, 'updateAccountDetails'])->name('my-account.update-details');
     Route::post('/my-account/change-password', [AccountController::class, 'changePassword'])->name('my-account.change-password');

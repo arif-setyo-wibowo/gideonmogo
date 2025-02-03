@@ -15,12 +15,23 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('nomer_order')->unique();
-            $table->string('email');
-            $table->string('nama');
             $table->date('tanggal_order');
             $table->float('total_harga');
+            $table->enum('metode_pembayaran', ['PayPal', 'CashApp', 'Venmo'])->default('PayPal');
             $table->string('bukti_transfer')->nullable();
             $table->enum('status', ['pending', 'diterima'])->default('pending');
+
+            // Colum Akun Game
+            $table->string('username');
+            $table->string('facebook');
+            $table->string('link');
+            
+            // New columns for billing details
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('note')->nullable();
             
             $table->foreign('user_id')
                   ->references('id')

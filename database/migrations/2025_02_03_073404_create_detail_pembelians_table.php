@@ -20,7 +20,7 @@ return new class extends Migration
             
             $table->foreign('pembelian_id')
                   ->references('id')
-                  ->on('pembelians')
+                  ->on('pembelian')
                   ->onDelete('cascade');
             
             $table->foreign('produk_id')
