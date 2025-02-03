@@ -14,7 +14,10 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('my-account');
+        // Fetch the authenticated user's orders
+        $orders = auth()->user()->pembelian()->with('details')->latest()->get();
+
+        return view('my-account', compact('orders'));
     }
 
     /**
@@ -157,5 +160,19 @@ class AccountController extends Controller
                 ->with('error_message', 'Failed to change password. Please try again.')
                 ->with('alert_type', 'error');
         }
+    }
+
+    /**
+     * Fetch and display order details.
+     */
+    public function orderDetails($nomer_order)
+    {
+        // Fetch the specific order with its details
+        $order = auth()->user()->pembelian()
+            ->with(['details.produk'])
+            ->where('nomer_order', $nomer_order)
+            ->firstOrFail();
+
+        return view('order-details', compact('order'));
     }
 }

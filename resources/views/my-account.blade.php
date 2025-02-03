@@ -56,35 +56,42 @@
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Order</th>
+                                                            <th>Order Number</th>
                                                             <th>Date</th>
                                                             <th>Status</th>
                                                             <th>Total</th>
-                                                            <th>Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @forelse($orders as $order)
                                                         <tr>
-                                                            <td>#1357</td>
-                                                            <td>March 45, 2020</td>
-                                                            <td>Processing</td>
-                                                            <td>$125.00 for 2 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                            <td>{{ $order->nomer_order }}</td>
+                                                            <td>{{ $order->tanggal_order->format('F d, Y') }}</td>
+                                                            <td>
+                                                                <span class=" 
+                                                                    @switch($order->status)
+                                                                        @case('pending') text-warning @break
+                                                                        @case('diterima') text-success @break
+                                                                    @endswitch
+                                                                ">
+                                                                    @if($order->status == 'diterima')
+                                                                        Completed
+                                                                    @else
+                                                                        {{ ucfirst($order->status) }}
+                                                                    @endif
+                                                                </span>
+                                                            </td>
+                                                            <td>${{ number_format($order->total_harga, 2) }} 
+                                                                ({{ $order->details->count() }} item{{ $order->details->count() != 1 ? 's' : '' }})
+                                                            </td>
                                                         </tr>
+                                                        @empty
                                                         <tr>
-                                                            <td>#2468</td>
-                                                            <td>June 29, 2020</td>
-                                                            <td>Completed</td>
-                                                            <td>$364.00 for 5 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                            <td colspan="5" class="text-center">
+                                                                <p>You have no orders yet.</p>
+                                                            </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>#2366</td>
-                                                            <td>August 02, 2020</td>
-                                                            <td>Completed</td>
-                                                            <td>$280.00 for 3 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
+                                                        @endforelse
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -28,6 +28,10 @@ class Pembelian extends Model
         'link'
     ];
 
+    protected $casts = [
+        'tanggal_order' => 'datetime',
+    ];
+
     // Relationship with PembelianDetail
     public function details()
     {

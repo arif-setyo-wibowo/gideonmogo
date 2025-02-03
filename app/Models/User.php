@@ -47,4 +47,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relationship with Pembelian (orders)
+    public function pembelian()
+    {
+        return $this->hasMany(Pembelian::class, 'user_id', 'id');
+    }
 }

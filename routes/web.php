@@ -71,6 +71,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-account', [AccountController::class, 'index'])->name('my-account.index');
     Route::post('/my-account/update-details', [AccountController::class, 'updateAccountDetails'])->name('my-account.update-details');
     Route::post('/my-account/change-password', [AccountController::class, 'changePassword'])->name('my-account.change-password');
+    Route::get('/order/{nomer_order}', [AccountController::class, 'orderDetails'])->name('order.details');
 });
 
 Route::controller(LoginAdminController::class)->prefix('back-login')->group(function () {
