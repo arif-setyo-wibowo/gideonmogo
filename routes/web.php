@@ -83,7 +83,12 @@ Route::prefix('back/')->group(function () {
 
     Route::resource('pembelian', PembelianController::class);
 
+    Route::post('/pembelian/{id}/konfirmasi', [PembelianController::class, 'konfirmasi'])
+        ->name('admin.pembelian.konfirmasi');
+
     Route::resource('user-admin', UserController::class);
+    Route::delete('/user-admin/{id}', [UserController::class, 'destroy'])->name('user-admin.destroy');
+
 
     Route::resource('admin', AdminController::class);
 

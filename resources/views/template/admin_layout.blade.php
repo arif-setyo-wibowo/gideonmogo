@@ -245,7 +245,7 @@
                 <div
                   class="footer-container d-flex align-items-center justify-content-between py-3 flex-md-row flex-column">
                   <div class="mb-2 mb-md-0">
-                    ©
+                    &copy;
                     <script>
                       document.write(new Date().getFullYear());
                     </script>
@@ -274,25 +274,16 @@
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/jquery/jquery.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/popper/popper.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/js/bootstrap.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/node-waves/node-waves.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/hammer/hammer.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/i18n/i18n.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/js/menu.js"></script>
-
+    <!-- build:js assets_admin/vendor/js/core.js -->
+    <script src="{{ asset('assets_admin')}}/vendor/libs/jquery/jquery.js"></script>
+    <script src="{{ asset('assets_admin')}}/vendor/libs/popper/popper.js"></script>
+    <script src="{{ asset('assets_admin')}}/vendor/js/bootstrap.js"></script>
+    <script src="{{ asset('assets_admin')}}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="{{ asset('assets_admin')}}/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/apex-charts/apexcharts.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/select2/select2.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-    <script src="{{ asset('assets_admin/')}}/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="{{ asset('assets_admin')}}/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('assets_admin/')}}/js/main.js"></script>
