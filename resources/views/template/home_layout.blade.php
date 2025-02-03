@@ -105,7 +105,7 @@
                                         <span class="pro-count blue">{{ $cartItemCount }}</span>
                                     </a>
                                     <a href="{{ route('shop-cart.index') }}"><span class="lable">Cart</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2 cartku">
                                         @php
                                             $cartItems = \App\Models\Cart::with('produk')
                                                 ->when(Auth::check(), function($query) {
@@ -168,22 +168,36 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="header-action-icon-2">
-                                    <a href="{{ route('my-account.index')}}">
-                                        <img class="svgInject" alt="Nest" src="{{ asset('assets/')}}/imgs/theme/icons/icon-user.svg" />
-                                    </a>
-                                    <a href="{{ route('my-account.index')}}"><span class="lable ml-0">Account</span></a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-                                        <ul>
-                                            <li>
-                                                <a href="{{ route('my-account.index')}}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('login.index')}}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
-                                            </li>
-                                        </ul>
+                                @auth
+                                    <div class="header-action-icon-2">
+                                        <a href="{{ route('my-account.index')}}">
+                                            <img class="svgInject" alt="Nest" src="{{ asset('assets/')}}/imgs/theme/icons/icon-user.svg" />
+                                        </a>
+                                        <a href="{{ route('my-account.index')}}"><span class="lable ml-0">{{ Auth::user()->display_name ?? 'Account' }}</span></a>
+                                        <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ route('my-account.index')}}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+                                                </li>
+                                                <li>
+                                                    <form method="POST" action="{{ route('logout') }}">
+                                                        @csrf
+                                                        <a href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                            <i class="fi fi-rs-sign-out mr-10"></i>Sign out
+                                                        </a>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="header-action-icon-2">
+                                        <a href="{{ route('login.index')}}">
+                                            <img class="svgInject" alt="Nest" src="{{ asset('assets/')}}/imgs/theme/icons/icon-user.svg" />
+                                        </a>
+                                        <a href="{{ route('login.index')}}"><span class="lable ml-0">Login</span></a>
+                                    </div>
+                                @endauth
                             </div>
                         </div>
                     </div>
@@ -534,62 +548,6 @@
     @yield('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     @yield('scripts')
-    @push('scripts')
-    <script>
-    function removeCartItemDropdown(element) {
-        const cartId = element.getAttribute('data-cart-id');
-        const cartItem = element.closest('li');
-
-        fetch(`/shop-cart/${cartId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                cartItem.remove();
-                updateCartDropdownTotal();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-    function updateCartDropdownTotal() {
-        const cartDropdown = document.querySelector('.cart-dropdown-wrap');
-        const cartItems = cartDropdown.querySelectorAll('li');
-        const totalElement = cartDropdown.querySelector('.shopping-cart-total span');
-
-        if (cartItems.length === 0) {
-            // If no items, replace with empty cart message
-            cartDropdown.innerHTML = `
-                <div class="text-center p-3">
-                    <p>Your cart is empty</p>
-                    <a href="{{ route('shop.index') }}" class="btn btn-sm btn-primary">Continue Shopping</a>
-                </div>
-            `;
-            return;
-        }
-
-        // Recalculate total
-        let total = 0;
-        cartItems.forEach(item => {
-            const priceText = item.querySelector('.shopping-cart-title h4:last-child').textContent;
-            const price = parseFloat(priceText.split('×')[1].replace('$', '').trim());
-            const quantity = parseInt(priceText.split('×')[0].trim());
-            total += price * quantity;
-        });
-
-        // Update total
-        totalElement.textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
-    }
-    </script>
-    @endpush
     <!-- Template  JS -->
     <script src="{{ asset('assets/')}}/js/main.js?v=6.0"></script>
     <script src="{{ asset('assets/')}}/js/shop.js?v=6.0"></script>

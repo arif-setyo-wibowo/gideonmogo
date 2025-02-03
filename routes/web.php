@@ -6,11 +6,11 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ShopDetailController;
 use App\Http\Controllers\ShopCartController;
 use App\Http\Controllers\ShopCheckoutController;
-use App\Http\Controllers\AccountController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\Admin\DashboardController;
@@ -23,17 +23,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\LoginAdminController;
 
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index')->name('home.index');
-});
-
-Route::controller(ShopController::class)->group(function () {
-    Route::get('/shop', 'index')->name('shop.index');
-});
-
-Route::controller(ShopDetailController::class)->group(function () {
-    Route::get('/shop-detail/{slug}', 'index')->name('shop-detail.index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop-detail/{slug}', [ShopDetailController::class, 'index'])->name('shop-detail.index');
 
 Route::controller(ShopCartController::class)->group(function () {
     Route::get('/shop-cart', 'index')->name('shop-cart.index');
@@ -53,47 +45,32 @@ Route::controller(ShopCheckoutController::class)->group(function () {
     Route::get('/shop-checkout/success', 'success')->name('shop-checkout.success');
 });
 
-Route::controller(AccountController::class)->group(function () {
-    Route::get('/my-account', 'index')->name('my-account.index');
-});
-
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login.index');
-});
-
-Route::controller(LoginController::class)->group(function () {
+    Route::post('/login', 'login')->name('login.submit');
+    Route::get('/register', 'register')->name('register.index');
+    Route::post('/register', 'registerStore')->name('register.store');
+    Route::post('/logout', 'logout')->name('logout');
     Route::get('/forgot-password', 'forgot')->name('forgot.index');
 });
 
-Route::controller(LoginController::class)->group(function () {
-    Route::get('/register', 'register')->name('register.index');
-});
-
-Route::controller(AboutController::class)->group(function () {
-    Route::get('/about', 'index')->name('about.index');
-});
-
-Route::controller(ContactController::class)->group(function () {
-    Route::get('/contact', 'index')->name('contact.index');
-});
-
-Route::controller(PolicyController::class)->group(function () {
-    Route::get('/privacy-policy', 'index')->name('privacy.index');
-});
-
-Route::controller(PolicyController::class)->group(function () {
-    Route::get('/terms-policy', 'terms')->name('terms.index');
-});
-
-Route::controller(PolicyController::class)->group(function () {
-    Route::get('/refund-policy', 'refund')->name('refund.index');
-});
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('privacy.index');
+Route::get('/terms-policy', [PolicyController::class, 'terms'])->name('terms.index');
+Route::get('/refund-policy', [PolicyController::class, 'refund'])->name('refund.index');
 
 // Checkout Routes
 Route::prefix('checkout')->group(function () {
     Route::get('/', [ShopCheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/process', [ShopCheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/success', [ShopCheckoutController::class, 'success'])->name('checkout.success');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/my-account', [AccountController::class, 'index'])->name('my-account.index');
+    Route::post('/my-account/update-details', [AccountController::class, 'updateAccountDetails'])->name('my-account.update-details');
+    Route::post('/my-account/change-password', [AccountController::class, 'changePassword'])->name('my-account.change-password');
 });
 
 Route::controller(LoginAdminController::class)->prefix('back-login')->group(function () {

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -15,13 +19,41 @@ class LoginController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Handle an authentication attempt.
      */
-    public function forgot()
+    public function login(Request $request)
     {
-        return view('forgot-password');
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($request->only('email'));
+        }
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            // Authentication passed...
+            $request->session()->regenerate();
+            
+            // Redirect to intended page or home
+            return redirect()->intended(route('home.index'))
+                ->with('success', 'Login berhasil!');
+        }
+
+        // Authentication failed
+        return redirect()->back()
+            ->withErrors(['email' => 'Email atau password salah'])
+            ->withInput($request->only('email'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function register()
     {
         return view('register');
@@ -30,9 +62,52 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function registerStore(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Create display name
+        $displayName = $validatedData['first_name'] . 
+            ($validatedData['last_name'] ? ' ' . $validatedData['last_name'] : '');
+
+        $user = User::create([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'] ?? null,
+            'display_name' => $displayName,
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('home.index')->with('success', 'Registration successful!');
+    }
+
+    /**
+     * Log the user out of the application.
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home.index')
+            ->with('success', 'Anda berhasil logout');
+    }
+
+    /**
+     * Show the form for forgot password.
+     */
+    public function forgot()
+    {
+        return view('forgot-password');
     }
 
     /**

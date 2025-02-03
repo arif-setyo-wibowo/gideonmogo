@@ -27,7 +27,7 @@
                                         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login.index')}}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                        <a class="nav-link" id="change-password-tab" data-bs-toggle="tab" href="#change-password" role="tab" aria-controls="change-password" aria-selected="true"><i class="fi-rs-lock mr-10"></i>Change Password</a>
                                     </li>
                                 </ul>
                             </div>
@@ -37,11 +37,11 @@
                                 <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="mb-0">Hello Rosie!</h3>
+                                            <h3 class="mb-0">Hello {{ Auth::user()->display_name }}</h3>
                                         </div>
                                         <div class="card-body">
                                             <p>
-                                                Cek riwayat order anda dan ubah kelengkapan akun anda
+                                                Check your order history and change your account details
                                             </p>
                                         </div>
                                     </div>
@@ -94,41 +94,67 @@
                                 <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Ubah data akun</h5>
+                                            <h5>Change account data</h5>
                                         </div>
                                         <div class="card-body">
-                                            <form method="post" name="enq">
+                                            <form method="POST" action="{{ route('my-account.update-details') }}">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
                                                         <label>First Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="name" type="text" />
+                                                        <input required="" class="form-control" name="first_name" type="text" 
+                                                               value="{{ Auth::user()->first_name }}" />
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label>Last Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="phone" />
+                                                        <label>Last Name</label>
+                                                        <input class="form-control" name="last_name" type="text" 
+                                                               value="{{ Auth::user()->last_name ?? '' }}" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Display Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="dname" type="text" />
+                                                        <input required="" class="form-control" name="display_name" type="text" 
+                                                               value="{{ Auth::user()->display_name }}" />
+                                                        <em>This will be how your name will be displayed in the account section</em>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Email Address <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="email" type="email" />
-                                                    </div>
-                                                    <div class="form-group col-md-12">
-                                                        <label>Current Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="password" type="password" />
-                                                    </div>
-                                                    <div class="form-group col-md-12">
-                                                        <label>New Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="npassword" type="password" />
-                                                    </div>
-                                                    <div class="form-group col-md-12">
-                                                        <label>Confirm Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="cpassword" type="password" />
+                                                        <input required="" class="form-control" name="email" type="email" 
+                                                               value="{{ Auth::user()->email }}" />
                                                     </div>
                                                     <div class="col-md-12">
-                                                        <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
+                                                        <button type="submit" class="btn btn-fill-out submit font-weight-bold">Save Changes</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Change Password</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <form id="change-password-form" method="POST" action="{{ route('my-account.change-password') }}">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Current Password</label>
+                                                        <input class="form-control" id="current_password" name="current_password" type="password" required />
+                                                        <div class="invalid-feedback current-password-error"></div>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>New Password</label>
+                                                        <input class="form-control" id="new_password" name="new_password" type="password" required minlength="8" />
+                                                        <div class="invalid-feedback new-password-error"></div>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Confirm New Password</label>
+                                                        <input class="form-control" id="new_password_confirmation" name="new_password_confirmation" type="password" required minlength="8" />
+                                                        <div class="invalid-feedback confirm-password-error"></div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <button type="submit" class="btn btn-fill-out submit font-weight-bold">Change Password</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -144,4 +170,140 @@
     </div>
 </main>
 
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success_message'))
+            Swal.fire({
+                icon: 'success',
+                text: '{{ session('success_message') }}',
+                toast: true,
+                showConfirmButton: false,
+                position: 'top-end',
+                timer: 3000
+            });
+        @endif
+
+        @if(session('error_message'))
+            Swal.fire({
+                icon: 'error',
+                text: '{{ session('error_message') }}',
+                toast: true,
+                showConfirmButton: false
+                position: 'top-end',
+                timer: 3000
+            });
+        @endif
+
+        @if($errors->any())
+            Swal.fire({
+                icon: 'error',
+                html: `
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                `,
+                position: 'top-end',
+                toast: true,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        @endif
+
+        // Password Change Form Validation
+        const passwordForm = document.getElementById('change-password-form');
+        
+        passwordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset previous error states
+            const inputs = passwordForm.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.classList.remove('is-invalid');
+            });
+            
+            const currentPassword = document.getElementById('current_password');
+            const newPassword = document.getElementById('new_password');
+            const confirmPassword = document.getElementById('new_password_confirmation');
+            
+            let isValid = true;
+            
+            // Current Password Validation
+            if (!currentPassword.value.trim()) {
+                currentPassword.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            // New Password Validation
+            if (!newPassword.value.trim()) {
+                newPassword.classList.add('is-invalid');
+                isValid = false;
+            } else if (newPassword.value.length < 8) {
+                newPassword.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            // Confirm Password Validation
+            if (!confirmPassword.value.trim()) {
+                confirmPassword.classList.add('is-invalid');
+                isValid = false;
+            } else if (newPassword.value !== confirmPassword.value) {
+                confirmPassword.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            // If validation fails, stop submission
+            if (!isValid) {
+                return;
+            }
+            
+            // AJAX Form Submission
+            fetch('{{ route('my-account.change-password') }}', {
+                method: 'POST',
+                body: new FormData(passwordForm),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: data.message,
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    
+                    // Reset form
+                    passwordForm.reset();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: data.message,
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'An unexpected error occurred. Please try again.',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            });
+        });
+    });
+</script>
 @endsection

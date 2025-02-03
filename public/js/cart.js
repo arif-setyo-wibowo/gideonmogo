@@ -213,7 +213,7 @@ class CartManager {
             });
 
             // Update cart dropdown content
-            const cartDropdownElements = document.querySelectorAll('.cart-dropdown-wrap');
+            const cartDropdownElements = document.querySelectorAll('.cartku');
             cartDropdownElements.forEach(dropdown => {
                 if (data.cartItems.length > 0) {
                     // Create cart items HTML

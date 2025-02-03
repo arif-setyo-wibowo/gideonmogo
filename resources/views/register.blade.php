@@ -11,7 +11,7 @@
     </div>
     <div class="page-content pt-20 pb-150">
         <div class="container">
-            <div class="row d-flex justify-content-center align-items-center min-vh-100">
+            <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-xl-6 col-lg-8 col-md-10">
                     <div class="login_wrap widget-taber-content background-white p-4 rounded">
                         <div class="padding_eight_all bg-white">
@@ -19,21 +19,67 @@
                                 <h1 class="mb-5">Create an Account</h1>
                                 <p class="mb-30">Already have an account? <a href="{{ route('login.index')}}">Login</a></p>
                             </div>
-                            <form method="post">
-                                <div class="form-group">
-                                    <input type="text" required name="username" placeholder="Username" class="form-control" />
+                            <form method="POST" action="{{ route('register.store') }}">
+                                @csrf
+                                <div class="form-group mb-30">
+                                    <input type="text" 
+                                           name="first_name" 
+                                           placeholder="First Name" 
+                                           class="form-control @error('first_name') is-invalid @enderror" 
+                                           value="{{ old('first_name') }}" 
+                                           required />
+                                    @error('first_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" required name="email" placeholder="Email" class="form-control" />
+                                <div class="form-group mb-30">
+                                    <input type="text" 
+                                           name="last_name" 
+                                           placeholder="Last Name (Optional)" 
+                                           class="form-control @error('last_name') is-invalid @enderror" 
+                                           value="{{ old('last_name') }}" />
+                                    @error('last_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="form-group">
-                                    <input required type="password" name="password" placeholder="Password" class="form-control" />
+                                <div class="form-group mb-30">
+                                    <input type="email" 
+                                           name="email" 
+                                           placeholder="Email" 
+                                           class="form-control @error('email') is-invalid @enderror" 
+                                           value="{{ old('email') }}" 
+                                           required />
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-                                <div class="form-group">
-                                    <input required type="password" name="confirm_password" placeholder="Confirm password" class="form-control" />
+                                <div class="form-group mb-30">
+                                    <input type="password" 
+                                           name="password" 
+                                           placeholder="Password" 
+                                           class="form-control @error('password') is-invalid @enderror" 
+                                           required />
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-30">
+                                    <input type="password" 
+                                           name="password_confirmation" 
+                                           placeholder="Confirm Password" 
+                                           class="form-control" 
+                                           required />
                                 </div>
                                 <div class="form-group mb-30 text-center">
-                                    <button type="submit" class="btn btn-fill-out btn-block hover-up font-weight-bold">Submit &amp; Register</button>
+                                    <button type="submit" class="btn btn-fill-out btn-block hover-up font-weight-bold">Register</button>
                                 </div>
                                 <p class="font-xs text-muted text-center"><strong>Note:</strong> Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>
                             </form>

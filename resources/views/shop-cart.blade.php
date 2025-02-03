@@ -25,10 +25,10 @@
                 <div class="table-responsive shopping-summery">
                     <table class="table table-wishlist">
                         <thead>
-                            <tr class="main-heading">
+                            <tr class="main-heading text-center">
                                 <th scope="col" colspan="2" class="pl-30">Product</th>
                                 <th scope="col">Unit Price</th>
-                                <th scope="col" class="text-center">Quantity</th>
+                                <th scope="col">Quantity</th>
                                 <th scope="col">Subtotal</th>
                                 <th scope="col" class="end">Remove</th>
                             </tr>
@@ -107,7 +107,9 @@
                             </tbody>
                         </table>
                     </div>
+                    @if($cartItems->count() > 0)
                     <a href="{{ route('shop-checkout.index')}}" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
+                    @endif
                 </div>
             </div>
         </div>
