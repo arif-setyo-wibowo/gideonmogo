@@ -12,7 +12,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
@@ -42,8 +41,7 @@ Route::get('/cart/dropdown', [ShopCartController::class, 'getDropdownData'])
 
 Route::controller(ShopCheckoutController::class)->group(function () {
     Route::get('/shop-checkout', 'index')->name('shop-checkout.index');
-    Route::post('/shop-checkout/process', 'process')->name('shop-checkout.process');
-    Route::get('/shop-checkout/success', 'success')->name('shop-checkout.success');
+    Route::post('/checkout/process', 'processCheckout')->name('checkout.process');
 });
 
 Route::controller(LoginController::class)->group(function () {
@@ -60,12 +58,6 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('privacy.index');
 Route::get('/terms-policy', [PolicyController::class, 'terms'])->name('terms.index');
 Route::get('/refund-policy', [PolicyController::class, 'refund'])->name('refund.index');
-
-// Checkout Routes
-Route::prefix('checkout')->group(function () {
-    Route::get('/', [ShopCheckoutController::class, 'index'])->name('checkout.index');
-    Route::post('/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
-});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-account', [AccountController::class, 'index'])->name('my-account.index');
