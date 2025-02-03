@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderNotificationMail;
+use Illuminate\Support\Facades\Log;
 
 class ShopCheckoutController extends Controller
 {
@@ -91,11 +94,7 @@ class ShopCheckoutController extends Controller
                 ->get();
 
             if ($cartItems->isEmpty()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Your cart is empty',
-                    'errors' => []
-                ], 400);
+                return redirect(route('home.index'));
             }
 
             $totalPrice = $cartItems->sum(function($item) {
@@ -146,6 +145,21 @@ class ShopCheckoutController extends Controller
                 $productDetails[] = "{$cartItem->quantity}x {$cartItem->produk->nama_produk}";
             }
 
+            try {
+                // Send email notification
+                Mail::to($validatedData['email'])->send(new OrderNotificationMail($pembelian));
+                
+                // Optional: Send a copy to admin
+                Mail::to(config('mail.admin_email'))->send(new OrderNotificationMail($pembelian));
+            } catch (\Exception $e) {
+                // Log the email sending error
+                Log::error('Order Email Notification Failed: ' . $e->getMessage());
+                
+                // Optionally, you can choose to continue the process or throw the exception
+                // Uncomment the next line if you want to stop the process on email failure
+                // throw $e;
+            }
+            
             Cart::where('user_id', Auth::id())->delete();
 
             $message = "*Order from GideonMogo*\n\n";
@@ -170,17 +184,9 @@ class ShopCheckoutController extends Controller
             return redirect($whatsappUrl);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Validation failed',
-                'errors' => $e->errors()
-            ], 422);
+            return redirect(route('home.index'));
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'An unexpected error occurred',
-                'errors' => [$e->getMessage()]
-            ], 500);
+            return redirect(route('home.index'));
         }
     }
 }

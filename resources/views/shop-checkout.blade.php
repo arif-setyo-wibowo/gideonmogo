@@ -140,8 +140,8 @@
                                 <select name="payment_method" id="payment_method" class="form-control">
                                     <option value="" selected disabled>Choose Payment Method</option>
                                     <option value="PayPal">PayPal</option>
-                                    <option value="CashApp">Venmo</option>
-                                    <option value="Venmo">CashApp</option>
+                                    <option value="Venmo">Venmo</option>
+                                    <option value="CashApp">CashApp</option>
                                 </select>
                             </div>
 
