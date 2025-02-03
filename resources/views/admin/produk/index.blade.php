@@ -216,7 +216,6 @@
                                 <button class="ql-list" value="bullet"></button>
                             </span>
                         </div>
-                        <div id="snow-editor" style="min-height: 150px;"></div>
                         <input type="hidden" name="deskripsi" id="deskripsi-input">
                     </div>
 
@@ -270,13 +269,17 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const form = this.closest('form');
-            
+
             Swal.fire({
                 title: 'Apakah Yakin ingin menghapus data?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
+                    cancelButton: 'btn btn-outline-secondary waves-effect'
+                },
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();

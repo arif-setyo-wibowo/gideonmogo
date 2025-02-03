@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\LoginAdminController;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home.index');
@@ -93,6 +94,11 @@ Route::prefix('checkout')->group(function () {
     Route::get('/', [ShopCheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/process', [ShopCheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/success', [ShopCheckoutController::class, 'success'])->name('checkout.success');
+});
+
+Route::controller(LoginAdminController::class)->prefix('back-login')->group(function () {
+    Route::get('/', 'index')->name('login');
+    Route::post('/', 'postlogin')->name('postlogin');
 });
 
 Route::prefix('back/')->group(function () {
