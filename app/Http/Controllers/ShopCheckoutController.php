@@ -69,7 +69,7 @@ class ShopCheckoutController extends Controller
 
             $buktiPath = null;
             $paymentMethod = $request->input('payment_method');
-            
+
             switch ($paymentMethod) {
                 case 'PayPal':
                     $file = $request->file('bukti_pembayaran_paypal');
@@ -111,13 +111,13 @@ class ShopCheckoutController extends Controller
                 'total_harga' => $totalPrice,
                 'metode_pembayaran' => $paymentMethod,
                 'status' => 'pending',
-                
+
                 'first_name' => $validatedData['first_name'],
                 'last_name' => $validatedData['last_name'],
                 'email' => $validatedData['email'],
                 'phone' => $validatedData['phone'],
                 'note' => $request->input('note'),
-                
+
                 'username' => $request->input('username', ''),
                 'facebook' => $request->input('facebook', ''),
                 'link' => $request->input('link', '')
@@ -128,7 +128,7 @@ class ShopCheckoutController extends Controller
             }
 
             if ($buktiPath) {
-                $pembelianData['bukti_pembayaran'] = $buktiPath;
+                $pembelianData['bukti_transfer'] = $buktiPath;
             }
 
             $pembelian = Pembelian::create($pembelianData);
@@ -141,25 +141,25 @@ class ShopCheckoutController extends Controller
                     'jumlah' => $cartItem->quantity,
                     'harga' => $cartItem->produk->harga
                 ]);
-                
+
                 $productDetails[] = "{$cartItem->quantity}x {$cartItem->produk->nama_produk}";
             }
 
             try {
                 // Send email notification
                 Mail::to($validatedData['email'])->send(new OrderNotificationMail($pembelian));
-                
+
                 // Optional: Send a copy to admin
                 Mail::to(config('mail.admin_email'))->send(new OrderNotificationMail($pembelian));
             } catch (\Exception $e) {
                 // Log the email sending error
                 Log::error('Order Email Notification Failed: ' . $e->getMessage());
-                
+
                 // Optionally, you can choose to continue the process or throw the exception
                 // Uncomment the next line if you want to stop the process on email failure
                 // throw $e;
             }
-            
+
             Cart::where('user_id', Auth::id())->delete();
 
             $message = "*Order from GideonMogo*\n\n";
@@ -178,7 +178,7 @@ class ShopCheckoutController extends Controller
             $message .= "Total: $" . number_format($totalPrice, 2);
 
             $encodedMessage = urlencode($message);
-            
+
             $whatsappUrl = "https://wa.me/6287863353906?text=" . $encodedMessage;
 
             return redirect($whatsappUrl);

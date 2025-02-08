@@ -173,7 +173,7 @@
                         <label for="nama_produk">Nama Produk</label>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
-                        <label>Kategori</label>
+
                         <select class="selectpicker w-100" data-style="btn-default" name="id_kategori"
                             data-live-search="true" required>
                             <option selected disabled value="">Pilih Kategori</option>
@@ -181,6 +181,7 @@
                             <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
                             @endforeach
                         </select>
+                        <label>Kategori</label>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="number" class="form-control" id="stok" name="stok" placeholder="Stok" required/>
@@ -216,6 +217,7 @@
                                 <button class="ql-list" value="bullet"></button>
                             </span>
                         </div>
+                        <div id="snow-editor" style="min-height: 150px;"></div>
                         <input type="hidden" name="deskripsi" id="deskripsi-input">
                     </div>
 
@@ -263,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('deskripsi-input').value = quill.root.innerHTML;
     });
 
+
     // Initialize delete confirmation
     const deleteButtons = document.querySelectorAll('.delete-btn');
     deleteButtons.forEach(button => {
@@ -275,11 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal',
-                customClass: {
-                    confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
-                    cancelButton: 'btn btn-outline-secondary waves-effect'
-                },
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();

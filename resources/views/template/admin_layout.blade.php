@@ -53,11 +53,10 @@
     <link rel="stylesheet" href="{{ asset('assets_admin/')}}/vendor/libs/select2/select2.css " />
     <link rel="stylesheet" href="{{ asset('assets_admin/')}}/vendor/libs/quill/katex.css" />
     <link rel="stylesheet" href="{{ asset('assets_admin/')}}/vendor/libs/toastr/toastr.css" />
-
     <link rel="stylesheet" href="{{ asset('assets_admin/')}}/vendor/libs/sweetalert2/sweetalert2.css" />
     <!-- Page CSS -->
-    <!-- Row Group CSS -->
-    <link rel="stylesheet" href="{{ asset('assets_admin/')}}/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css" />
+<!-- Row Group CSS -->
+<link rel="stylesheet" href="{{ asset('assets_admin/')}}/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css" />
     <link rel="stylesheet" href="{{ asset('assets_admin/')}}/vendor/css/pages/app-logistics-dashboard.css" />
 
     <!-- Helpers -->
@@ -76,86 +75,86 @@
         <!-- Menu -->
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-          <div class="app-brand demo">
-            <a href="{{ route('dashboard.index')}}" class="app-brand-link">
-              <span class="app-brand-text demo menu-text fw-bold ms-2">GideonMogo</span>
-            </a>
-          </div>
+            <div class="app-brand demo">
+              <a href="{{ route('dashboard.index')}}" class="app-brand-link">
+                <span class="app-brand-text demo menu-text fw-bold ms-2">GideonMogo</span>
+              </a>
+            </div>
 
-          <div class="menu-inner-shadow"></div>
+            <div class="menu-inner-shadow"></div>
 
-          <ul class="menu-inner py-1">
-            <!-- Dashboards -->
-            <!-- Apps & Pages -->
-                <li class="menu-item  {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
-                    <a href="{{ route('dashboard.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
-                        <div>Dashboards</div>
-                    </a>
-                </li>
-                <li class="menu-header fw-medium mt-4">
-                    <span class="menu-header-text">Action Data</span>
-                </li>
-                 <li class="menu-item  {{ request()->routeIs('kategori.index') ? 'active' : '' }}">
-                    <a href="{{ route('kategori.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-shape"></i>
-                        <div>Data Kategori</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('produk.index') ? 'active' : '' }}">
-                    <a href="{{ route('produk.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-clipboard-outline"></i>
-                        <div>Data Produk</div>
-                    </a>
-                </li>
-
-                <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
-                    <a href="{{ route('pembelian.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-calendar-edit"></i>
-                        <div>Data Pembelian</div>
-                    </a>
-                </li>
-
-                <li class="menu-item {{ request()->routeIs('user-admin.index') ? 'active' : '' }}">
-                    <a href="{{ route('user-admin.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-account-group-outline"></i>
-                        <div>Data User</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
-                    <a href="{{ route('admin.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-calendar-account"></i>
-                        <div>Data Admin</div>
-                    </a>
-                </li>
-                <li class="menu-header fw-medium mt-4">
-                    <span class="menu-header-text">Data Laporan</span>
-                </li>
-                <li class="menu-item {{ request()->routeIs('laporan.pembelian') ? 'active' : '' }}">
-                    <a href="{{ route('laporan.pembelian')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-calendar-edit"></i>
-                        <div>Laporan Pembelian</div>
-                    </a>
-                </li>
-                <li class="menu-header fw-medium mt-4">
-                    <span class="menu-header-text">Form Web</span>
+            <ul class="menu-inner py-1">
+              <!-- Dashboards -->
+              <!-- Apps & Pages -->
+                  <li class="menu-item  {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
+                      <a href="{{ route('dashboard.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+                          <div>Dashboards</div>
+                      </a>
                   </li>
-                <li class="menu-item {{ request()->routeIs('faq.index') ? 'active' : '' }}">
-                    <a href="{{ route('faq.index')}}" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-frequently-asked-questions"></i>
-                        <div>FAQ</div>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a href="" class="menu-link">
-                        <i class="menu-icon tf-icons mdi mdi-logout"></i>
-                        <div>Logout</div>
-                    </a>
-                </li>
+                  <li class="menu-header fw-medium mt-4">
+                      <span class="menu-header-text">Action Data</span>
+                  </li>
+                   <li class="menu-item  {{ request()->routeIs('kategori.index') ? 'active' : '' }}">
+                      <a href="{{ route('kategori.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-shape"></i>
+                          <div>Data Kategori</div>
+                      </a>
+                  </li>
+                  <li class="menu-item {{ request()->routeIs('produk.index') ? 'active' : '' }}">
+                      <a href="{{ route('produk.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-clipboard-outline"></i>
+                          <div>Data Produk</div>
+                      </a>
+                  </li>
+
+                  <li class="menu-item {{ request()->routeIs('pembelian.index') ? 'active' : '' }}">
+                      <a href="{{ route('pembelian.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-calendar-edit"></i>
+                          <div>Data Pembelian</div>
+                      </a>
+                  </li>
+
+                  <li class="menu-item {{ request()->routeIs('user-admin.index') ? 'active' : '' }}">
+                      <a href="{{ route('user-admin.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-account-group-outline"></i>
+                          <div>Data User</div>
+                      </a>
+                  </li>
+                  <li class="menu-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">
+                      <a href="{{ route('admin.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-calendar-account"></i>
+                          <div>Data Admin</div>
+                      </a>
+                  </li>
+                  <li class="menu-header fw-medium mt-4">
+                      <span class="menu-header-text">Data Laporan</span>
+                  </li>
+                  <li class="menu-item {{ request()->routeIs('laporan.pembelian') ? 'active' : '' }}">
+                      <a href="{{ route('laporan.pembelian')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-calendar-edit"></i>
+                          <div>Laporan Pembelian</div>
+                      </a>
+                  </li>
+                  <li class="menu-header fw-medium mt-4">
+                      <span class="menu-header-text">Form Web</span>
+                    </li>
+                  <li class="menu-item {{ request()->routeIs('faq.index') ? 'active' : '' }}">
+                      <a href="{{ route('faq.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-frequently-asked-questions"></i>
+                          <div>FAQ</div>
+                      </a>
+                  </li>
+                  <li class="menu-item ">
+                      <a href="{{ route('logoutadmin.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-logout"></i>
+                          <div>Logout</div>
+                      </a>
+                  </li>
 
 
-          </ul>
-        </aside>
+            </ul>
+          </aside>
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -185,43 +184,10 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="pages-account-settings-account.html">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="{{ asset('assets_admin/')}}/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            {{-- <span class="fw-medium d-block">{{ session('user.nama')}}</span>
-                            <small class="text-muted">{{ session('user.role') }}</small> --}}
-                            <span class="fw-medium d-block">Rudi</span>
-                            <small class="text-muted">Admin</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    {{-- <li>
-                      <a class="dropdown-item" href="pages-profile-user.html">
-                        <i class="mdi mdi-account-outline me-2"></i>
-                        <span class="align-middle">Admin</span>
-                      </a>
-                    </li> --}}
-                    <li>
-                        {{-- @if (session('pelatih'))
-                            <a class="dropdown-item" href="{{ route('admin.logout.pelatih')}}">
-                        @endif
-                        @if (session('admin'))
-                            <a class="dropdown-item" href="{{ route('admin.logout')}}">
-                        @endif --}}
-                        <a class="dropdown-item" href="">
+                        <a class="dropdown-item" href="{{ route('logoutadmin.index')}}">
                         <i class="mdi mdi-logout me-2"></i>
-
                         <span class="align-middle">Log Out</span>
-                            </a>
+                      </a>
                     </li>
                   </ul>
                 </li>
@@ -245,7 +211,7 @@
                 <div
                   class="footer-container d-flex align-items-center justify-content-between py-3 flex-md-row flex-column">
                   <div class="mb-2 mb-md-0">
-                    &copy;
+                    ©
                     <script>
                       document.write(new Date().getFullYear());
                     </script>
@@ -275,21 +241,28 @@
 
     <!-- Core JS -->
     <!-- build:js assets_admin/vendor/js/core.js -->
-    <script src="{{ asset('assets_admin')}}/vendor/libs/jquery/jquery.js"></script>
-    <script src="{{ asset('assets_admin')}}/vendor/libs/popper/popper.js"></script>
-    <script src="{{ asset('assets_admin')}}/vendor/js/bootstrap.js"></script>
-    <script src="{{ asset('assets_admin')}}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="{{ asset('assets_admin')}}/vendor/js/menu.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/jquery/jquery.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/popper/popper.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/js/bootstrap.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/hammer/hammer.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/i18n/i18n.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/js/menu.js"></script>
+
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="{{ asset('assets_admin')}}/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/select2/select2.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('assets_admin/')}}/js/main.js"></script>
+    <script src="{{ asset('assets_admin')}}/vendor/libs/sweetalert2/sweetalert2.js"></script>
     <script src="{{ asset('assets_admin/')}}/js/ui-modals.js"></script>
-
-    <!-- Page JS -->
 
 
     <script src="{{ asset('assets_admin/')}}/js/forms-selects.js"></script>

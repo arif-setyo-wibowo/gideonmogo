@@ -71,7 +71,7 @@ Route::controller(LoginAdminController::class)->prefix('back-login')->group(func
     Route::post('/', 'postlogin')->name('postlogin');
 });
 
-Route::prefix('back/')->group(function () {
+Route::middleware(['admin'])->prefix('back/')->group(function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/', 'index')->name('dashboard.index');
@@ -96,6 +96,10 @@ Route::prefix('back/')->group(function () {
 
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan-pembelian', 'pembelian')->name('laporan.pembelian');
+    });
+
+    Route::controller(LoginAdminController::class)->group(function () {
+        Route::get('/logout-admin', 'logout_admin')->name('logoutadmin.index');
     });
 
 });

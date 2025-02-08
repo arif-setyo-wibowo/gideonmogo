@@ -41,7 +41,7 @@
                                 </td>
                                 <td class="product-des product-name">
                                     <h6 class="mb-5">
-                                        <a class="product-name mb-10 text-heading" href="shop-product-right.html">
+                                        <a class="product-name mb-10 text-heading" >
                                             {{ $item->produk->nama_produk }}
                                         </a>
                                     </h6>
@@ -53,10 +53,10 @@
                                     <div class="detail-extralink mr-15">
                                         <div class="detail-qty border radius">
                                             <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <input type="number" name="quantity" 
-                                                   class="qty-val" 
-                                                   value="{{ $item->quantity }}" 
-                                                   min="1" 
+                                            <input type="number" name="quantity"
+                                                   class="qty-val"
+                                                   value="{{ $item->quantity }}"
+                                                   min="1"
                                                    max="{{ $item->produk->stok }}"
                                                    readonly
                                             >

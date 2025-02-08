@@ -43,18 +43,9 @@ class LoginAdminController extends Controller
                     'user.id' => $user->id,
                     'user.username' => $user->username,
                     'user.nama' => $user->nama,
+                    'admin' => true
                 ]);
-
-                // Set role-specific session variables and redirect
-                if ($user->role == 1) {
-                    session(['pelatih' => true]);
-                    session(['user.role' => 'Pelatih']);
-                    return redirect()->route('dashboard.index.pelatih');
-                } elseif ($user->role == 0) {
-                    session(['admin' => true]);
-                    session(['user.role' => 'Admin']);
-                    return redirect()->route('dashboard.index');
-                }
+                return redirect()->route('dashboard.index');
 
             } else {
                 return redirect()->route('login')->withErrors(['error' => 'Password salah'])->withInput();
@@ -63,5 +54,12 @@ class LoginAdminController extends Controller
             return redirect()->route('login')->withErrors(['error' => 'Email tidak ditemukan'])->withInput();
         }
 
+    }
+    public function logout_admin (){
+
+        session()->forget('admin');
+        session()->forget('user.id');
+        session()->forget('user.nama');
+        return redirect()->route('login');
     }
 }

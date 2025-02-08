@@ -21,7 +21,7 @@ class AdminController extends Controller
             'admin' => Admin::all()
         ];
 
-        return view('admin.user-admin.index',$data);
+        return view('admin.admin.index',$data);
     }
 
     /**
@@ -38,13 +38,13 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'unique:user_admins',
+            'username' => 'unique:admins',
         ]);
-        $user = new Admin;
-        $user->nama = $request->nama;
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        $admin = new Admin;
+        $admin->nama = $request->nama;
+        $admin->username = $request->username;
+        $admin->password = Hash::make($request->password);
+        $admin->save();
         Session::flash('msg', 'Berhasil Menambah Data');
         return redirect()->route('admin.index');
     }
@@ -67,7 +67,7 @@ class AdminController extends Controller
             'admin' => Admin::find($id)
         ];
 
-        return view('admin.user-admin.edit',$data);
+        return view('admin.admin.edit',$data);
     }
 
     /**
@@ -75,10 +75,10 @@ class AdminController extends Controller
      */
     public function update(Request $request)
     {
-        $user = Admin::find($request->id);
+        $admin = Admin::find($request->id);
 
             $request->validate([
-                'username'=> Rule::unique('user_admins')->ignore($user->id)
+                'username'=> Rule::unique('admins')->ignore($admin->id)
             ]);
 
             if($request->password == null){
@@ -88,16 +88,16 @@ class AdminController extends Controller
             }
 
             if ($request->nama_user == null) {
-                session(['nama.admin' => $user->nama_user]);
+                session(['nama.admin' => $admin->nama_user]);
             }else{
                 session()->forget('nama.admin');
                 session(['nama.admin' => $request->nama_user]);
             }
 
-            $user->nama = $request->nama;
-            $user->username = $request->username;
-            $user->password = $password;
-            $user->save();
+            $admin->nama = $request->nama;
+            $admin->username = $request->username;
+            $admin->password = $password;
+            $admin->save();
 
 
             Session::flash('msg', 'Berhasil Mengubah Data');
@@ -109,8 +109,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $user = Admin::findOrFail($id);
-        $user->delete();
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
         return redirect()->route('admin.index')->with('msg', 'Admin berhasil dihapus');
     }
 }

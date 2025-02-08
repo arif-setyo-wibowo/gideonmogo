@@ -27,7 +27,7 @@
                         <div class="product-category">
                             <span class="text-muted">Since 2025</span>
                         </div>
-                        <h3 class="mb-5 text-white"><a href="vendor-details-1.html" class="text-white">GideonMogo</a>
+                        <h3 class="mb-5 text-white"><a href="{{ route('home.index')}}" class="text-white">GideonMogo</a>
                         </h3>
                         {{-- <div class="product-rate-cover mb-15">
                             <div class="product-rate d-inline-block">
@@ -209,9 +209,9 @@
                     <h5 class="section-title style-1 mb-30">Category</h5>
                     <ul>
                         <li>
-                            <a href="{{ route('shop.index', 
+                            <a href="{{ route('shop.index',
                                 array_merge(
-                                    request()->except('category'), 
+                                    request()->except('category'),
                                     ['category' => 'all']
                                 )
                             ) }}"
@@ -221,9 +221,9 @@
                         </li>
                         @foreach($categories as $category)
                         <li>
-                            <a href="{{ route('shop.index', 
+                            <a href="{{ route('shop.index',
                                 array_merge(
-                                    request()->except('category'), 
+                                    request()->except('category'),
                                     ['category' => $category->slug]
                                 )
                             ) }}" class="category-filter {{ request('category') == $category->slug ? 'active' : '' }}">
@@ -253,11 +253,11 @@
                                     </strong>
                                 </div>
                             </div>
-                            <a href="{{ route('shop.index', 
+                            <a href="{{ route('shop.index',
                                 array_merge(
-                                    request()->except(['min_price', 'max_price']), 
+                                    request()->except(['min_price', 'max_price']),
                                     [
-                                        'min_price' => $minPrice, 
+                                        'min_price' => $minPrice,
                                         'max_price' => $maxPrice
                                     ]
                                 )

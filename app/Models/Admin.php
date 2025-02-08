@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
 {
-    protected $table = 'user_admins';
+    protected $table = 'admins';
     protected $primaryKey = 'id';
 }

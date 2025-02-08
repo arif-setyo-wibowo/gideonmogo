@@ -115,7 +115,7 @@
                                                     return $query->where('session_id', Session::getId());
                                                 })
                                                 ->get();
-                                            
+
                                             $cartTotal = $cartItems->sum(function($item) {
                                                 return $item->produk->harga * $item->quantity;
                                             });
@@ -127,7 +127,7 @@
                                                     <li>
                                                         <div class="shopping-cart-img">
                                                             <a href="{{ route('shop-detail.index', $item->produk->id) }}">
-                                                                 <img alt="{{ $item->produk->nama_produk }}" 
+                                                                 <img alt="{{ $item->produk->nama_produk }}"
                                                                       src="{{ asset('storage/' . $item->produk->foto) }}" />
                                                             </a>
                                                         </div>
@@ -143,7 +143,7 @@
                                                             </h4>
                                                         </div>
                                                         <div class="shopping-cart-delete">
-                                                            <a href="#" class="remove-cart-item-dropdown" 
+                                                            <a href="#" class="remove-cart-item-dropdown"
                                                                data-cart-id="{{ $item->id }}"
                                                                onclick="event.preventDefault(); removeCartItemDropdown(this);">
                                                                 <i class="fi-rs-cross-small"></i>
@@ -249,7 +249,7 @@
                                                 return $query->where('session_id', Session::getId());
                                             })
                                             ->get();
-                                        
+
                                         $cartTotal = $cartItems->sum(function($item) {
                                             return $item->produk->harga * $item->quantity;
                                         });
@@ -261,7 +261,7 @@
                                                 <li>
                                                     <div class="shopping-cart-img">
                                                         <a href="{{ route('shop-detail.index', $item->produk->id) }}">
-                                                            <img alt="{{ $item->produk->nama_produk }}" 
+                                                            <img alt="{{ $item->produk->nama_produk }}"
                                                                  src="{{ asset('storage/' . $item->produk->foto) }}" />
                                                         </a>
                                                     </div>
@@ -277,7 +277,7 @@
                                                         </h4>
                                                     </div>
                                                     <div class="shopping-cart-delete">
-                                                        <a href="#" class="remove-cart-item-dropdown" 
+                                                        <a href="#" class="remove-cart-item-dropdown"
                                                            data-cart-id="{{ $item->id }}"
                                                            onclick="event.preventDefault(); removeCartItemDropdown(this);">
                                                             <i class="fi-rs-cross-small"></i>
@@ -312,7 +312,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="{{ asset('assets/')}}/imgs/theme/logo.svg" alt="logo" /></a>
+                    <a href="{{ route('home.index')}}"><img src="{{ asset('assets/')}}/imgs/theme/logo.svg" alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -379,70 +379,20 @@
                 <div class="col-lg-8 mx-auto">
                     <div class="accordion" id="faqAccordion">
                         <!-- Question 1 -->
+                        @foreach($faqs as $index => $faq)
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqHeading1">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
-                                    What is Nest eCommerce?
+                            <h2 class="accordion-header" id="faqHeading{{ $index }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse{{ $index }}" aria-expanded="true" aria-controls="faqCollapse1">
+                                    {{ $faq->pertanyaan }}
                                 </button>
                             </h2>
-                            <div id="faqCollapse1" class="accordion-collapse collapse" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                            <div id="faqCollapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="faqHeading{{ $index }}" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body bg-light p-3 text-dark rounded">
-                                    Nest eCommerce is a modern template for building online stores with responsive design and complete features.
+                                    {!! $faq->jawaban !!}
                                 </div>
                             </div>
                         </div>
-                        <!-- Question 2 -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqHeading2">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
-                                    Does Nest eCommerce support online payments?
-                                </button>
-                            </h2>
-                            <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-light p-3 text-dark p-3 rounded">
-                                    Yes, this template can be integrated with various payment gateways such as PayPal, Stripe, and more.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Question 3 -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqHeading3">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
-                                    How can I customize this template's appearance?
-                                </button>
-                            </h2>
-                            <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-light p-3 text-dark p-3 rounded">
-                                    You can edit the HTML, CSS, and JavaScript files of this template or use a backend framework like Laravel.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Question 4 -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqHeading4">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
-                                    Is this template SEO friendly?
-                                </button>
-                            </h2>
-                            <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-light  text-dark p-3 rounded">
-                                    Yes, Nest eCommerce is optimized for SEO with a clean HTML structure and compatibility with Google Search Console.
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Question 5 -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="faqHeading5">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
-                                    Does Nest eCommerce support multiple languages?
-                                </button>
-                            </h2>
-                            <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body bg-light p-3 text-dark p-3 rounded">
-                                    Yes, this template supports multiple languages easily using translation files or additional plugins.
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -455,7 +405,7 @@
                     <div class="col">
                         <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
                             <div class="logo mb-30">
-                                <a href="index.html" class="mb-15"><img src="{{ asset('assets/')}}/imgs/logo/logo-2.png" width="120" alt="logo" /></a>
+                                <a href="{{ route('home.index')}}" class="mb-15"><img src="{{ asset('assets/')}}/imgs/logo/logo-2.png" width="120" alt="logo" /></a>
                                 <p class="font-lg text-heading">Empower Your Journey with GideonMogo!</p>
                             </div>
                             <ul class="contact-infor">

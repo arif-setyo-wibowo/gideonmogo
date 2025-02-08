@@ -22,7 +22,7 @@
                                         <!-- MAIN SLIDES -->
                                         <div class="product-image-slider">
                                             <figure class="border-radius-10">
-                                                <img src="{{ asset('storage/' . $product->foto) }}" 
+                                                <img src="{{ asset('storage/' . $product->foto) }}"
                                                      alt="{{ $product->nama_produk }}"
                                                      style="width: 100%; height: 500px; object-fit: cover; aspect-ratio: 1/1;" />
                                             </figure>
@@ -36,20 +36,18 @@
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
                                                 <span class="current-price text-brand">$ {{ number_format($product->harga, 0, ',', '.') }}</span>
-                                                <span>
-                                                    <span class="save-price font-md color3 ml-15">Stok: {{ $product->stok }}</span>
-                                                </span>
                                             </div>
                                         </div>
                                         <div class="detail-extralink mb-50">
                                             <div class="product-extra-link2">
-                                                <button type="submit" class="button button-add-to-cart add-to-cart-link" data-produk_id="{{ $product->id }}" 
+                                                <button type="submit" class="button button-add-to-cart add-to-cart-link" data-produk_id="{{ $product->id }}"
                                                 data-quantity="1"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                             </div>
                                         </div>
                                         <div class="font-xs">
                                             <ul class="mr-50 float-start">
-                                                <li class="mb-5">Kategori: <span class="text-brand">{{ $product->kategori->kategori }}</span></li>
+                                                <li class="mb-5 fs-5">Stok: <span class="text-brand fs-5">{{ $product->stok }}</span></li>
+                                                <li class="mb-5 fs-5">Kategori: <span class="text-brand fs-5">{{ $product->kategori->kategori }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -66,7 +64,7 @@
                                     <div class="tab-content shop_info_tab entry-main-content">
                                         <div class="tab-pane fade show active" id="Description">
                                             <div class="">
-                                                {!! $product->deskripsi ?? 'Tidak ada deskripsi detail produk.' !!}
+                                                {!! html_entity_decode($product->deskripsi) ?? 'Tidak ada deskripsi detail produk.' !!}
                                             </div>
                                         </div>
                                     </div>
@@ -86,8 +84,8 @@
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
                                                         <a href="{{ route('shop-detail.index', $relatedProduct->slug) }}" tabindex="0">
-                                                            <img class="default-img" 
-                                                                 src="{{ asset('storage/' . $relatedProduct->foto) }}" 
+                                                            <img class="default-img"
+                                                                 src="{{ asset('storage/' . $relatedProduct->foto) }}"
                                                                  style="width: 100%; height: 250px; object-fit: cover;"
                                                                  alt="{{ $relatedProduct->nama_produk }}" />
                                                         </a>
