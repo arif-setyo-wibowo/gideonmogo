@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Produk;
+use App\Models\Pembelian;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,11 +18,15 @@ class DashboardController extends Controller
     {
         $totalKategori = Kategori::count();
         $totalProduk = Produk::count();
+        $totalPembelian = Pembelian::count();
+        $totalUser = User::count();
 
         $data = [
             'title' => 'Dashboard',
             'totalKategori' => $totalKategori,
-            'totalProduk' => $totalProduk
+            'totalProduk' => $totalProduk,
+            'totalPembelian' => $totalPembelian,
+            'totalUser' => $totalUser
         ];
 
         return view('admin.dashboard.index', $data);

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="{{ route('home.index')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                 <span></span> Forgot Password
+                <span></span> Forgot Password
             </div>
         </div>
     </div>
@@ -19,14 +19,26 @@
                             <div class="heading_s1">
                                 <img class="border-radius-15" src="assets/imgs/page/forgot_password.svg" alt="" />
                                 <h2 class="mb-15 mt-15">Forgot your password?</h2>
-                                <p class="mb-30">Not to worry, we got you! Let’s get you a new password. Please enter your email address or your Username.</p>
+                                <p class="mb-30">Not to worry, we got you! Let’s get you a new password. Please enter
+                                    your email address or your Username.</p>
                             </div>
-                            <form method="post">
+                            @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                            @endif
+                            <form method="POST" action="{{ route('password.email') }}">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="text" required="" name="email" placeholder="Username or Email *" />
+                                    <input type="email" required name="email" placeholder="Email *"
+                                        value="{{ old('email') }}" />
+                                    @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Reset password</button>
+                                    <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Reset
+                                        password</button>
                                 </div>
                             </form>
                         </div>

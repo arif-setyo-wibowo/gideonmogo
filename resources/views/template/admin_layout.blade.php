@@ -89,7 +89,7 @@
                   <li class="menu-item  {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                       <a href="{{ route('dashboard.index')}}" class="menu-link">
                           <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
-                          <div>Dashboards</div>
+                          <div>Dashboard</div>
                       </a>
                   </li>
                   <li class="menu-header fw-medium mt-4">

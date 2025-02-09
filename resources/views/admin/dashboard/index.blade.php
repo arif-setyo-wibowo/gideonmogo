@@ -42,6 +42,42 @@
         </div>
       </div>
     </div>
+    <div class="col-sm-6 col-lg-3 mb-4">
+      <div class="card card-border-shadow-success h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2 pb-1">
+            <div class="avatar me-2">
+              <span class="avatar-initial rounded bg-label-success">
+                <i class="mdi mdi-cart-outline"></i>
+              </span>
+            </div>
+            <h4 class="ms-1 mb-0">{{ $totalPembelian }}</h4>
+          </div>
+          <p class="mb-1">Total Pembelian</p>
+          <p class="mb-0">
+            <a href="{{ route('pembelian.index') }}" class="text-muted">Lihat Detail</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3 mb-4">
+      <div class="card card-border-shadow-warning h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2 pb-1">
+            <div class="avatar me-2">
+              <span class="avatar-initial rounded bg-label-warning">
+                <i class="mdi mdi-account-outline"></i>
+              </span>
+            </div>
+            <h4 class="ms-1 mb-0">{{ $totalUser }}</h4>
+          </div>
+          <p class="mb-1">Total User</p>
+          <p class="mb-0">
+            <a href="{{ route('user-admin.index') }}" class="text-muted">Lihat Detail</a>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <!-- / Content -->

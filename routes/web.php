@@ -11,7 +11,6 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
@@ -22,6 +21,9 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\LoginAdminController;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
@@ -50,8 +52,23 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/register', 'register')->name('register.index');
     Route::post('/register', 'registerStore')->name('register.store');
     Route::post('/logout', 'logout')->name('logout');
-    Route::get('/forgot-password', 'forgot')->name('forgot.index');
 });
+
+Route::get('/forgot-password', [AccountController::class, 'showForgotPasswordForm'])
+    ->middleware('guest')
+    ->name('password.request');
+
+Route::post('/forgot-password', [AccountController::class, 'sendPasswordResetLink'])
+    ->middleware('guest')
+    ->name('password.email');
+
+Route::get('/reset-password/{token}', [AccountController::class, 'showPasswordResetForm'])
+    ->middleware('guest')
+    ->name('password.reset');
+
+Route::post('/reset-password', [AccountController::class, 'resetPassword'])
+    ->middleware('guest')
+    ->name('password.update');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

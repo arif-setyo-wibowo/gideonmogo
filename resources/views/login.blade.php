@@ -44,7 +44,7 @@
                                     <div class="custome-checkbox">
                                         
                                     </div>
-                                    <a class="text-muted" href="{{ route('forgot.index')}}">Forgot password?</a>
+                                    <a class="text-muted" href="{{ route('password.request')}}">Forgot password?</a>
                                 </div>
                                 <div class="form-group mb-30 text-center">
                                     <button type="submit" class="btn btn-fill-out hover-up w-100">Log in</button>
@@ -57,4 +57,20 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+<script>
+    if ({{ Session::has('status') }}) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: '{{ Session::get('status') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }
+</script>
 @endsection
