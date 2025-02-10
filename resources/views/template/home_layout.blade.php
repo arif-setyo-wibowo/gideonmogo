@@ -3,14 +3,12 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>GideonMogo - Home</title>
+    <title> GideonMogo Store - Buy Monopoly GO Items at the Best Prices! 🎲</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="description" content="GideonMogo" />
+    <meta name="description" content="Get the best deals on Monopoly GO items at GideonMogo Store! 🎲 Dice, stickers, shields, and more. Fast response & 100% secure! 🚀" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:title" content="GideonMogo" />
-    <meta property="og:type" content="GideonMogo" />
-    <meta property="og:url" content="GideonMogo" />
-    <meta property="og:image" content="GideonMogo" />
+    <meta property="og:title" content="GideonMogo Store - Monopoly GO Items" />
+    <meta property="og:type" content="website" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/')}}/imgs/logo/logo-2.png" />
@@ -312,7 +310,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{ route('home.index')}}"><img src="{{ asset('assets/')}}/imgs/theme/logo.svg" alt="logo" /></a>
+                    <a href="{{ route('home.index')}}"><img src="{{ asset('assets/')}}/imgs/logo/logo-1.png" alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -402,7 +400,7 @@
         <section class="section-padding footer-mid">
             <div class="container pt-15 pb-20">
                 <div class="row">
-                    <div class="col">
+                    <div class="col col-md-3 col-sm-12">
                         <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
                             <div class="logo mb-30">
                                 <a href="{{ route('home.index')}}" class="mb-15"><img src="{{ asset('assets/')}}/imgs/logo/logo-2.png" width="120" alt="logo" /></a>
@@ -415,29 +413,36 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                        <h4 class="widget-title">Company</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="{{ route('about.index')}}">About Us</a></li>
-                            <li>FAQ</li>
-                            <li><a href="{{ route('contact.index')}}">Contact Us</a></li>
-                        </ul>
+                    <div class="col col-md-3 col-sm-4">
+                        <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                            <h4 class="widget-title">Company</h4>
+                            <ul class="footer-list mb-sm-5 mb-md-0">
+                                <li><a href="{{ route('about.index')}}">About Us</a></li>
+                                <li>FAQ</li>
+                                <li><a href="{{ route('contact.index')}}">Contact Us</a></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                        <h4 class="widget-title">Policy</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="{{ route('privacy.index')}}">Privacy Policy</a></li>
-                            <li><a href="{{ route('terms.index')}}">Terms &amp; Conditions</a></li>
-                            <li><a href="{{ route('refund.index')}}">Refund Policy</a></li>
-                        </ul>
+                    <div class="col col-md-3 col-sm-4">
+                        <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                            <h4 class="widget-title">Policy</h4>
+                            <ul class="footer-list mb-sm-5 mb-md-0">
+                                <li><a href="{{ route('privacy.index')}}">Privacy Policy</a></li>
+                                <li><a href="{{ route('terms.index')}}">Terms &amp; Conditions</a></li>
+                                <li><a href="{{ route('refund.index')}}">Refund Policy</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                        <h4 class="widget-title">Account</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="{{ route('login.index')}}">Sign In</a></li>
-                            <li><a href="{{ route('shop-cart.index')}}">View Cart</a></li>
-                        </ul>
+
+                    <div class="col col-md-3 col-s-4">
+                        <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                            <h4 class="widget-title">Account</h4>
+                            <ul class="footer-list mb-sm-5 mb-md-0">
+                                <li><a href="{{ route('login.index')}}">Sign In</a></li>
+                                <li><a href="{{ route('shop-cart.index')}}">View Cart</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
         </section>
@@ -448,7 +453,7 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
-                    <p class="font-sm mb-0">&copy; 2025, <strong class="text-brand">Itboy</strong> <br />All rights reserved</p>
+                    <p class="font-sm mb-0">&copy; 2025, <a href="https://itboy.my.id" class="text-brand">Itboy</a> <br />All rights reserved</p>
                 </div>
 
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
@@ -461,11 +466,21 @@
                 <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
                     <div class="mobile-social-icon">
                         <h6>Follow Us</h6>
-                        <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-facebook-white.svg" alt="" /></a>
-                        <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-instagram-white.svg" alt="" /></a>
-                        <a href="#"><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-youtube-white.svg" alt="" /></a>
+                        <a href="{{ $contact_view->link_facebook ?? '#' }}">
+                            <img src="{{ asset('assets/imgs/theme/icons/icon-facebook-white.svg') }}" alt="Facebook" />
+                        </a>
+                        <a href="{{ $contact_view->link_instagram ?? '#' }}">
+                            <img src="{{ asset('assets/imgs/theme/icons/icon-instagram-white.svg') }}" alt="Instagram" />
+                        </a>
+                        <a href="{{ $contact_view->link_wa ?? '#' }}">
+                            <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/wa.png') }}" alt="WhatsApp" />
+                        </a>
+                        <a href="{{ $contact_view->link_discord ?? '#' }}">
+                            <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/discord.webp') }}" alt="Discord" />
+                        </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </footer>

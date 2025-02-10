@@ -207,7 +207,7 @@
         button.addEventListener('click', function(event) {
             event.preventDefault();
             const form = this.closest('form');
-            
+
             Swal.fire({
                 title: 'Apakah Yakin ingin menghapus data?',
                 icon: 'warning',

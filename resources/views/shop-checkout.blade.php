@@ -12,6 +12,12 @@
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Checkout</h1>
                 <div class="d-flex justify-content-between">

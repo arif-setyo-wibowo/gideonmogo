@@ -145,6 +145,12 @@
                           <div>FAQ</div>
                       </a>
                   </li>
+                  <li class="menu-item {{ request()->routeIs('contact-admin.index') ? 'active' : '' }}">
+                      <a href="{{ route('contact-admin.index')}}" class="menu-link">
+                          <i class="menu-icon tf-icons mdi mdi-phone"></i>
+                          <div>Contact</div>
+                      </a>
+                  </li>
                   <li class="menu-item ">
                       <a href="{{ route('logoutadmin.index')}}" class="menu-link">
                           <i class="menu-icon tf-icons mdi mdi-logout"></i>

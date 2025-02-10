@@ -48,7 +48,7 @@
                                         <li><img class="mr-5" src="assets/imgs/theme/icons/icon-location.svg"
                                                 alt=""><strong>Address: </strong> <span>Jakarta, Indonesia</span></li>
                                         <li><img class="mr-5" src="assets/imgs/theme/icons/icon-contact.svg"
-                                                alt=""><strong>Call Us:</strong><span>(+62) - 540-025-124553</span></li>
+                                                alt=""><strong>Call Us:</strong><span>(+62) - 898 - 5288 - 600</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -57,15 +57,29 @@
                                     <h6 class="mb-15 text-white">Follow Us</h6>
                                     <ul class="social-network">
                                         <li class="hover-up">
-                                            <a href="#">
-                                                <img src="assets/imgs/theme/icons/social-fb.svg" alt="">
+                                            <a href="{{ $contact_view->link_facebook ?? '#' }}">
+                                                <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/icon-facebook-white.svg') }}" alt="Facebook" />
                                             </a>
                                         </li>
                                         <li class="hover-up">
-                                            <a href="#">
-                                                <img src="assets/imgs/theme/icons/social-insta.svg" alt="">
+                                            <a href="{{ $contact_view->link_instagram ?? '#' }}">
+                                                <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/icon-instagram-white.svg') }}" alt="Instagram" />
                                             </a>
                                         </li>
+
+                                        <li class="hover-up">
+                                            <a href="{{ $contact_view->link_wa ?? '#' }}">
+                                                <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/wa.png') }}" alt="WhatsApp" />
+                                            </a>
+                                        </li>
+
+                                        <li class="hover-up">
+                                            <a href="{{ $contact_view->link_discord ?? '#' }}">
+                                                <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/discord.webp') }}" alt="Discord" />
+                                            </a>
+                                        </li>
+
+
                                     </ul>
                                 </div>
                             </div>

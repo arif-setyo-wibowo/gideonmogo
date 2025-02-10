@@ -179,10 +179,9 @@ class ShopCheckoutController extends Controller
 
             $encodedMessage = urlencode($message);
 
-            $whatsappUrl = "https://wa.me/6287863353906?text=" . $encodedMessage;
+            $whatsappUrl = "https://wa.me/628985288600?text=" . $encodedMessage;
 
-            return redirect($whatsappUrl);
-
+            return redirect($whatsappUrl)->with('success', 'Your message has been sent successfully!');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect(route('home.index'));
         } catch (\Exception $e) {

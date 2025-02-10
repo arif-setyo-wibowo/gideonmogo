@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
+use App\Models\Contact;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -11,54 +14,25 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact');
+        $contact = Contact::first();
+        return view('contact', compact('contact'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function sendContactForm(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'subject' => 'required',
+            'message' => 'required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $data = $request->all();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        Mail::to('gideonmogo442@gmail.com')->send(new ContactMail($data));
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', 'Your message has been sent successfully!');
     }
 }

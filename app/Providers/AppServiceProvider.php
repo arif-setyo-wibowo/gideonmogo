@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use App\Models\Faq;
-
+use App\Models\Contact;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,10 +23,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Set custom pagination views
         Paginator::defaultView('vendor.pagination.custom');
         Paginator::defaultSimpleView('vendor.pagination.simple-custom');
+
+        // Bagikan semua FAQ ke semua view
         View::composer('*', function ($view) {
             $view->with('faqs', Faq::all());
+        });
+
+        // Bagikan data kontak ke semua view langsung dari model
+        View::composer('*', function ($view) {
+            $view->with('contact_view', Contact::first());
         });
     }
 }

@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\LoginAdminController;
+use App\Http\Controllers\Admin\ContactAdminController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -28,6 +29,10 @@ use Illuminate\Http\Request;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop-detail/{slug}', [ShopDetailController::class, 'index'])->name('shop-detail.index');
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
 
 Route::controller(ShopCartController::class)->group(function () {
     Route::get('/shop-cart', 'index')->name('shop-cart.index');
@@ -72,6 +77,7 @@ Route::post('/reset-password', [AccountController::class, 'resetPassword'])
 
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'sendContactForm'])->name('contact.send');
 Route::get('/privacy-policy', [PolicyController::class, 'index'])->name('privacy.index');
 Route::get('/terms-policy', [PolicyController::class, 'terms'])->name('terms.index');
 Route::get('/refund-policy', [PolicyController::class, 'refund'])->name('refund.index');
@@ -110,6 +116,8 @@ Route::middleware(['admin'])->prefix('back/')->group(function () {
     Route::resource('admin', AdminController::class);
 
     Route::resource('faq', FaqController::class);
+
+    Route::resource('contact-admin', ContactAdminController::class);
 
     Route::controller(LaporanController::class)->group(function () {
         Route::get('/laporan-pembelian', 'pembelian')->name('laporan.pembelian');
