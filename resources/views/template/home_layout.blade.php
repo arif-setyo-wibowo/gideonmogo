@@ -409,7 +409,7 @@
                             <ul class="contact-infor">
                                 <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong> <span>Jakarta, Indonesia</span></li>
                                 <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Call Us:</strong><span>(+62) - 540-025-124553</span></li>
-                                <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-email-2.svg" alt="" /><strong>Email:</strong><span>sale@Nest.com</span></li>
+                                {{-- <li><img src="{{ asset('assets/')}}/imgs/theme/icons/icon-email-2.svg" alt="" /><strong>Email:</strong><span>sale@Nest.com</span></li> --}}
                             </ul>
                         </div>
                     </div>
