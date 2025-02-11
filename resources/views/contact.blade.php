@@ -17,47 +17,36 @@
                 <div class="col-xl-10 col-lg-12 m-auto">
                     <section class="mb-50">
                         <div class="row mb-60">
-                            <div class="row">
-                                <div class="col mt-2">
-                                    <div class="d-flex align-items-center">
-                                        <a href="{{ $contact->link_facebook ?? 'https://www.facebook.com' }}"
-                                           class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
-                                            <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/icon-facebook-white.svg') }}" width="35" alt="Facebook" />
-                                        </a>
-                                        <h4 class="mb-0 text-brand">Facebook</h4>
-                                    </div>
+                            <div class="d-flex justify-content-center mt-2">
+                                <div class="d-flex align-items-center mx-2">
+                                    <a href="{{ $contact->link_facebook ?? 'https://www.facebook.com' }}"
+                                       class="btn btn-sm font-weight-bold text-white border-radius-5">
+                                        <img style="height: 35px;" src="{{ asset('assets/imgs/theme/icons/facebook.webp') }}" alt="Facebook" />
+                                    </a>
                                 </div>
 
-                                <div class="col mt-2">
-                                    <div class="d-flex align-items-center">
-                                        <a href="{{ $contact->link_instagram ?? 'https://www.instagram.com' }}"
-                                           class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
-                                            <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/icon-instagram-white.svg') }}" width="35" alt="Instagram" />
-                                        </a>
-                                        <h4 class="mb-0 text-brand">Instagram</h4>
-                                    </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <a href="{{ $contact->link_instagram ?? 'https://www.instagram.com' }}"
+                                       class="btn btn-sm font-weight-bold text-white border-radius-5">
+                                        <img style="height: 35px;" src="{{ asset('assets/imgs/theme/icons/instagram.webp') }}" alt="Instagram" />
+                                    </a>
                                 </div>
 
-                                <div class="col mt-2">
-                                    <div class="d-flex align-items-center">
-                                        <a href="{{ $contact->link_discord ?? 'https://www.discord.com' }}"
-                                           class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
-                                            <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/discord.webp') }}" width="35" alt="Discord" />
-                                        </a>
-                                        <h4 class="mb-0 text-brand">Discord</h4>
-                                    </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <a href="{{ $contact->link_discord ?? 'https://www.discord.com' }}"
+                                       class="btn btn-sm font-weight-bold text-white border-radius-5">
+                                        <img style="height: 35px;" src="{{ asset('assets/imgs/theme/icons/discord.webp') }}" alt="Discord" />
+                                    </a>
                                 </div>
 
-                                <div class="col mt-2">
-                                    <div class="d-flex align-items-center">
-                                        <a href="{{ $contact->link_wa ?? 'https://wa.me' }}"
-                                           class="mr-3 btn btn-sm font-weight-bold text-white mr-5 border-radius-5 btn-shadow-brand hover-up">
-                                            <img style="margin-top: 5px; height: 20px;" src="{{ asset('assets/imgs/theme/icons/wa.png') }}" width="35" alt="WhatsApp" />
-                                        </a>
-                                        <h4 class="mb-0 text-brand">WhatsApp</h4>
-                                    </div>
+                                <div class="d-flex align-items-center mx-2">
+                                    <a href="{{ $contact->link_wa ?? 'https://wa.me' }}"
+                                       class="btn btn-sm font-weight-bold text-white border-radius-5">
+                                        <img style="height: 35px;" src="{{ asset('assets/imgs/theme/icons/wa.png') }}" alt="WhatsApp" />
+                                    </a>
                                 </div>
                             </div>
+
 
 
                         <!-- Connect With Us Section -->
