@@ -62,18 +62,15 @@ class LoginController extends Controller
     public function registerStore(Request $request)
     {
         $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $displayName = $validatedData['first_name'] . 
-            ($validatedData['last_name'] ? ' ' . $validatedData['last_name'] : '');
+        $displayName = $validatedData['name'];
 
         $user = User::create([
-            'first_name' => $validatedData['first_name'],
-            'last_name' => $validatedData['last_name'] ?? null,
+            'name' => $validatedData['name'],
             'display_name' => $displayName,
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),

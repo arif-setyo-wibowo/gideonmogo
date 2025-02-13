@@ -107,23 +107,18 @@
                                             <form method="POST" action="{{ route('my-account.update-details') }}">
                                                 @csrf
                                                 <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label>First Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" name="first_name" type="text" 
-                                                               value="{{ Auth::user()->first_name }}" />
+                                                    <div class="form-group">
+                                                        <label>Full Name</label>
+                                                        <input required="" class="form-control" name="name" type="text" 
+                                                               value="{{ Auth::user()->name }}" />
                                                     </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label>Last Name</label>
-                                                        <input class="form-control" name="last_name" type="text" 
-                                                               value="{{ Auth::user()->last_name ?? '' }}" />
-                                                    </div>
-                                                    <div class="form-group col-md-12">
+                                                    <div class="form-group">
                                                         <label>Display Name <span class="required">*</span></label>
                                                         <input required="" class="form-control" name="display_name" type="text" 
                                                                value="{{ Auth::user()->display_name }}" />
                                                         <em>This will be how your name will be displayed in the account section</em>
                                                     </div>
-                                                    <div class="form-group col-md-12">
+                                                    <div class="form-group">
                                                         <label>Email Address <span class="required">*</span></label>
                                                         <input required="" class="form-control" name="email" type="email" 
                                                                value="{{ Auth::user()->email }}" />

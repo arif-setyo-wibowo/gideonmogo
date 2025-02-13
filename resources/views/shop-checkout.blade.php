@@ -70,9 +70,9 @@
                     <div class="row">
                         <h4 class="mb-30">Billing Details</h4>
                         <div class="row">
-                            <div class="form-Catatangroup col-lg-6">
-                                <input type="text" required="" name="first_name" placeholder="First Name *"
-                                    value="{{ Auth::check() ? Auth::user()->first_name : '' }}">
+                            <div class="form-group col-lg-6">
+                                <input type="text" required="" name="name" placeholder="Full Name *"
+                                    value="{{ Auth::check() ? Auth::user()->name : '' }}">
                             </div>
                             <div class="form-group col-lg-6">
                                 <input required="" type="text" name="email" placeholder="Email *"
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="form-group mb-30">
-                            <textarea rows="5" name="note" placeholder="request note"></textarea>
+                            <textarea rows="5" name="note" placeholder="Request Note"></textarea>
                         </div>
                     </div>
                 </div>

@@ -22,28 +22,15 @@
                             <form method="POST" action="{{ route('register.store') }}">
                                 @csrf
                                 <div class="form-group mb-30">
-                                    <input type="text" 
-                                           name="first_name" 
-                                           placeholder="First Name" 
-                                           class="form-control @error('first_name') is-invalid @enderror" 
-                                           value="{{ old('first_name') }}" 
-                                           required />
-                                    @error('first_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group mb-30">
-                                    <input type="text" 
-                                           name="last_name" 
-                                           placeholder="Last Name (Optional)" 
-                                           class="form-control @error('last_name') is-invalid @enderror" 
-                                           value="{{ old('last_name') }}" />
-                                    @error('last_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <input type="text" name="name" 
+                                        class="form-control @error('name') is-invalid @enderror" 
+                                        value="{{ old('name') }}" 
+                                        placeholder="Full Name"
+                                        required />
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                                 <div class="form-group mb-30">

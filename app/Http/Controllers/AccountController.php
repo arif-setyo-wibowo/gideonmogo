@@ -79,18 +79,16 @@ class AccountController extends Controller
 
         try {
             $validatedData = $request->validate([
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'nullable|string|max:255',
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
                 'display_name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email,' . $user->id,
             ]);
 
-            $user->update([
-                'first_name' => $validatedData['first_name'],
-                'last_name' => $validatedData['last_name'] ?? null,
-                'display_name' => $validatedData['display_name'],
-                'email' => $validatedData['email'],
-            ]);
+            $user->name = $validatedData['name'];
+            $user->display_name = $validatedData['display_name'];
+            $user->email = $validatedData['email'];
+
+            $user->update();
 
             return redirect()->route('my-account.index')
                 ->with('success_message', 'Account details updated successfully!')

@@ -35,10 +35,8 @@ class ShopCheckoutController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
+                'name' => 'required|string|max:255',
                 'email' => 'required|email',
-                'phone' => 'required|string|max:20',
                 'username' => 'required|string|max:255',
                 'facebook' => 'required|string|max:255',
                 'link' => 'required|string',
@@ -47,11 +45,9 @@ class ShopCheckoutController extends Controller
                 'bukti_pembayaran_venmo' => $request->input('payment_method') === 'Venmo' ? 'required|file|image|max:5120' : '',
                 'bukti_pembayaran_cashapp' => $request->input('payment_method') === 'CashApp' ? 'required|file|image|max:5120' : ''
             ], [
-                'first_name.required' => 'First name is required',
-                'last_name.required' => 'Last name is required',
+                'name.required' => 'Full name is required',
                 'email.required' => 'Email is required',
                 'email.email' => 'Invalid email format',
-                'phone.required' => 'Phone number is required',
                 'username.required' => 'Username is required',
                 'facebook.required' => 'Facebook is required',
                 'link.required' => 'Link is required',
@@ -112,10 +108,8 @@ class ShopCheckoutController extends Controller
                 'metode_pembayaran' => $paymentMethod,
                 'status' => 'pending',
 
-                'first_name' => $validatedData['first_name'],
-                'last_name' => $validatedData['last_name'],
+                'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
-                'phone' => $validatedData['phone'],
                 'note' => $request->input('note'),
 
                 'username' => $request->input('username', ''),
@@ -165,7 +159,7 @@ class ShopCheckoutController extends Controller
             $message = "*Order from GideonMogo*\n\n";
             $message .= "Order Number: " . $nomerOrder . "\n";
             $message .= "Date: " . now()->format('d F Y') . "\n";
-            $message .= "Name: " . $validatedData['first_name'] . " " . $validatedData['last_name'] . "\n";
+            $message .= "Name: " . $validatedData['name'] . "\n";
             $message .= "IGN: " . $validatedData['username'] . "\n";
             $message .= "Facebook: " . $validatedData['facebook'] . "\n";
             $message .= "Link: " . $validatedData['link'] . "\n\n";
