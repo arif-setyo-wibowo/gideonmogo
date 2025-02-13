@@ -36,7 +36,7 @@ class CartManager {
                 const subtotalElement = cartRow.querySelector('.price.subtotal h4');
                 const unitPrice = parseFloat(cartRow.querySelector('.price.unit-price h4').textContent.replace('$', '').trim());
                 const newSubtotal = (unitPrice * newQuantity);
-                subtotalElement.textContent = `$${newSubtotal.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+                subtotalElement.textContent = `$${newSubtotal.toFixed(2)}`;
                 
                 // Update cart total
                 this.updateCartTotal();
@@ -191,7 +191,7 @@ class CartManager {
             });
 
             // Update total element
-            cartTotalElement.textContent = `$${Number(calculatedTotal).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+            cartTotalElement.textContent = `$${calculatedTotal.toFixed(2)}`;
         }
     }
 
@@ -232,16 +232,9 @@ class CartManager {
                                     </a>
                                 </h4>
                                 <h4>
-                                    <span>${item.quantity} × </span>
-                                    $${item.produk.harga.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}
+                                    $${item.produk.harga.toFixed(2)}
+                                    <span> X ${item.quantity}</span>
                                 </h4>
-                            </div>
-                            <div class="shopping-cart-delete">
-                                <a href="#" class="remove-cart-item-dropdown" 
-                                   data-cart-id="${item.id}"
-                                   onclick="event.preventDefault(); this.removeCartItemDropdown(this);">
-                                    <i class="fi-rs-cross-small"></i>
-                                </a>
                             </div>
                         </li>
                     `).join('');
@@ -250,7 +243,7 @@ class CartManager {
                     const cartFooterHtml = `
                         <div class="shopping-cart-footer">
                             <div class="shopping-cart-total">
-                                <h4>Total <span>$${data.cartTotal.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</span></h4>
+                                <h4>Total <span>$${data.cartTotal.toFixed(2)}</span></h4>
                             </div>
                             <div class="shopping-cart-button">
                                 <a href="/shop-cart" class="outline">View cart</a>

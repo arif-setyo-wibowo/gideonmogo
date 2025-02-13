@@ -89,7 +89,8 @@
                             <th>Produk</th>
                             <th>Kategori</th>
                             <th>Stok</th>
-                            <th>Harga</th>
+                            <th>Harga Jual</th>
+                            <th>Harga Dicoret</th>
                             <th>Gambar</th>
                             <th>Action</th>
                         </tr>
@@ -101,7 +102,8 @@
                             <td>{{ $produk->nama_produk }}</td>
                             <td>{{ $produk->kategori->kategori }}</td>
                             <td>{{ $produk->stok }}</td>
-                            <td>${{ number_format($produk->harga, 0, ',', '.') }}</td>
+                            <td>${{ number_format($produk->harga, 2, '.', '.') }}</td>
+                            <td>${{ number_format($produk->harga_diskon, 2, '.', '.') }}</td>
                             <td>
                                 @if($produk->foto)
                                 <img src="{{ asset('storage/' . $produk->foto) }}"
@@ -188,12 +190,14 @@
                         <label for="stok">Stok</label>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required/>
-                        <label for="harga">Harga Lama ( Optional ) </label>
+                        <input type="text" class="form-control" id="harga" name="harga" 
+                               placeholder="Harga Jual" pattern="^\d+(\.\d{1,2})?$" required/>
+                        <label for="harga">Harga Jual ( Ditampilkan hijau ) </label>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required/>
-                        <label for="harga">Harga</label>
+                        <input type="text" class="form-control" id="harga_diskon" name="harga_diskon" 
+                               placeholder="Harga Asli" pattern="^\d+(\.\d{1,2})?$"/>
+                        <label for="harga_diskon">Harga Awal ( Dicoret ) (opsional)</label>
                     </div>
                     <div class="mb-4">
                         <label for="foto">Foto Produk</label>

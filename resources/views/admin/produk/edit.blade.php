@@ -54,13 +54,16 @@
                     </div>
 
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required/>
-                        <label for="harga">Harga Lama ( Optional ) </label>
+                        <input type="text" class="form-control" id="harga" name="harga" 
+                               value="{{ old('harga', number_format($produk->harga, 2, '.', '')) }}" 
+                               placeholder="Harga Jual" pattern="^\d+(\.\d{1,2})?$" required/>
+                        <label for="harga">Harga Jual ( Ditampilkan hijau )</label>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="harga" name="harga"
-                               value="{{ old('harga', $produk->harga) }}" placeholder="Harga" required/>
-                        <label for="harga">Harga</label>
+                        <input type="text" class="form-control" id="harga_diskon" name="harga_diskon" 
+                               value="{{ old('harga_diskon', number_format($produk->harga_diskon, 2, '.', '')) }}" 
+                               placeholder="Harga Asli" pattern="^\d+(\.\d{1,2})?$"/>
+                        <label for="harga_diskon">Harga Awal ( Dicoret ) (opsional)</label>
                     </div>
                     <div class="mb-4">
                         <label for="foto">Foto Produk</label>

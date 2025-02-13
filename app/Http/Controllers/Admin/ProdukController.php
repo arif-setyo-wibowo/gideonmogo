@@ -52,7 +52,8 @@ class ProdukController extends Controller
             'nama_produk' => 'required|max:255',
             'id_kategori' => 'required|exists:kategori,id',
             'stok' => 'required|integer|min:0',
-            'harga' => 'required|numeric|min:0',
+            'harga' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'harga_diskon' => ['nullable', 'regex:/^\d+(\.\d{1,2})?$/'],
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi' => 'nullable|string'
         ]);
@@ -61,7 +62,8 @@ class ProdukController extends Controller
         $produk->nama_produk = $validatedData['nama_produk'];
         $produk->id_kategori = $validatedData['id_kategori'];
         $produk->stok = $validatedData['stok'];
-        $produk->harga = $validatedData['harga'];
+        $produk->harga = floatval($validatedData['harga']);
+        $produk->harga_diskon = $request->input('harga_diskon') ? floatval($request->input('harga_diskon')) : null;
         $produk->deskripsi = $request->input('deskripsi');
 
         // Handle file upload
@@ -119,7 +121,8 @@ class ProdukController extends Controller
             'nama_produk' => 'required|max:255',
             'id_kategori' => 'required|exists:kategori,id',
             'stok' => 'required|integer|min:0',
-            'harga' => 'required|numeric|min:0',
+            'harga' => ['required', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'harga_diskon' => ['nullable', 'regex:/^\d+(\.\d{1,2})?$/'],
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi' => 'nullable|string'
         ]);
@@ -127,7 +130,8 @@ class ProdukController extends Controller
         $produk->nama_produk = $validatedData['nama_produk'];
         $produk->id_kategori = $validatedData['id_kategori'];
         $produk->stok = $validatedData['stok'];
-        $produk->harga = $validatedData['harga'];
+        $produk->harga = floatval($validatedData['harga']);
+        $produk->harga_diskon = $request->input('harga_diskon') ? floatval($request->input('harga_diskon')) : null;
         $produk->deskripsi = $request->input('deskripsi');
 
         // Handle file upload

@@ -170,8 +170,10 @@
                                     </h2>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
-                                            <span class="old-price">$55.8</span>
+                                            <span>$ {{ fmod($product->harga, 1) == 0 ? number_format($product->harga, 0, '.', '.') : number_format($product->harga, 2, '.', '.') }}</span>
+                                            @if($product->harga_diskon > 0)
+                                            <span class="old-price">$ {{ fmod($product->harga_diskon, 1) == 0 ? number_format($product->harga_diskon, 0, '.', '.') : number_format($product->harga_diskon, 2, '.', '.') }}</span>
+                                            @endif
                                         </div>
                                         <div class="add-cart">
                                             <a class="add add-to-cart-link" href="javascript:void(0);"
@@ -222,8 +224,10 @@
                                     </h2>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
-                                            <span class="old-price">$55.8</span>
+                                            <span>$ {{ fmod($product->harga, 1) == 0 ? number_format($product->harga, 0, '.', '.') : number_format($product->harga, 2, '.', '.') }}</span>
+                                            @if($product->harga_diskon > 0)
+                                                <span class="old-price">$ {{ fmod($product->harga_diskon, 1) == 0 ? number_format($product->harga_diskon, 0, '.', '.') : number_format($product->harga_diskon, 2, '.', '.') }}</span>
+                                            @endif
                                         </div>
                                         <div class="add-cart">
                                             <a class="add add-to-cart-link" href="javascript:void(0);"

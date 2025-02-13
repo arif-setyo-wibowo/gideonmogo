@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kategori');
             $table->integer('stok');
             $table->float('harga');
+            $table->float('harga_diskon')->nullable();
             $table->string('foto')->nullable();
             $table->text('deskripsi')->nullable();
             $table->timestamps();

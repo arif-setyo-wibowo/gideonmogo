@@ -22,7 +22,8 @@ class ProdukSeeder extends Seeder
 
         $produks = [];
         for ($i=0; $i<5; $i++) {
-            $harga = rand(10, 250);
+            $harga = rand(10, 500) + rand(0, 9) / 10;
+            $harga_diskon = rand(510, 1000) + rand(0, 9) / 10;
             $gambar = 'produk/b' . rand(3,5) . '.png';
 
             $produks[] = [
@@ -30,6 +31,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Sticker Lucu ' . $i),
                 'deskripsi' => 'Sticker lucu yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 50,
                 'foto' => $gambar,
                 'id_kategori' => $stickerId,
@@ -41,6 +43,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Sticker Keren ' . $i),
                 'deskripsi' => 'Sticker keren yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 30,
                 'foto' => $gambar,
                 'id_kategori' => $stickerId,
@@ -52,6 +55,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Akun Facebook ' . $i),
                 'deskripsi' => 'Akun Facebook yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 20,
                 'foto' => $gambar,
                 'id_kategori' => $accountsId,
@@ -63,6 +67,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Akun Instagram ' . $i),
                 'deskripsi' => 'Akun Instagram yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 40,
                 'foto' => $gambar,
                 'id_kategori' => $accountsId,
@@ -74,6 +79,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Dice Boost 10% ' . $i),
                 'deskripsi' => 'Dice boost yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 50,
                 'foto' => $gambar,
                 'id_kategori' => $diceBoostId,
@@ -85,6 +91,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Dice Boost 20% ' . $i),
                 'deskripsi' => 'Dice boost yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 30,
                 'foto' => $gambar,
                 'id_kategori' => $diceBoostId,
@@ -96,6 +103,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Partners Event ' . $i),
                 'deskripsi' => 'Partners event yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 20,
                 'foto' => $gambar,
                 'id_kategori' => $monopolyGoId,
@@ -107,6 +115,7 @@ class ProdukSeeder extends Seeder
                 'slug' => Str::slug('Premium Partners Event ' . $i),
                 'deskripsi' => 'Premium partners event yang dapat digunakan untuk berbagai keperluan',
                 'harga' => $harga,
+                'harga_diskon' => $harga_diskon,
                 'stok' => 40,
                 'foto' => $gambar,
                 'id_kategori' => $monopolyGoId,

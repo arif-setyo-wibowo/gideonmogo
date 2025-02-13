@@ -35,10 +35,12 @@
                                         <h2 class="title-detail">{{ $product->nama_produk }}</h2>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
-                                                <span class="current-price text-brand">$ {{ number_format($product->harga, 0, ',', '.') }}</span>
+                                                <span class="current-price text-brand">$ {{ fmod($product->harga, 1) == 0 ? number_format($product->harga, 0, '.', '.') : number_format($product->harga, 2, '.', '.') }}</span>
+                                                @if($product->harga_diskon > 0)
                                                 <span>
-                                                    <span class="old-price font-md ml-15">$52</span>
+                                                    <span class="old-price font-md ml-15">$ {{ fmod($product->harga_diskon, 1) == 0 ? number_format($product->harga_diskon, 0, '.', '.') : number_format($product->harga_diskon, 2, '.', '.') }}</span>
                                                 </span>
+                                                @endIf
                                             </div>
                                         </div>
                                         <div class="detail-extralink mb-50">
@@ -97,8 +99,10 @@
                                                 <div class="product-content-wrap">
                                                     <h2><a href="{{ route('shop-detail.index', $relatedProduct->slug) }}">{{ $relatedProduct->nama_produk }}</a></h2>
                                                     <div class="product-price">
-                                                        <span>$ {{ number_format($relatedProduct->harga, 0, ',', '.') }}</span>
-                                                        <span class="old-price">$52</span>
+                                                        <span>$ {{ fmod($relatedProduct->harga, 1) == 0 ? number_format($relatedProduct->harga, 0, '.', '.') : number_format($relatedProduct->harga, 2, '.', '.') }}</span>
+                                                        @if($relatedProduct->harga_diskon > 0)
+                                                            <span class="old-price">$ {{ fmod($relatedProduct->harga_diskon, 1) == 0 ? number_format($relatedProduct->harga_diskon, 0, '.', '.') : number_format($relatedProduct->harga_diskon, 2, '.', '.') }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

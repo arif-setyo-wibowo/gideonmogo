@@ -34,17 +34,19 @@
                     <form method="post">
                     </form>
                     <div class="row mb-50">
+                        @guest
                         <div class="col-lg-6 mb-sm-15 mb-lg-0 mb-md-3">
-                            @guest
+                            
                             <div class="toggle_info">
                                 <span><i class="fi-rs-user mr-10"></i><span class="text-muted font-lg">Already have an
                                         account?</span> <a href="{{ route('login.index')}}"
                                         class=" font-lg" aria-expanded="false">Click here to login</a></span>
                             </div>
-                            @endguest
+                           
                         </div>
+                        @endguest
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mb-sm-15 mb-lg-0 mb-md-3">
                             <form method="post" class="apply-coupon">
                                 <input type="text" placeholder="Enter Coupon Code...">
                                 <button class="btn  btn-md" name="login">Apply Coupon</button>
@@ -242,7 +244,7 @@
                                         <label for="uploadBuktiUsdt" class="form-label fs-7 fw-bold">Upload Trust Wallet
                                             Payment Proof</label>
                                         <div class="custom-file">
-                                            <input type="file" name="bukti_pembayaran_cashapp" class="custom-file-input"
+                                            <input type="file" name="bukti_pembayaran_usdt" class="custom-file-input"
                                                 id="uploadBuktiUsdt" accept="image/png, image/jpeg, image/jpg">
                                             <label class="custom-file-label" for="uploadBuktiUsdt">Choose
                                                 file...</label>

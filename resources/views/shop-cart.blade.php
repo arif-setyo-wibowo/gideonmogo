@@ -39,15 +39,15 @@
                                 <td class="image product-thumbnail pl-30">
                                     <img src="{{ asset('storage/' . $item->produk->foto) }}" alt="{{ $item->produk->nama_produk }}">
                                 </td>
-                                <td class="product-des product-name">
+                                <td class="product-des product-name ">
                                     <h6 class="mb-5">
                                         <a class="product-name mb-10 text-heading" >
                                             {{ $item->produk->nama_produk }}
                                         </a>
                                     </h6>
                                 </td>
-                                <td class="price unit-price" data-title="Price">
-                                    <h4 class="text-body">${{ number_format($item->produk->harga, 0) }}</h4>
+                                <td class="price unit-price text-center" data-title="Price">
+                                    <h4 class="text-body">${{ number_format($item->produk->harga, 2) }}</h4>
                                 </td>
                                 <td class="text-center detail-info" data-title="Stock">
                                     <div class="detail-extralink mr-15">
@@ -64,8 +64,8 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="price subtotal" data-title="Subtotal">
-                                    <h4 class="text-brand">${{ number_format($item->produk->harga * $item->quantity, 0) }}</h4>
+                                <td class="price subtotal text-center" data-title="Subtotal">
+                                    <h4 class="text-brand">${{ number_format($item->produk->harga * $item->quantity, 2) }}</h4>
                                 </td>
                                 <td class="action text-center" data-title="Remove">
                                     <a href="#" class="text-body remove-cart-item" onclick="event.preventDefault(); removeCartItem(this);">

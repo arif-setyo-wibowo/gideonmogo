@@ -40,10 +40,11 @@ class ShopCheckoutController extends Controller
                 'username' => 'required|string|max:255',
                 'facebook' => 'required|string|max:255',
                 'link' => 'required|string',
-                'payment_method' => 'required|in:PayPal,CashApp,Venmo',
+                'payment_method' => 'required|in:PayPal,CashApp,Venmo,Usdt',
                 'bukti_pembayaran_paypal' => $request->input('payment_method') === 'PayPal' ? 'required|file|image|max:5120' : '',
                 'bukti_pembayaran_venmo' => $request->input('payment_method') === 'Venmo' ? 'required|file|image|max:5120' : '',
-                'bukti_pembayaran_cashapp' => $request->input('payment_method') === 'CashApp' ? 'required|file|image|max:5120' : ''
+                'bukti_pembayaran_cashapp' => $request->input('payment_method') === 'CashApp' ? 'required|file|image|max:5120' : '',
+                'bukti_pembayaran_usdt' => $request->input('payment_method') === 'Usdt' ? 'required|file|image|max:5120' : ''
             ], [
                 'name.required' => 'Full name is required',
                 'email.required' => 'Email is required',
@@ -55,12 +56,15 @@ class ShopCheckoutController extends Controller
                 'bukti_pembayaran_paypal.required' => 'Please upload PayPal payment proof',
                 'bukti_pembayaran_venmo.required' => 'Please upload Venmo payment proof',
                 'bukti_pembayaran_cashapp.required' => 'Please upload CashApp payment proof',
+                'bukti_pembayaran_usdt.required' => 'Please upload Usdt payment proof',
                 'bukti_pembayaran_paypal.image' => 'PayPal payment proof must be an image',
                 'bukti_pembayaran_venmo.image' => 'Venmo payment proof must be an image',
                 'bukti_pembayaran_cashapp.image' => 'CashApp payment proof must be an image',
+                'bukti_pembayaran_usdt.image' => 'Usdt payment proof must be an image',
                 'bukti_pembayaran_paypal.max' => 'PayPal payment proof must not exceed 5MB',
                 'bukti_pembayaran_venmo.max' => 'Venmo payment proof must not exceed 5MB',
-                'bukti_pembayaran_cashapp.max' => 'CashApp payment proof must not exceed 5MB'
+                'bukti_pembayaran_cashapp.max' => 'CashApp payment proof must not exceed 5MB',
+                'bukti_pembayaran_usdt.max' => 'Usdt payment proof must not exceed 5MB'
             ]);
 
             $buktiPath = null;
@@ -75,6 +79,9 @@ class ShopCheckoutController extends Controller
                     break;
                 case 'CashApp':
                     $file = $request->file('bukti_pembayaran_cashapp');
+                    break;
+                case 'Usdt':
+                    $file = $request->file('bukti_pembayaran_usdt');
                     break;
                 default:
                     throw new \Exception('Invalid payment method');
@@ -177,9 +184,9 @@ class ShopCheckoutController extends Controller
 
             return redirect($whatsappUrl)->with('success', 'Your message has been sent successfully!');
         } catch (\Illuminate\Validation\ValidationException $e) {
-            return redirect(route('home.index'));
+            return redirect()->back()->withErrors($e->getMessage());
         } catch (\Exception $e) {
-            return redirect(route('home.index'));
+            return redirect()->back()->withErrors($e->getMessage());
         }
     }
 }
