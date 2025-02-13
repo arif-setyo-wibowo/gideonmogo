@@ -268,6 +268,8 @@
     <!-- Vendors JS -->
     <script src="{{ asset('assets_admin/')}}/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="{{ asset('assets_admin/')}}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/datatables-buttons/buttons.html5.js"></script>
+    <script src="{{ asset('assets_admin/')}}/vendor/libs/jszip/jszip.js"></script>
     <script src="{{ asset('assets_admin/')}}/vendor/libs/select2/select2.js"></script>
     <script src="{{ asset('assets_admin/')}}/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
 
