@@ -30,7 +30,7 @@
                     @csrf
                     @method('PUT')
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="text" class="form-control" id="nama_produk" name="nama_produk" 
+                        <input type="text" class="form-control" id="nama_produk" name="nama_produk"
                                value="{{ old('nama_produk', $produk->nama_produk) }}" placeholder="Nama Produk" required/>
                         <label for="nama_produk">Nama Produk</label>
                     </div>
@@ -40,7 +40,7 @@
                             data-live-search="true" required>
                             <option selected disabled value="">Pilih Kategori</option>
                             @foreach($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}" 
+                            <option value="{{ $kategori->id }}"
                                 {{ $produk->id_kategori == $kategori->id ? 'selected' : '' }}>
                                 {{ $kategori->kategori }}
                             </option>
@@ -48,12 +48,17 @@
                         </select>
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="stok" name="stok" 
+                        <input type="number" class="form-control" id="stok" name="stok"
                                value="{{ old('stok', $produk->stok) }}" placeholder="Stok" required/>
                         <label for="stok">Stok</label>
                     </div>
+
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="number" class="form-control" id="harga" name="harga" 
+                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required/>
+                        <label for="harga">Harga Lama ( Optional ) </label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="number" class="form-control" id="harga" name="harga"
                                value="{{ old('harga', $produk->harga) }}" placeholder="Harga" required/>
                         <label for="harga">Harga</label>
                     </div>
@@ -62,8 +67,8 @@
                         <input type="file" class="form-control" id="foto" name="foto" />
                         @if($produk->foto)
                         <div class="mt-2">
-                            <img src="{{ asset('storage/' . $produk->foto) }}" 
-                                 alt="Current Produk Image" 
+                            <img src="{{ asset('storage/' . $produk->foto) }}"
+                                 alt="Current Produk Image"
                                  style="max-width: 200px; max-height: 200px;">
                             <small class="d-block">Gambar saat ini</small>
                         </div>

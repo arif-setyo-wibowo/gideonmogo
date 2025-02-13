@@ -10100,7 +10100,7 @@ footer .hotline img {
     margin-bottom: 15px;
   }
 }
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1180px) {
   .header-style-1 .main-categori-wrap {
     margin-right: 20px;
   }
@@ -10210,6 +10210,11 @@ footer .hotline img {
 }
 /*small phone*/
 @media only screen and (max-width: 480px) {
+    .category-title{
+        max-width: 7ch;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
   .archive-header {
     padding: 30px;
   }
@@ -10631,6 +10636,11 @@ footer .hotline img {
 }
 /*small phone*/
 @media only screen and (max-width: 375px) {
+    .category-title{
+        max-width: 7ch;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
   .entry-meta .hit-count,
   .entry-meta.meta-2 .font-xs {
     display: none;

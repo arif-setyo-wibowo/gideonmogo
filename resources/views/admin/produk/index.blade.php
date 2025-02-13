@@ -189,6 +189,10 @@
                     </div>
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required/>
+                        <label for="harga">Harga Lama ( Optional ) </label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="number" class="form-control" id="harga" name="harga" placeholder="Harga" required/>
                         <label for="harga">Harga</label>
                     </div>
                     <div class="mb-4">

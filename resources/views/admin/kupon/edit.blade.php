@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="py-3 mb-4"><span class="text-muted fw-light">GideonMogo /</span> Kategori</h4>
+    <h4 class="py-3 mb-4"><span class="text-muted fw-light">GideonMogo /</span> Kupon</h4>
 
     <div class="card mb-4">
         <div class="card-header p-0">
@@ -19,24 +19,20 @@
         <div class="card-body">
           <div class="tab-content p-0">
             <div class="tab-pane fade active show" id="navs-top-profile" role="tabpanel">
-                <form action="{{ route('kategori.update', $kategori->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('kupon.update', $kupon->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-floating form-floating-outline mb-4">
-                        <input type="text" class="form-control" id="basic-default-fullname" name="kategori" placeholder="Kategori" value="{{ $kategori->kategori }}" required/>
-                        <label for="basic-default-fullname">Kategori</label>
+                        <input type="text" class="form-control" id="basic-default-fullname" name="kupon" placeholder="Kategori" required/>
+                        <label for="basic-default-fullname">Kupon</label>
                     </div>
-
-                    <div class="mb-4">
-                        <label for="basic-default-fullname">Banner kategori</label>
-                        <input type="file" class="form-control" id="basic-default-fullname" name="foto" placeholder="Banner Kategori" />
-
-                        @if($kategori->foto)
-                        <div class="mt-3">
-                            <label>Foto Saat Ini:</label>
-                            <img src="{{ asset('storage/' . $kategori->foto) }}" alt="Kategori Image" width="200" class="img-thumbnail">
-                        </div>
-                        @endif
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="date" class="form-control" id="basic-default-fullname" name="kupon" placeholder="Kategori" required/>
+                        <label for="basic-default-fullname">Tanggal Awal</label>
+                    </div>
+                    <div class="form-floating form-floating-outline mb-4">
+                        <input type="date" class="form-control" id="basic-default-fullname" name="kupon" placeholder="Kategori" required/>
+                        <label for="basic-default-fullname">Tanggal Akhir</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Ubah</button>
                     <a href="{{ route('kategori.index') }}" class="btn btn-danger">Batal</a>

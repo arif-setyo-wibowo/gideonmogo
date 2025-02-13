@@ -29,7 +29,7 @@
                         <a href="{{ route('home.index')}}"><img src="{{ asset('assets/')}}/imgs/logo/logo-2.png" alt="logo" /></a>
                     </div>
                     <div class="header-right">
-                        <div class="search-style-2">
+                        <div class="search-style-2" style="width: 50%;">
                             <form action="{{ route('shop.index') }}" method="GET" class="d-flex align-items-center search-form" id="desktop-search-form" onsubmit="return validateSearch(event)">
                                 <input type="text" name="search" placeholder="Search for items..." value="{{ request('search') }}" class="form-control search-input" style="background-image: none;" id="desktop-search-input">
                                 <button type="submit" class="btn btn-search">
@@ -40,7 +40,7 @@
                                 .search-form {
                                     position: relative;
                                     max-width: 400px;
-                                    width: 100%;
+                                    width: 50%;
                                 }
                                 .search-input {
                                     border-right: none;
@@ -67,9 +67,9 @@
                                 }
                             </style>
                         </div>
-                        <div class="header-action-right">
+                        <div class="header-action-right" style="display: inline-block">
                             <div class="header-action-2">
-                                <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
+                                <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-sm-block font-heading">
                                     <nav>
                                         <ul>
                                             <li>
@@ -492,6 +492,7 @@
     <script src="{{ asset('assets/')}}/js/plugins/jquery.syotimer.min.js"></script>
     <script src="{{ asset('assets/')}}/js/plugins/waypoints.js"></script>
     <script src="{{ asset('assets/')}}/js/plugins/wow.js"></script>
+    <script src="{{ asset('assets/')}}/js/plugins/jquery-ui.js"></script>
     <script src="{{ asset('assets/')}}/js/plugins/slider-range.js"></script>
     <script src="{{ asset('assets/')}}/js/plugins/perfect-scrollbar.js"></script>
     <script src="{{ asset('assets/')}}/js/plugins/magnific-popup.js"></script>

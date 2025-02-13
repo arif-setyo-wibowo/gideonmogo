@@ -90,13 +90,11 @@
                     <div class="banner-img wow animate__animated animate__fadeInUp" data-wow-delay="0.0s">
                         <img src="{{ asset('storage/' . $category->foto) }}" alt="{{ $category->kategori }}"
                             style="width: 400px; height: 250px; object-fit: cover; aspect-ratio: 1/1; filter: brightness(0.5);">
-                        <div class="banner-text">
-                            <h4 class="text-white">{{ $category->kategori }}</h4>
+                        <div class="banner-text" >
+                            <h4 class="text-white category-title"> {{ $category->kategori }}</h4>
                             <a href="{{ route('shop.index', ['category' => $category->slug]) }}"
                                 class="btn btn-sm btn-primary text-white" style="
-                                      padding: 5px 15px;
                                       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-                                      display: inline-block;
                                       margin-top: 10px;">
                                 Shop Now <i class="fi-rs-arrow-right"></i>
 
@@ -173,6 +171,7 @@
                                     <div class="product-card-bottom">
                                         <div class="product-price">
                                             <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
+                                            <span class="old-price">$55.8</span>
                                         </div>
                                         <div class="add-cart">
                                             <a class="add add-to-cart-link" href="javascript:void(0);"
@@ -224,6 +223,7 @@
                                     <div class="product-card-bottom">
                                         <div class="product-price">
                                             <span>$ {{ number_format($product->harga, 0, ',', '.') }}</span>
+                                            <span class="old-price">$55.8</span>
                                         </div>
                                         <div class="add-cart">
                                             <a class="add add-to-cart-link" href="javascript:void(0);"

@@ -198,6 +198,7 @@
                                 <div class="product-card-bottom">
                                     <div class="product-price">
                                         <span>$ {{ $product->harga }}</span>
+                                        <span class="old-price">$55.8</span>
                                     </div>
                                     <div class="add-cart">
                                         <a class="add add-to-cart-link" href="javascript:void(0);"

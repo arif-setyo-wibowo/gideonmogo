@@ -31,19 +31,28 @@
             @csrf
             <div class="row">
                 <div class="col-lg-7">
+                    <form method="post">
+                    </form>
                     <div class="row mb-50">
                         <div class="col-lg-6 mb-sm-15 mb-lg-0 mb-md-3">
                             @guest
                             <div class="toggle_info">
                                 <span><i class="fi-rs-user mr-10"></i><span class="text-muted font-lg">Already have an
-                                        account?</span> <a href="{{ route('login.index')}}" data-bs-toggle="collapse"
-                                        class="collapsed font-lg" aria-expanded="false">Click here to login</a></span>
+                                        account?</span> <a href="{{ route('login.index')}}"
+                                        class=" font-lg" aria-expanded="false">Click here to login</a></span>
                             </div>
                             @endguest
                         </div>
+
+                        <div class="col-lg-6">
+                            <form method="post" class="apply-coupon">
+                                <input type="text" placeholder="Enter Coupon Code...">
+                                <button class="btn  btn-md" name="login">Apply Coupon</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="row">
-                        <h4 class="mb-30">Informasi Akun</h4>
+                        <h4 class="mb-30">Account Information</h4>
 
                         <div class="row">
                             <div class="form-group col-lg-6">
@@ -56,31 +65,22 @@
                                 <input type="text" required="" name="link" placeholder="Link *">
                             </div>
                         </div>
+
                     </div>
                     <div class="row">
                         <h4 class="mb-30">Billing Details</h4>
                         <div class="row">
-                            <div class="form-group col-lg-6">
+                            <div class="form-Catatangroup col-lg-6">
                                 <input type="text" required="" name="first_name" placeholder="First Name *"
                                     value="{{ Auth::check() ? Auth::user()->first_name : '' }}">
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="text" required="" name="last_name" placeholder="Last Name *"
-                                    value="{{ Auth::check() ? Auth::user()->last_name : '' }}">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-6">
                                 <input required="" type="text" name="email" placeholder="Email *"
                                     value="{{ Auth::check() ? Auth::user()->email : '' }}">
                             </div>
-                            <div class="form-group col-lg-6">
-                                <input required="" type="text" name="phone" placeholder="No Telp/ WA *"
-                                    value="{{ Auth::check() ? Auth::user()->phone : '' }}">
-                            </div>
                         </div>
                         <div class="form-group mb-30">
-                            <textarea rows="5" name="note" placeholder="Catatan permintaan"></textarea>
+                            <textarea rows="5" name="note" placeholder="request note"></textarea>
                         </div>
                     </div>
                 </div>
@@ -133,6 +133,28 @@
                                             </h4>
                                         </td>
                                     </tr>
+
+                                    <tr>
+                                        <td colspan="3" class="text-end">
+                                            <h6 class="text-muted">Diskon</h6>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-brand">
+                                                ${{ number_format($total, 0) }}
+                                            </h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3" class="text-end">
+                                            <h6 class="text-muted">Total</h6>
+                                        </td>
+                                        <td>
+                                            <h4 class="text-brand">
+                                                ${{ number_format($total, 0) }}
+                                            </h4>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -148,6 +170,7 @@
                                     <option value="PayPal">PayPal</option>
                                     <option value="Venmo">Venmo</option>
                                     <option value="CashApp">CashApp</option>
+                                    <option value="Usdt">Usdt</option>
                                 </select>
                             </div>
 
@@ -200,6 +223,28 @@
                                             <input type="file" name="bukti_pembayaran_cashapp" class="custom-file-input"
                                                 id="uploadBuktiCashApp" accept="image/png, image/jpeg, image/jpg">
                                             <label class="custom-file-label" for="uploadBuktiCashApp">Choose
+                                                file...</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="Usdt-details" class="payment-detail" style="display: none;">
+                                    <div class="alert alert-info">
+                                        <p>Send payment to: <span class="text-success">
+                                            Addres : 0xE608eFB646547fa0A2a4dB56aeE978670c7254C4
+                                        </span></p>
+                                        Network : BEP20
+                                        <p></p>
+                                        <a href="  https://link.trustwallet.com/send?coin=20000714&address=0xE608eFB646547fa0A2a4dB56aeE978670c7254C4&token_id=0x55d398326f99059fF775485246999027B3197955 " target="_blank"
+                                            class="btn btn-outline-primary btn-sm">Trust Wallet Link</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="uploadBuktiUsdt" class="form-label fs-7 fw-bold">Upload Trust Wallet
+                                            Payment Proof</label>
+                                        <div class="custom-file">
+                                            <input type="file" name="bukti_pembayaran_cashapp" class="custom-file-input"
+                                                id="uploadBuktiUsdt" accept="image/png, image/jpeg, image/jpg">
+                                            <label class="custom-file-label" for="uploadBuktiUsdt">Choose
                                                 file...</label>
                                         </div>
                                     </div>

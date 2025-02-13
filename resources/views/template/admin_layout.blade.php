@@ -127,6 +127,12 @@
                           <div>Data Admin</div>
                       </a>
                   </li>
+                  <li class="menu-item {{ request()->routeIs('kupon.index') ? 'active' : '' }}">
+                    <a href="{{ route('kupon.index')}}" class="menu-link">
+                        <i class="menu-icon tf-icons mdi mdi-sale"></i>
+                        <div>Data Kupon</div>
+                    </a>
+                </li>
                   <li class="menu-header fw-medium mt-4">
                       <span class="menu-header-text">Data Laporan</span>
                   </li>

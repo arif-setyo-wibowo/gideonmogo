@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\LoginAdminController;
 use App\Http\Controllers\Admin\ContactAdminController;
+use App\Http\Controllers\Admin\KuponController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -116,6 +117,8 @@ Route::middleware(['admin'])->prefix('back/')->group(function () {
     Route::resource('admin', AdminController::class);
 
     Route::resource('faq', FaqController::class);
+
+    Route::resource('kupon', KuponController::class);
 
     Route::resource('contact-admin', ContactAdminController::class);
 
