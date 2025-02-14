@@ -5,7 +5,7 @@
         <div class="container">
             <div class="breadcrumb">
                 <a href="{{ route('home.index')}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> <a href="shop-grid-right.html">kategori </a> <span></span> product
+                <span></span> <a href="shop-grid-right.html">Category </a> <span></span> Product
             </div>
         </div>
     </div>
@@ -51,8 +51,8 @@
                                         </div>
                                         <div class="font-xs">
                                             <ul class="mr-50 float-start">
-                                                <li class="mb-5 fs-5">Stok: <span class="text-brand fs-5">{{ $product->stok }}</span></li>
-                                                <li class="mb-5 fs-5">Kategori: <span class="text-brand fs-5">{{ $product->kategori->kategori }}</span></li>
+                                                <li class="mb-5 fs-5">Stock: <span class="text-brand fs-5">{{ $product->stok }}</span></li>
+                                                <li class="mb-5 fs-5">Category: <span class="text-brand fs-5">{{ $product->kategori->kategori }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                             @if($relatedProducts->count() > 0)
                             <div class="row mt-60">
                                 <div class="col-12">
-                                    <h3 class="section-title style-1 mb-30">Produk Terkait</h3>
+                                    <h3 class="section-title style-1 mb-30">Related Product</h3>
                                 </div>
                                 <div class="col-12">
                                     <div class="row related-products">

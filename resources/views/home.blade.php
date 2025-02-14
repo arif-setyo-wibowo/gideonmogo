@@ -136,10 +136,9 @@
 
                     <div class="row product-grid-4">
                         @php
-                            $categoryProducts = collect(); // Koleksi kosong untuk menyimpan produk dari setiap kategori
+                            $categoryProducts = collect();
 
                             foreach($categories as $category) {
-                                // Ambil 5 produk dari masing-masing kategori dan gabungkan ke dalam koleksi
                                 $categoryProducts = $categoryProducts->merge($products->where('id_kategori', $category->id)->take(5));
                             }
                         @endphp
