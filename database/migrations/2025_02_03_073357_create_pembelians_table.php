@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('nomer_order')->unique();
             $table->date('tanggal_order');
             $table->float('total_harga');
+            $table->float('harga_asli')->nullable(); // Original total price before discount
+            $table->float('diskon')->default(0); // Total discount amount
+            $table->string('kode_kupon')->nullable(); // Coupon code used
             $table->enum('metode_pembayaran', ['PayPal', 'CashApp', 'Venmo', 'Usdt'])->default('PayPal');
             $table->string('bukti_transfer')->nullable();
             $table->enum('status', ['pending', 'diterima'])->default('pending');

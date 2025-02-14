@@ -1,6 +1,7 @@
 @extends('template.home_layout')
 @section('content')
 <main class="main">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
@@ -47,10 +48,12 @@
                         @endguest
 
                         <div class="col-lg-6 mb-sm-15 mb-lg-0 mb-md-3">
-                            <form method="post" class="apply-coupon">
-                                <input type="text" placeholder="Enter Coupon Code...">
-                                <button class="btn  btn-md" name="login">Apply Coupon</button>
-                            </form>
+                            <div class="apply-coupon">
+                                <input type="text" id="coupon-code" name="coupon_code" placeholder="Enter Coupon Code...">
+                                <div id="coupon-message" class="mt-2"></div>
+                                <button type="button" id="apply-coupon-btn" class="btn btn-md">Apply Coupon</button>
+                                <input type="hidden" name="total_purchase" id="total-purchase-input" value="{{ $total ?? 0 }}">
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -117,7 +120,7 @@
                                         </td>
                                         <td>
                                             <h4 class="text-brand">
-                                                ${{ number_format($item->produk->harga * $item->quantity, 0) }}
+                                                ${{ number_format($item->produk->harga * $item->quantity, 2) }}
                                             </h4>
                                         </td>
                                         @php
@@ -130,19 +133,19 @@
                                             <h6 class="text-muted">Subtotal</h6>
                                         </td>
                                         <td>
-                                            <h4 class="text-brand">
-                                                ${{ number_format($total, 0) }}
+                                            <h4 class="text-brand" id="subtotal">
+                                                ${{ number_format($total, 2 ) }}
                                             </h4>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td colspan="3" class="text-end">
-                                            <h6 class="text-muted">Diskon</h6>
+                                            <h6 class="text-muted">Discount</h6>
                                         </td>
                                         <td>
-                                            <h4 class="text-brand">
-                                                ${{ number_format($total, 0) }}
+                                            <h4 class="text-brand" id="discount">
+                                                $0
                                             </h4>
                                         </td>
                                     </tr>
@@ -152,8 +155,8 @@
                                             <h6 class="text-muted">Total</h6>
                                         </td>
                                         <td>
-                                            <h4 class="text-brand">
-                                                ${{ number_format($total, 0) }}
+                                            <h4 class="text-brand" id="total">
+                                                ${{ number_format($total, 2) }}
                                             </h4>
                                         </td>
                                     </tr>
@@ -268,107 +271,6 @@
 @endsection
 
 @section('js')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const paymentMethodSelect = document.querySelector('#payment_method');
-        const paymentDetailsContainer = document.querySelector('#payment-details');
-        const paymentDetails = document.querySelectorAll('.payment-detail');
-        const checkoutForm = document.querySelector('form');
-        const submitButton = document.querySelector('#checkout-submit-btn');
-
-        // Initially hide submit button and payment details
-        submitButton.style.display = 'none';
-        paymentDetailsContainer.style.display = 'none';
-        paymentDetails.forEach(detail => {
-            detail.style.display = 'none';
-        });
-
-        // File input name and validation handling
-        document.querySelectorAll('.custom-file-input').forEach(input => {
-            input.addEventListener('change', function (event) {
-                const file = event.target.files[0];
-                let fileName = file ? file.name : "Choose file...";
-                this.nextElementSibling.innerText = fileName;
-
-                // Validate file
-                if (file) {
-                    // Check file type (must be an image)
-                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-                    if (!allowedTypes.includes(file.type)) {
-                        alert('Please upload a valid image (JPEG, PNG, JPG)');
-                        this.value = ''; // Clear the file input
-                        this.nextElementSibling.innerText = "Choose file...";
-                        return;
-                    }
-
-                    // Check file size (max 5MB)
-                    const maxSize = 5 * 1024 * 1024; // 5MB
-                    if (file.size > maxSize) {
-                        alert('File size must not exceed 5MB');
-                        this.value = ''; // Clear the file input
-                        this.nextElementSibling.innerText = "Choose file...";
-                        return;
-                    }
-                }
-
-                // Validate payment method and file
-                validatePaymentAndFile();
-            });
-        });
-
-        // Add event listener to payment method select
-        paymentMethodSelect.addEventListener('change', function () {
-            const selectedPaymentMethod = paymentMethodSelect.value;
-
-            // Hide all payment details and submit button
-            paymentDetails.forEach(detail => {
-                detail.style.display = 'none';
-            });
-            submitButton.style.display = 'none';
-
-            // Show/hide payment details container
-            if (selectedPaymentMethod) {
-                paymentDetailsContainer.style.display = 'block';
-
-                // Show selected payment details
-                const selectedPaymentDetail = document.querySelector(
-                    `#${selectedPaymentMethod}-details`);
-                if (selectedPaymentDetail) {
-                    selectedPaymentDetail.style.display = 'block';
-                }
-
-                // Enable corresponding file input
-                const correspondingFileInput = document.querySelector(
-                    `#${selectedPaymentMethod}-details input[name="bukti_pembayaran_${selectedPaymentMethod.toLowerCase()}"]`
-                    );
-                if (correspondingFileInput) {
-                    correspondingFileInput.disabled = false;
-                }
-            } else {
-                paymentDetailsContainer.style.display = 'none';
-            }
-        });
-
-        // Function to validate payment method and file
-        function validatePaymentAndFile() {
-            const selectedPaymentMethod = paymentMethodSelect.value;
-
-            if (!selectedPaymentMethod) {
-                submitButton.style.display = 'none';
-                return;
-            }
-
-            const correspondingFileInput = document.querySelector(
-                `#${selectedPaymentMethod}-details input[name="bukti_pembayaran_${selectedPaymentMethod.toLowerCase()}"]`
-                );
-
-            if (correspondingFileInput && correspondingFileInput.files.length > 0) {
-                submitButton.style.display = 'block';
-            } else {
-                submitButton.style.display = 'none';
-            }
-        }
-    });
-
-</script>
+<script src="{{ asset('js/cart.js') }}"></script>
+<script src="{{ asset('assets/js/checkout.js') }}"></script>
 @endsection

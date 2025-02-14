@@ -52,6 +52,9 @@ Route::controller(ShopCheckoutController::class)->group(function () {
     Route::post('/checkout/process', 'processCheckout')->name('checkout.process');
 });
 
+Route::post('/validate-coupon', [ShopCheckoutController::class, 'validateCoupon'])
+    ->name('validate.coupon');
+
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login.index');
     Route::post('/login', 'login')->name('login.submit');

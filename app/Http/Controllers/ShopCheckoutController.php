@@ -6,6 +6,7 @@ use App\Models\Pembelian;
 use App\Models\PembelianDetail;
 use App\Models\Produk;
 use App\Models\Cart;
+use App\Models\Kupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderNotificationMail;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\ValidateCouponRequest;
 
 class ShopCheckoutController extends Controller
 {
@@ -44,7 +46,8 @@ class ShopCheckoutController extends Controller
                 'bukti_pembayaran_paypal' => $request->input('payment_method') === 'PayPal' ? 'required|file|image|max:5120' : '',
                 'bukti_pembayaran_venmo' => $request->input('payment_method') === 'Venmo' ? 'required|file|image|max:5120' : '',
                 'bukti_pembayaran_cashapp' => $request->input('payment_method') === 'CashApp' ? 'required|file|image|max:5120' : '',
-                'bukti_pembayaran_usdt' => $request->input('payment_method') === 'Usdt' ? 'required|file|image|max:5120' : ''
+                'bukti_pembayaran_usdt' => $request->input('payment_method') === 'Usdt' ? 'required|file|image|max:5120' : '',
+                'coupon_code' => 'nullable|string|max:50'
             ], [
                 'name.required' => 'Full name is required',
                 'email.required' => 'Email is required',
@@ -100,9 +103,46 @@ class ShopCheckoutController extends Controller
                 return redirect(route('home.index'));
             }
 
-            $totalPrice = $cartItems->sum(function($item) {
-                return $item->quantity * $item->produk->harga;
-            });
+            $totalPrice = 0;
+            foreach ($cartItems as $item) {
+                $totalPrice += $item->quantity * $item->produk->harga;
+            }
+
+            // Coupon validation and application
+            $discountAmount = 0;
+            $couponApplied = null;
+            if ($request->filled('coupon_code')) {
+                $coupon = Kupon::where('kode', $request->input('coupon_code'))->first();
+
+                if (!$coupon) {
+                    return redirect()->back()->withErrors(['coupon_code' => 'Coupon code not found.']);
+                }
+
+                if ($coupon->status !== 'aktif') {
+                    return redirect()->back()->withErrors(['coupon_code' => 'Coupon is not active.']);
+                }
+
+                $now = now();
+                if (($coupon->tanggal_mulai && $now < $coupon->tanggal_mulai) || 
+                    ($coupon->tanggal_berakhir && $now > $coupon->tanggal_berakhir)) {
+                    return redirect()->back()->withErrors(['coupon_code' => 'Coupon is expired or not yet valid.']);
+                }
+
+                if ($coupon->minimal_belanja && $totalPrice < $coupon->minimal_belanja) {
+                    return redirect()->back()->withErrors(['coupon_code' => 'Minimum purchase amount not met.']);
+                }
+
+                if ($coupon->jumlah_kupon !== null && $coupon->jumlah_kupon <= $coupon->jumlah_terpakai) {
+                    return redirect()->back()->withErrors(['coupon_code' => 'Coupon has reached its usage limit.']);
+                }
+
+                // Calculate actual discount amount
+                $discountAmount = $coupon->calculateDiscount($totalPrice);
+                $couponApplied = $coupon;
+                $coupon->markAsUsed();
+            }
+
+            $finalPrice = $totalPrice - $discountAmount;
 
             do {
                 $nomerOrder = mt_rand(10000000, 99999999);
@@ -111,7 +151,10 @@ class ShopCheckoutController extends Controller
             $pembelianData = [
                 'nomer_order' => $nomerOrder,
                 'tanggal_order' => now(),
-                'total_harga' => $totalPrice,
+                'total_harga' => number_format($finalPrice, 2, '.', '.'),
+                'harga_asli' => number_format($totalPrice, 2, '.', '.'),
+                'diskon' => number_format($discountAmount, 2, '.', '.'),
+                'kode_kupon' => $couponApplied ? $couponApplied->kode : null,
                 'metode_pembayaran' => $paymentMethod,
                 'status' => 'pending',
 
@@ -176,7 +219,8 @@ class ShopCheckoutController extends Controller
                 $message .= "• " . $product . "\n";
             }
             $message .= "\nPayment Method: " . $paymentMethod . "\n";
-            $message .= "Total: $" . number_format($totalPrice, 2);
+            $message .= "Total: $" . number_format($finalPrice, 2, '.', '.') . "\n\n";
+            $message .= "Thank you for your order!";
 
             $encodedMessage = urlencode($message);
 
@@ -188,5 +232,89 @@ class ShopCheckoutController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    /**
+     * Validate coupon via AJAX
+     */
+    public function validateCoupon(ValidateCouponRequest $request)
+    {
+        try {
+            $validatedData = $request->validated();
+
+            // Find the coupon
+            $coupon = Kupon::where('kode', $validatedData['coupon_code'])->first();
+
+            // Comprehensive coupon validation checks
+            $validationErrors = $this->validateCouponRules($coupon, $validatedData['total_purchase']);
+            
+            if ($validationErrors) {
+                return response()->json([
+                    'valid' => false,
+                    'message' => $validationErrors
+                ], 200);
+            }
+
+            // Calculate discount
+            $discountAmount = $coupon->calculateDiscount($validatedData['total_purchase']);
+
+            return response()->json([
+                'valid' => true,
+                'coupon_code' => $coupon->kode,
+                'discount_amount' => $discountAmount,
+                'discount_type' => $coupon->tipe,
+                'discount_value' => $coupon->nilai
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Coupon validation error: ' . $e->getMessage());
+            
+            return response()->json([
+                'valid' => false,
+                'message' => 'An unexpected error occurred. Please try again.'
+            ], 200);
+        }
+    }
+
+    /**
+     * Validate coupon against various business rules
+     * 
+     * @param Kupon|null $coupon
+     * @param float $totalPurchase
+     * @return string|null Validation error message or null if valid
+     */
+    private function validateCouponRules($coupon, $totalPurchase)
+    {
+        // Check if coupon exists
+        if (!$coupon) {
+            return 'Coupon code not found.';
+        }
+
+        // Check coupon status
+        if ($coupon->status !== 'aktif') {
+            return 'Coupon is not active.';
+        }
+
+        // Check date range
+        $now = now();
+        $startDate = $coupon->tanggal_mulai ? $coupon->tanggal_mulai->startOfDay()->subHours(8) : null;
+        $endDate = $coupon->tanggal_berakhir ? $coupon->tanggal_berakhir->endOfDay() : null;
+
+        if (($startDate && $now < $startDate) || 
+            ($endDate && $now > $endDate)) {
+            return 'Coupon is expired or not yet valid.';
+        }
+
+        // Check minimum purchase amount
+        if ($coupon->minimal_belanja && $totalPurchase < $coupon->minimal_belanja) {
+            return 'Minimum purchase amount not met.';
+        }
+
+        // Check coupon quantity
+        if ($coupon->jumlah_kupon !== null && $coupon->jumlah_kupon <= $coupon->jumlah_terpakai) {
+            return 'Coupon has reached its usage limit.';
+        }
+
+        // Coupon is valid
+        return null;
     }
 }

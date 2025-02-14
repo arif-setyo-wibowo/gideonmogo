@@ -84,6 +84,8 @@
                             <th>Nilai</th>
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Berakhir</th>
+                            <th>Jumlah Kupon</th>
+                            <th>Sisa</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -97,6 +99,8 @@
                             <td>{{ $item->tipe === 'persen' ? $item->nilai . '%' : '$ ' . number_format($item->nilai, 2) }}</td>
                             <td>{{ $item->tanggal_mulai ? \Carbon\Carbon::parse($item->tanggal_mulai)->format('d F Y') : '-' }}</td>
                             <td>{{ $item->tanggal_berakhir ? \Carbon\Carbon::parse($item->tanggal_berakhir)->format('d F Y') : '-' }}</td>
+                            <td>{{ $item->jumlah_kupon }}</td>
+                            <td>{{ ($item->jumlah_kupon - $item->jumlah_terpakai) }}</td>
                             <td>
                                 @if($item->status === 'aktif')
                                     <span class="badge bg-success">Aktif</span>

@@ -13,6 +13,9 @@ class Pembelian extends Model
     protected $fillable = [
         'user_id',
         'nomer_order',
+        'harga_asli',
+        'diskon',
+        'kode_kupon',
         'tanggal_order',
         'total_harga',
         'metode_pembayaran',
