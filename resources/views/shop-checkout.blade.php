@@ -37,13 +37,13 @@
                     <div class="row mb-50">
                         @guest
                         <div class="col-lg-6 mb-sm-15 mb-lg-0 mb-md-3">
-                            
+
                             <div class="toggle_info">
                                 <span><i class="fi-rs-user mr-10"></i><span class="text-muted font-lg">Already have an
                                         account?</span> <a href="{{ route('login.index')}}"
                                         class=" font-lg" aria-expanded="false">Click here to login</a></span>
                             </div>
-                           
+
                         </div>
                         @endguest
 
@@ -183,7 +183,7 @@
                                 <div id="PayPal-details" class="payment-detail" style="display: none;">
                                     <div class="alert alert-info">
                                         <p class="form-label fs-6 fw-bold">Send payment to: <span
-                                                class="text-success">josephex13@gmail.com</span></p>
+                                                class="text-success">untubogang80@gmail.com</span></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="uploadBuktiPaypal" class="form-label fs-7 fw-bold">Upload PayPal
